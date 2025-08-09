@@ -1,0 +1,191 @@
+{
+  "users": [
+    {
+      "name": "Boris",
+      "email": "Terrance@example.com",
+      "id": 1
+    }
+  ],
+  "videos": [
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss How to build a application",
+      "name": "Boris",
+      "date": "1 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Boris",
+      "date": "13 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Boris",
+      "date": "2 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Boris",
+      "date": "12 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Vetheza",
+      "date": "12 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Articia",
+      "date": "15 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Anele",
+      "date": "22 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Philly",
+      "date": "30 June 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Elton",
+      "date": "21 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Valencia",
+      "date": "31 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "No Name",
+      "date": "24 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Terry",
+      "date": "10 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Vee",
+      "date": "11 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Collen",
+      "date": "29 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "./Assets/profile.png",
+      "id": 1
+    },
+    {
+      "video": "/Img/for cv.jpg",
+      "title": "How to build a application using react and tailwindcss",
+      "name": "Musa",
+      "date": "19 May 2024",
+      "subs": "10k",
+      "downloads": "20k",
+      "clicks": "102k",
+      "likes": "10k",
+      "profileImage": "/Assets/profile.png",
+      "id": 1
+    }
+  ]
+}

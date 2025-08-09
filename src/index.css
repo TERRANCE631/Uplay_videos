@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
+}
+
+@layer scrollBar {
+  .subs__scrollbar::-webkit-scrollbar {
+    background-image: linear-gradient(transparent, transparent);
+    width: 6px;
+  }
+
+  .subs__scrollbar::-webkit-scrollbar-button {
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .subs__scrollbar::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(gray, gray);
+    border-radius: 10px;
+  }
+
+  .filter__scrollbar::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .filter__scrollbar::-webkit-scrollbar {
+    height: 0px;
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .filter__scrollbar::-webkit-scrollbar-button {
+    background-image: linear-gradient(transparent, transparent);
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.906), rgb(17, 0, 253), rgba(255, 255, 255, 0.906));
+  }
+
+  50% {
+    transform: translateX(80%);
+    width: 60%;
+    background-image: linear-gradient(rgba(25, 0, 255, 0.45), rgba(17, 0, 253, 0.45), rgba(255, 255, 255, 0.906));
+  }
+
+  60% {
+    transform: translateX(40%);
+    background-image: linear-gradient(rgba(255, 0, 0, 0.906), rgb(255, 0, 0), rgba(255, 255, 255, 0.906));
+    width: 50%;
+  }
+
+  100% {
+    transform: translateX(250%);
+    background-image: linear-gradient(rgba(25, 0, 255, 0.45), rgba(25, 0, 255, 0.45), rgba(255, 255, 255, 0.906));
+  }
+}
+
+.animate-loading-bar {
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(13, 0, 255, 0.45), rgba(255, 255, 255, 0));
+  animation: loading 1.7s ease infinite;
+}
+
+.floating__header_lightMode {
+  @apply bg-slate-100 backdrop-blur-2xl
+}
+
+.floating__header_darkMode {
+  @apply dark:bg-gray-900 backdrop-blur-2xl
+}
+
+@layer MobileScreens {
+  @media (min-width: 320px) {
+    .small {
+      margin-left: 9.5rem;
+    }
+  }
+
+  @media (min-width: 375px) {
+    .medium {
+      margin-left: 11rem;
+    }
+  }
+
+  @media (min-width: 425px) {
+    .large {
+      margin-left: 12.5rem;
+
+    }
+  }
+}
+
+.upload__btn ::-webkit-file-upload-button {
+  background-color: transparent;
+  border: none;
+  opacity: 0;
+}
+
+.indicator-line {
+  @apply h-px w-[3px] rounded-full bg-white transition-all duration-200 ease-in-out;
+}
+
+.indicator-line.active {
+  animation: indicator-line 0.5s ease infinite;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+  0% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+
+  50% {
+    height: 16px;
+    transform: translateY(-4px);
+  }
+
+  100% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+}
+
+.mask {
+  /* mask for image effect */
+  mask: linear-gradient(0deg, transparent, gray 10%);
+}
