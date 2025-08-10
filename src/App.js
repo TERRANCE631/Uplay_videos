@@ -6,13 +6,16 @@ import { CreatePost } from "./Pages";
 import { Register } from "./Pages/User/Register";
 import { LogIn } from "./Pages/User/LogIn";
 import { GlobalContext } from "./Hooks/Context/useContext";
+import { useEffect } from "react";
 
 function App() {
-  const { showLogin, setLogin } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails } = GlobalContext();
 
   const [showRegister, setRegister] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
+
+  useEffect(() => { getUserDetails() }, []);
 
   return (
     <div className="dark:bg-gray-700 min-h-screen overflow-hidden">

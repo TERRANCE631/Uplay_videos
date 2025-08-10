@@ -9,6 +9,11 @@ export function LogInFn(setLogin) {
     const { getUser } = GlobalContext()
     const navigate = useNavigate()
 
+    const [userInputs, setUserInputs] = useState({
+        username: "",
+        password: ""
+    });
+
     const [err, setErr] = useState({
         error: "",
         loggedIn: "",
@@ -20,13 +25,14 @@ export function LogInFn(setLogin) {
         // eslint-disable-next-line
     }, [userToken]);
 
-    const UserInputs = (e) => {
+    const UserInputs = async (e) => {
         e.preventDefault();
         getUser();
-        const formData = new FormData(e.target);
+        const username = userInputs.username
+        const password = userInputs.password
 
         try {
-            axios.post(`${process.env.REACT_APP_API_URL}/uplay/signIn`, formData)
+            await axios.post(`${process.env.REACT_APP_API_URL}/uplay/signIn`, { username, password })
                 .then(res => {
                     const data = res.data;
                     setErr({ ...err, loggedIn: data.loggedIn })
@@ -48,9 +54,10 @@ export function LogInFn(setLogin) {
                     };
                 });
         } catch (error) {
+            console.log("Error occured at 👉👉LogInFn function", + " | " + error)
             throw new Error(error);
-        };
+        }
     };
 
-    return { UserInputs, err }
+    return { UserInputs, err, setUserInputs, userInputs }
 }

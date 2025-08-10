@@ -7,7 +7,7 @@ export function SideVideos({ videoList, videoDetails, scrollRef }) {
     return (
         <div onClick={() => scrollIntoView(scrollRef)} className="">
             <div className="flex flex-col gap-2">
-                {videoList.map((video, i) => {
+                {videoList && videoList.map((video, i) => {
                     return (
                         <Link
                             to={`/videoPlayer/${video.id}`}

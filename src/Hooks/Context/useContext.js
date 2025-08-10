@@ -3,15 +3,23 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 const ContextWrapper = createContext(null);
 export function GlobalState({ children }) {
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
     const userID = JSON.parse(sessionStorage.getItem("userID"));
 
-    const [profileDetails, setProfileDetails] = useState()
     const [value, setValue] = useState("");
     const [subs, setSubs] = useState([]);
     const [showLogin, setLogin] = useState(false);
     const [Loading, setLoading] = useState(false);
     const [videos, setVideos] = useState([]);
+    const [user, setUser] = useState({});
+
+    const getUserDetails = async () => {
+        await axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`)
+            .then(res => {
+                const data = res.data
+                setUser(data)
+                console.log(data);
+            });
+    };
 
     const getVideos = async () => {
         try {
@@ -21,26 +29,12 @@ export function GlobalState({ children }) {
                     const data = res.data;
                     setLoading(false)
                     setVideos(data);
+                    console.log(data);
                 })
         } catch (error) {
             console.log(error);
         }
     };
-
-    function getUser() {
-        axios.get(`${process.env.REACT_APP_API_URL}/uplay/GetUseId/${userID}`, {
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-        })
-            .then(res => {
-                const data = res.data
-                setProfileDetails(data.profile_Image)
-            })
-    };
-
-    // useEffect(() => {
-    //     getUser();
-    //     // eslint-disable-next-line
-    // }, [token, userID]);
 
     const GetSubscribers = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/uplay/getSubs`)
@@ -57,8 +51,6 @@ export function GlobalState({ children }) {
     const values = {
         value,
         setValue,
-        profileDetails,
-        getUser,
         GetSubscribers,
         subs,
         setSubs,
@@ -69,7 +61,9 @@ export function GlobalState({ children }) {
         setLoading,
         getVideos,
         videos,
-        setVideos
+        setVideos,
+        user,
+        getUserDetails
     };
 
     return (

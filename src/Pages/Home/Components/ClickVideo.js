@@ -41,7 +41,7 @@ export function ClickVideo() {
                         handling server, please wait
                     </div>
                     <div
-                        onClick={reloadPage}
+                        // onClick={reloadPage}
                         className="text-white bg-blue-700 py-2 px-4 my-2 tracking-wider"
                     >
                         Reload
@@ -50,7 +50,7 @@ export function ClickVideo() {
 
             <div className="w-full grid 2xl:grid-cols-8 xl:grid-cols-6 lg:grid-cols-4 
             md:grid-cols-3 grid-cols-1 pb-2">
-                {videos.legnth > 0 && videos.map((video, i) => {
+                {videos && videos.map((video, i) => {
                     return (
                         <div key={i} className="md:mb-6 mb-4 md:mx-2">
                             <HomeCard video={video} user={user} />

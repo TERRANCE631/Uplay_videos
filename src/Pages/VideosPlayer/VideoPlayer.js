@@ -3,16 +3,19 @@ import { VideoOwner } from './Components/VideoOwner';
 import { Comments } from './Components/Comments';
 import { useParams } from 'react-router-dom';
 import { VideoPlayerFn } from './Functions/VideoPlayerFn';
+import { GlobalContext } from '../../Hooks/Context/useContext';
 
 export function VideoPlayer() {
     const { id } = useParams();
+    const { videos } = GlobalContext();
+    console.log(videos);
+    
     const {
         videoDetails,
         scrollRef,
         videoList,
         getVideos,
         username,
-        video,
         likes,
         downloads,
         clicks,
@@ -30,7 +33,7 @@ export function VideoPlayer() {
                         <div className="w-full xl:h-[28rem] 2xl:h-[45rem] lg:h-[22rem] md:h-[23rem] 
                         h-[16rem] flex grid-grow-0">
                             <video
-                                src={video || "/Assets/feature-5.mp4"}
+                                src={videos || "/Assets/feature-5.mp4"}
                                 autoPlay
                                 muted
                                 controls
@@ -39,7 +42,7 @@ export function VideoPlayer() {
                             />
                         </div>
                         <section className="lg:block hidden">
-                            {[null].map(() => {
+                            {[].map(() => {
                                 return (
                                     <VideoOwner
                                         getVideos={getVideos}
@@ -59,7 +62,7 @@ export function VideoPlayer() {
                         </section>
                     </div>
                     <section className="h-full lg:hidden block px-2">
-                        {[null].map(() => {
+                        {[].map(() => {
                             return (
                                 <VideoOwner
                                     getVideos={getVideos}
@@ -94,7 +97,7 @@ export function VideoPlayer() {
                         <SideVideos scrollRef={scrollRef} videoList={videoList} videoDetails={videoDetails} />
                         <section className="h-full lg:hidden block">
                             <p className="border-b dark:border-white border-black/50 my-5" />
-                            <Comments videoDetails={videoDetails} />
+                            {/* <Comments videoDetails={videoDetails} /> */}
                         </section>
                     </div>
                 </section>

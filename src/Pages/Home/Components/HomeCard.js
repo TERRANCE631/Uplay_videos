@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { CardDropDown } from './CardDropDown';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 
-export function HomeCard({ video, TokenCondition }) {
+export function HomeCard({ video, TokenCondition, user }) {
     // const [showDropDown, setShowDropDown] = useState(false);
     // const [videoID, setVideoID] = useState(null);
     const { likes, Likes } = GlobalContext();
@@ -84,21 +83,6 @@ export function HomeCard({ video, TokenCondition }) {
                             </p>
                         </div>
                     </Link>
-
-                    {/* <button
-                        onClick={() => { setShowDropDown((prev) => !prev); setVideoID(video.id) }}
-                        className="bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-800/70 hover:bg-gray-100 py-2 rounded-full"
-                    >
-                        <div className="flex flex-col gap-[3px] mx-3 ">
-                            {[1, 2, 3].map((_, i) => {
-                                return (
-                                    <div key={i} className="w-[2px] h-[2px] border border-gray-900 dark:border-white rounded-full dark:bg-white 
-                                    bg-gray-900" />
-                                )
-                            })}
-                        </div>
-                    </button> */}
-                    {/* {video.id === videoID && showDropDown && <CardDropDown />} */}
                 </section>
             </div>
         </section >

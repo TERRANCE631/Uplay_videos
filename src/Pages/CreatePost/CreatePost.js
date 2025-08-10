@@ -1,38 +1,17 @@
 import axios from "axios"
-import { useEffect } from "react";
-import { useState } from "react";
 import { GlobalContext } from "../../Hooks/Context/useContext";
 
 export function CreatePost() {
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-    const { Loading } = GlobalContext();
-
-    const [user, setUser] = useState({});
-    const getUserDetails = async () => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/GetUseId/${userID}`)
-            .then(res => {
-                const data = res.data
-                setUser(data)
-                console.log(data);
-            });
-    };
-
-    useEffect(() => {
-        getUserDetails()
-        // eslint-disable-next-line
-    }, [userID])
-
+    const { Loading, user } = GlobalContext();
+    
     const postVideo = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const entries = Object.fromEntries(formData.entries());
 
         formData.append("username", user.username);
-        formData.append("photo", user.profile_Image);
+        formData.append("photo", user.profile_image);
         formData.append("userID", user.id);
-
-        console.log(entries);
 
         await axios.post(`${process.env.REACT_APP_API_URL}/uplay/videos`, formData)
             .then(res => {

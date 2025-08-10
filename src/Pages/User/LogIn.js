@@ -2,7 +2,7 @@ import { BiErrorCircle, BiLogInCircle, BiNotification, BiUndo } from 'react-icon
 import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
-    const { UserInputs, err } = LogInFn(setLogin);
+    const { UserInputs, err, setUserInputs, userInputs } = LogInFn(setLogin);
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-40 h-screen w-full">
@@ -44,6 +44,8 @@ export function LogIn({ setRegister, setLogin }) {
                             required
                             type="text"
                             name="username"
+                            value={userInputs.username}
+                            onChange={(e) => setUserInputs({ ...userInputs, username: e.target.value })}
                             id="username"
                             className="w-full py-2 outline-none duration-100 focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm pl-2 dark:border-white border-gray-600 
                             dark:text-white rounded-lg bg-transparent border"
@@ -55,6 +57,8 @@ export function LogIn({ setRegister, setLogin }) {
                             required
                             type="text"
                             name="password"
+                            value={userInputs.password}
+                            onChange={(e) => setUserInputs({ ...userInputs, password: e.target.value })}
                             id="password"
                             className="w-full py-2 outline-none rounded-lg pl-2 dark:border-white border-gray-600 
                             dark:text-white bg-transparent border duration-100 focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
@@ -63,7 +67,7 @@ export function LogIn({ setRegister, setLogin }) {
                     <p className="">
                         <span className="dark:text-white">Don't have an account? </span>
                         <span
-                            role="button"
+                            type="submit"
                             onClick={() => { setRegister(true); setLogin(false) }}
                             className="text-blue-600 hover:underline">
                             Sign Up
@@ -79,7 +83,7 @@ export function LogIn({ setRegister, setLogin }) {
                         </div>
                     </button>
                     <div
-                        role="button"
+                        type="button"
                         onClick={() => setLogin(false)}
                         className="uppercase w-full  rounded-lg py-2 bg-gray-400 dark:text-white flex justify-center items-center text-white">
                         <span>Cancel</span><span><BiUndo className="scale-150" /></span>
