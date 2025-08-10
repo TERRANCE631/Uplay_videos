@@ -17,7 +17,7 @@ export function Comments({ videoDetails }) {
                     id="comment"
                 />
                 <button onClick={() => scrollIntoView(scrollRef)} className="py-2.5 border border-blue-700 md:px-8 px-4 shadow-inner shadow-gray-500 
-                bg-blue-500 text-2xl rounded-r-full">
+                bg-blue-500 hover:bg-blue-400 text-2xl rounded-r-full">
                     <BiSolidSend />
                 </button>
             </form>

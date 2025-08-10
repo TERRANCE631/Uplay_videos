@@ -6,7 +6,7 @@ import { GlobalContext } from "../../../Hooks/Context/useContext";
 export function LogInFn(setLogin) {
     const [userToken, setToken] = useState(JSON.parse(sessionStorage.getItem("userToken")) || "");
     const [ID, setID] = useState(JSON.parse(localStorage.getItem("userID")) || 0);
-    const { getUser } = GlobalContext()
+    const { getUserDetails } = GlobalContext()
     const navigate = useNavigate()
 
     const [userInputs, setUserInputs] = useState({
@@ -27,7 +27,7 @@ export function LogInFn(setLogin) {
 
     const UserInputs = async (e) => {
         e.preventDefault();
-        getUser();
+        getUserDetails();
         const username = userInputs.username
         const password = userInputs.password
 

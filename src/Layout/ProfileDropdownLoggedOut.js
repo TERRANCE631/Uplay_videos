@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ProfileDropdownLoggedOut({ setLogin, setProfile, setRegister }) {
     return (
-        <section className="w-full h-screen shadow-xl shadow-black bg-opacity-20 bg-black">
+        <section onClick={() => setProfile(false)} className="w-full h-screen shadow-xl shadow-black bg-opacity-20 bg-black">
             <div className="fixed backdrop-blur-lg md:w-[30%] z-40 shadow-inner shadow-gray-800 border-2 
                 border-gray-500 rounded-lg right-1 top-[4rem] min-h-[20rem] bg-white/20">
                 <section className="w-full flex justify-center">
