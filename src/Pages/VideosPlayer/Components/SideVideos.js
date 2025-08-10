@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 
 export function SideVideos({ videoList, videoDetails, scrollRef }) {
-    const { scrollIntoView } = GlobalContext();
+    const { scrollIntoView, videos } = GlobalContext();
 
     return (
         <div onClick={() => scrollIntoView(scrollRef)} className="">
             <div className="flex flex-col gap-2">
-                {videoList && videoList.map((video, i) => {
+                {videos && videos.map((video, i) => {
                     return (
                         <Link
                             to={`/videoPlayer/${video.id}`}

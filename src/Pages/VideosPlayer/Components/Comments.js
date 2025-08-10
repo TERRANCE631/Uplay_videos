@@ -22,10 +22,10 @@ export function Comments({ videoDetails }) {
                 </button>
             </form>
 
-            <p className="mt-2">Comments: ({comments.length})</p>
+            <p className="mt-2">Comments: ({comments.length ? comments.length : 0})</p>
 
             <div className="mt-5 mb-10">
-                {data.map((comment, i) => {
+                {data.length < 0 ? data.map((comment, i) => {
                     return (
                         <div key={i} className="">
                             {comment.videoID === videoDetails.id &&
@@ -40,10 +40,11 @@ export function Comments({ videoDetails }) {
                                             <span>{comment.date}</span>
                                         </p>
                                     </div>
-                                </div>}
+                                </div>
+                            }
                         </div>
                     )
-                })}
+                }) : <div className="text-center">No comments</div>}
             </div>
             <div ref={scrollRef} />
         </section>

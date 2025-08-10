@@ -3,30 +3,14 @@ import { GlobalContext } from "../../../Hooks/Context/useContext";
 import axios from "axios";
 
 export function CommentsFn(videoDetails) {
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-    const { scrollIntoView } = GlobalContext();
+    const { scrollIntoView, user } = GlobalContext();
 
-    const [user, setUser] = useState({});
     const [data, setData] = useState([]);
     const [forUseEffect, setForUseEffect] = useState("");
+    console.log(data);
 
-    const comments = data && data.filter(item => item.videoID === videoDetails.id);
+    const comments = data.length > 0 && data.filter(item => item.videoID === videoDetails.id);
     const scrollRef = useRef(null);
-
-    // getting current user details
-    const getUserDetails = async () => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/GetUseId/${userID}`)
-            .then(res => {
-                const data = res.data
-                setUser(data)
-            });
-    };
-
-    useEffect(() => {
-        getUserDetails()
-        // eslint-disable-next-line
-    }, [userID])
-    // end of getting current user datails
 
     const sendFeedback = (e) => {
         e.preventDefault();
@@ -54,9 +38,8 @@ export function CommentsFn(videoDetails) {
                 const data = res.data;
                 console.log(data);
                 setData(data);
-
             });
-    }
+    };
 
     useEffect(() => {
         getComments();

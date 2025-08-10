@@ -30,11 +30,11 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         // eslint-disable-next-line
     }, [id, userID]);
 
-    const amountOfSubs = subs.filter(item => item.videoUserID === videoDetails.userID);
+    const amountOfSubs = subs.length < 0 && subs.filter(item => item.videoUserID === videoDetails.userID);
 
     useEffect(() => {
         // eslint-disable-next-line 
-        const existOrNot = subs.findIndex(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id);
+        const existOrNot = subs.length < 0 && subs.findIndex(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id);
         console.log(existOrNot);
 
         if (existOrNot !== -1) {

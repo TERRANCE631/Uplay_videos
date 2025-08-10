@@ -33,8 +33,8 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
         </p>
         <div className="mt-4 flex items-center gap-2">
           <p className="text-gray-600 flex gap-2 md:text-md text-sm dark:text-gray-100">
-            <span className="font-bold">Likes: </span><span>{likes.length}</span>
-            <span className="font-bold">Subscribers: </span><span>{amountOfSubs.length}</span>
+            <span className="font-bold">Likes: </span><span>{likes.length || 0}</span>
+            <span className="font-bold">Subscribers: </span><span>{amountOfSubs.length || 0}</span>
           </p>
           <div className="flex ">
             {!existOrNot &&
@@ -54,7 +54,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {existOrNot &&
               <section>
                 {/*  eslint-disable-next-line  */}
-                {like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
+                {like.length < 0 && like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
                   return (
                     <button
                       key={i}
@@ -85,20 +85,20 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
               />
             </Link>
             <p className="truncate">{username}</p>
-            {exist &&
+            {!exist &&
               <button
                 onClick={() => { Subscribers(); GetSubscribers() }}
                 className="truncate flex items-center gap-2 bg-gray-300 ml-4 shadow-gray-600 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
-                shadow-inner hover:bg-gray-200 px-4 py-1 
+                shadow-inner hover:bg-gr  ay-200 px-4 py-1 
                 border border-black/30 rounded-full"
               >
                 <span className="text-blue-800 scale-150"><BiAddToQueue /></span>
                 <span>Subscribe</span>
               </button>}
-            {!exist &&
+            {exist &&
               <section>
                 {/* eslint-disable-next-line  */}
-                {subs.filter(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id).map((sub, i) => {
+                {subs.length < 0 && subs.filter(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id).map((sub, i) => {
                   return (
                     <button
                       key={i}
@@ -132,7 +132,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {existOrNot &&
               <section>
                 {/*  eslint-disable-next-line  */}
-                {like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
+                {like.length < 0 && like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
                   return (
                     <button
                       key={i}
