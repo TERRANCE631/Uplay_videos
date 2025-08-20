@@ -5,6 +5,7 @@ import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { ProfileDropdown } from "./ProfileDropdown";
 import { HeaderFn } from "./Functions/HeaderFn";
+import { User } from "lucide-react";
 
 export function Header({ setShowManu, setLogin, setRegister }) {
   const { currentScrollY,
@@ -17,7 +18,8 @@ export function Header({ setShowManu, setLogin, setRegister }) {
     Loading,
     setShowSearch,
     setProfile,
-    scrollRef
+    scrollRef,
+    user
   } = HeaderFn();
 
   return (
@@ -62,7 +64,7 @@ export function Header({ setShowManu, setLogin, setRegister }) {
           </section>
 
           <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
-            <img src={profileDetails || "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
+            <img src={user.profile_image || "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
               alt="" className="object-cover object-center h-full w-full rounded-full" />
           </button>
         </section>

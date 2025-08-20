@@ -1,4 +1,3 @@
-import React from 'react'
 
 export default function ProfileDropdownLoggedOut({ setLogin, setProfile, setRegister }) {
     return (

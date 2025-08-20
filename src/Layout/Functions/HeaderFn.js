@@ -5,7 +5,7 @@ import { GlobalContext } from "../../Hooks/Context/useContext";
 export function HeaderFn() {
     const [showSearch, setShowSearch] = useState(false);
     const [showProfile, setProfile] = useState(false);
-    const { setValue, profileDetails, Loading } = GlobalContext()
+    const { setValue, profileDetails, Loading, user } = GlobalContext()
     const token = JSON.parse(sessionStorage.getItem("userToken"));
 
     const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
@@ -57,6 +57,7 @@ export function HeaderFn() {
         Loading,
         setShowSearch,
         setProfile,
-        scrollRef
+        scrollRef,
+        user
     };
 }

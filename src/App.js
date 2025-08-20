@@ -40,10 +40,9 @@ function App() {
       <main className="min-h-screen md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
         <AllRoutes />
       </main>
-      <ToastContainer />
+      <ToastContainer theme="dark" position="top-center" hideProgressBar/>
     </div>
   );
 }
-
 
 export default App;
