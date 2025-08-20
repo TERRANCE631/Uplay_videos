@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 
-export function SideVideos({ videoList, videoDetails, scrollRef }) {
-    const { scrollIntoView, videos } = GlobalContext();
+export function SideVideos({ videos, videoDetails, scrollRef }) {
+    const { scrollIntoView } = GlobalContext();
 
     return (
         <div onClick={() => scrollIntoView(scrollRef)} className="">

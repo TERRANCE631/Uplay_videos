@@ -3,17 +3,13 @@ import { VideoOwner } from './Components/VideoOwner';
 import { Comments } from './Components/Comments';
 import { useParams } from 'react-router-dom';
 import { VideoPlayerFn } from './Functions/VideoPlayerFn';
-import { GlobalContext } from '../../Hooks/Context/useContext';
 
 export function VideoPlayer() {
     const { id } = useParams();
-    const { videos } = GlobalContext();
-    console.log(videos);
-    
+
     const {
         videoDetails,
         scrollRef,
-        videoList,
         getVideos,
         username,
         likes,
@@ -22,12 +18,13 @@ export function VideoPlayer() {
         photo,
         title,
         video,
+        videos,
         toggle,
         setToggle
     } = VideoPlayerFn(id);
 
     return (
-        <section ref={scrollRef}>
+        <section>
             <div className="flex flex-col justify-center">
                 <section className="grid xl:pr-10 md:pl-2 md:pl-1 md:pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
                     <div className="">
@@ -42,7 +39,7 @@ export function VideoPlayer() {
                                 object-center w-full h-full"
                             />
                         </div>
-                        <section className="lg:block hidden">
+                        <section ref={scrollRef} className="lg:block hidden">
                             {[null].map(() => {
                                 return (
                                     <VideoOwner
@@ -95,7 +92,7 @@ export function VideoPlayer() {
                                 </button>
                             </div>
                         </div>}
-                        <SideVideos scrollRef={scrollRef} videoList={videoList} videoDetails={videoDetails} />
+                        <SideVideos scrollRef={scrollRef} videos={videos} videoDetails={videoDetails} />
                         <section className="h-full lg:hidden block">
                             <p className="border-b dark:border-white border-black/50 my-5" />
                             <Comments videoDetails={videoDetails} />

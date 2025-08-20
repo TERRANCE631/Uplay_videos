@@ -6,10 +6,6 @@ export function ClickVideoFn() {
     const Rtext = "<Upl"
     const Ltext = "ay />"
 
-    useEffect(() => {
-        getVideos();
-        // eslint-disable-next-line
-    }, []);
 
     const reloadPage = () => {
         window.location.reload();

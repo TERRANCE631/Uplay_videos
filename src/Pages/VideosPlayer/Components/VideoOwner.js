@@ -15,7 +15,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
     Likes,
     user,
     getLikes,
-    userID
+    userId
   } = LikesFn(id);
 
   const {
@@ -23,7 +23,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
     Subscribers,
     DeleteSub,
     amountOfSubs
-  } = SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, username, user, photo);
+  } = SubscribeFn(id, userId, subs, GetSubscribers, videoDetails, username, user, photo);
 
   return (
     <section className="">
@@ -54,7 +54,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {existOrNot &&
               <section>
                 {/*  eslint-disable-next-line  */}
-                {like.length < 0 && like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
+                {like.length > 0 && like.filter(item => item.videoID === id && item.userID === userId).map((like, i) => {
                   return (
                     <button
                       key={i}
@@ -98,7 +98,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {exist &&
               <section>
                 {/* eslint-disable-next-line  */}
-                {subs.length < 0 && subs.filter(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id).map((sub, i) => {
+                {subs.length > 0 && subs.filter(item => item.videoUserID === videoDetails.userID && item.userID === userId).map((sub, i) => {
                   return (
                     <button
                       key={i}
@@ -132,7 +132,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {existOrNot &&
               <section>
                 {/*  eslint-disable-next-line  */}
-                {like.length < 0 && like.filter(item => item.videoID == id && item.userID == userID && item.id == item.id).map((like, i) => {
+                {like.length > 0 && like.filter(item => item.videoID == id && item.userID == userId).map((like, i) => {
                   return (
                     <button
                       key={i}

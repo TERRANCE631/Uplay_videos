@@ -6,7 +6,7 @@ export function VideoPlayerFn(id) {
     const [videoDetails, setVideoDetails] = useState({});
     const [toggle, setToggle] = useState(true);
     const scrollRef = useRef(null);
-    const { getVideos } = GlobalContext()
+    const { getVideos, videos } = GlobalContext()
 
     const getVideoByID = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/uplay/VideoPlayer/${id}`)
@@ -34,6 +34,7 @@ export function VideoPlayerFn(id) {
         title,
         video,
         toggle,
+        videos,
         setToggle
     };
 };

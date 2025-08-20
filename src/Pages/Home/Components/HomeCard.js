@@ -19,7 +19,7 @@ export function HomeCard({ video, TokenCondition, user }) {
     return (
         <section className="h-full">
             <div className="h-full w-full flex flex-col mb-4 bg-white 
-            dark:bg-gray-600 shadow-lg shadow-black border-b border-black md:border-2 border-dotted md:rounded-lg border-white/20 ">
+            dark:bg-gray-600 shadow-lg border border-black/40 md:border-2 md:rounded-lg dark:border-white/20">
                 {!hover &&
                     <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
                         <video
@@ -28,7 +28,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            className="h-[10rem] mask md:rounded-t-lg bg-white w-full object-cover object-center"
+                            className="h-[10rem] border-b-4 mask md:rounded-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
                 {hover &&
@@ -42,7 +42,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                             }}
                             alt=""
                             onClick={TokenCondition}
-                            className="h-[10rem] bg-white w-full object-cover object-center md:rounded-t-lg"
+                            className="h-[10rem] border-b-4 bg-white w-full rounded-lg object-cover object-center md:rounded-t-lg"
                         />
                     </Link>}
 
@@ -64,6 +64,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                         })}
                     </Link>
                 </section>
+                <div className="text-xs px-1">{video.created_At}</div>
 
                 <section className="flex p-1 h-full items-center justify-between">
                     <Link to={`/Home/User/profile/${video.userID}`}
@@ -79,7 +80,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                             {video.username}
                             <p className="font-normal text-xs truncate">
                                 <span className="bg-gray-400 dark:bg-gray-800 px-2 text-white">Clicks</span>
-                                <span className="truncate w-2"> 7k</span>
+                                <span className="truncate w-2 mx-1">7k</span>
                             </p>
                         </div>
                     </Link>

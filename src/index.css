@@ -132,5 +132,5 @@ body {
 
 .mask {
   /* mask for image effect */
-  mask: linear-gradient(0deg, transparent, gray 10%);
-}
+  /* mask: linear-gradient(-140deg, transparent, white 20%); */
+} 

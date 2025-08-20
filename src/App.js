@@ -7,15 +7,27 @@ import { Register } from "./Pages/User/Register";
 import { LogIn } from "./Pages/User/LogIn";
 import { GlobalContext } from "./Hooks/Context/useContext";
 import { useEffect } from "react";
+import { ClickVideoFn } from "./Pages/Home/Components/Functions/ClickVideoFn";
+import { BiLoaderCircle } from "react-icons/bi";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { showLogin, setLogin, getUserDetails } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails, userID, getVideos } = GlobalContext();
+  const { Loading } = ClickVideoFn();
 
   const [showRegister, setRegister] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
 
-  useEffect(() => { getUserDetails() }, []);
+  useEffect(() => { getUserDetails(); getVideos() }, [userID]);
+
+  if (Loading) return (
+    <div className="flex dark:bg-gray-700 dark:text-white justify-center gap-1 items-center absolute inset-0">
+      <BiLoaderCircle className="animate-spin h-8 w-8" />
+      <span className="">Loading...</span>
+    </div>
+  );
 
   return (
     <div className="dark:bg-gray-700 min-h-screen overflow-hidden">
@@ -28,8 +40,10 @@ function App() {
       <main className="min-h-screen md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
         <AllRoutes />
       </main>
+      <ToastContainer />
     </div>
   );
 }
+
 
 export default App;

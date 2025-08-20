@@ -3,7 +3,7 @@ import { VideoList } from './VideoList'
 import { Tabs } from './Tabs';
 import { Graph } from './Graph';
 
-export function TabList({ dashboardList, videoList, user, getVideos }) {
+export function TabList({ dashboardList, videos, user, getVideos }) {
     const consoleIndex = (index) => {
         console.log(index);
     };
@@ -11,7 +11,7 @@ export function TabList({ dashboardList, videoList, user, getVideos }) {
     const tabs = [
         {
             title: "Videos",
-            content: <VideoList videoList={videoList} user={user} getVideos={getVideos} />,
+            content: <VideoList videos={videos} user={user} getVideos={getVideos} />,
         },
         {
             title: "More",

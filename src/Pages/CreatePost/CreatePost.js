@@ -3,10 +3,10 @@ import { GlobalContext } from "../../Hooks/Context/useContext";
 
 export function CreatePost() {
     const { Loading, user } = GlobalContext();
-    
+
     const postVideo = async (e) => {
         e.preventDefault();
-
+        
         const formData = new FormData(e.target);
 
         formData.append("username", user.username);
@@ -16,7 +16,6 @@ export function CreatePost() {
         await axios.post(`${process.env.REACT_APP_API_URL}/uplay/videos`, formData)
             .then(res => {
                 const data = res.data;
-                console.log(data);
                 window.location.reload()
             })
     };

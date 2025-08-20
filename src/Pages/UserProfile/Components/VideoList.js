@@ -2,12 +2,13 @@ import { Link } from "react-router-dom"
 import { YesOrNo } from "./YesOrNo";
 import { VideoListFn } from "../Functions/VideoListFn";
 
-export function VideoList({ user, videoList, getVideos }) {
-    const { ID, setID, toggle, setToggle, userID, deleteVideo } = VideoListFn(videoList);
+export function VideoList({ user, videos, getVideos }) {
+    const { ID, setID, toggle, setToggle, userID, deleteVideo } = VideoListFn(videos, getVideos);
+    console.log(videos);
 
     return (
         <div className="grid h-full w-full 2xl:grid-cols-8 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 md:mx-2 py-2 gap-5">
-            {videoList.length ? videoList.filter((prev) => prev.userID === user.id).map((vid, i) => {
+            {videos.length > 0 ? videos.filter((prev) => prev.userID === user.id).map((vid, i) => {
                 return (
                     <div key={i} className="border border-dotted border-white h-fit w-full bg-slate-200/20 shadow-black shadow-lg">
                         <div className="border border-dotted h-[12rem] w-full">
@@ -44,10 +45,12 @@ export function VideoList({ user, videoList, getVideos }) {
                         </div>
                     </div>
                 )
-            }) : <div className="w-screen flex flex-col justify-center items-center">
-                <div className="my-2 text-xl">Oops no videos found, post videos</div>
-                <div className="md:text-6xl text-4xl">{".·´¯`(>▂<)´¯`·."}</div>
-            </div >}
+            }) :
+                <div className="w-screen flex flex-col justify-center items-center">
+                    <div className="my-2 text-xl">Oops no videos found, post videos</div>
+                    <div className="md:text-6xl text-4xl">{".·´¯`(>▂<)´¯`·."}</div>
+                </div >
+            }
         </div>
     )
 }   

@@ -21,8 +21,8 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
             })
     };
 
-    const DeleteSub = (userID) => {
-        axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deleteSub/${userID}`);
+    const DeleteSub = async (userID) => {
+        await axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deleteSub/${userID}`);
     };
 
     useEffect(() => {
@@ -30,19 +30,19 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         // eslint-disable-next-line
     }, [id, userID]);
 
-    const amountOfSubs = subs.length < 0 && subs.filter(item => item.videoUserID === videoDetails.userID);
+    const amountOfSubs = subs.length > 0 && subs.filter(item => item.videoUserID === videoDetails.userID);
 
     useEffect(() => {
         // eslint-disable-next-line 
-        const existOrNot = subs.length < 0 && subs.findIndex(item => item.videoUserID === videoDetails.userID && item.userID === userID && item.id === item.id);
+        const existOrNot = subs.length > 0 && subs.findIndex(item => item.videoUserID === videoDetails.userID && item.userID === userID);
         console.log(existOrNot);
 
-        if (existOrNot !== -1) {
-            setExist(false);
-        } else {
+        if (subs.length > 0 && existOrNot !== -1) {
             setExist(true);
+        } else {
+            setExist(false);
         }
     }, [id, subs, GetSubscribers, videoDetails.userID, userID]);
 
     return { exist, setExist, Subscribers, DeleteSub, amountOfSubs }
-}
+};
