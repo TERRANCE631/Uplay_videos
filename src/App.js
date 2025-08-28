@@ -13,14 +13,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { showLogin, setLogin, getUserDetails, userID, getVideos } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails, userID, getVideos, GetSubscribers } = GlobalContext();
   const { Loading } = ClickVideoFn();
 
   const [showRegister, setRegister] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
 
-  useEffect(() => { getUserDetails(); getVideos() }, [userID]);
+  useEffect(() => { getUserDetails(); getVideos(); GetSubscribers() }, [userID]);
 
   if (Loading) return (
     <div className="flex dark:bg-gray-700 dark:text-white justify-center gap-1 items-center absolute inset-0">
@@ -40,7 +40,7 @@ function App() {
       <main className="min-h-screen md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
         <AllRoutes />
       </main>
-      <ToastContainer theme="dark" position="top-center" hideProgressBar/>
+      <ToastContainer theme="dark" position="top-center" hideProgressBar />
     </div>
   );
 }

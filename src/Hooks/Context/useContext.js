@@ -1,11 +1,9 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react"
-import { toast } from "react-toastify";
+import { createContext, useContext, useState } from "react"
 
 const ContextWrapper = createContext(null);
 export function GlobalState({ children }) {
     const userID = JSON.parse(sessionStorage.getItem("userID"));
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
 
     const [value, setValue] = useState("");
     const [subs, setSubs] = useState([]);
@@ -87,4 +85,4 @@ export function GlobalState({ children }) {
 export const GlobalContext = () => {
     const context = useContext(ContextWrapper);
     return context;
-}
+};

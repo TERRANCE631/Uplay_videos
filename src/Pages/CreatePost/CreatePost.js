@@ -45,8 +45,6 @@ export function CreatePost() {
                         <option value="education">Education</option>
                         <option value="content">Content</option>
                         <option value="music">Music</option>
-                        <option value="movies">Movies</option>
-                        <option value="working_music">Working Music</option>
                     </select>
                 </div>
 

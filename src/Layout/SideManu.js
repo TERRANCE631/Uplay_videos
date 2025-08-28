@@ -7,7 +7,7 @@ export function SideManu({ setShowCreatePost }) {
   const userID = JSON.parse(sessionStorage.getItem("userID"));
 
   return (
-    <div className="fixed md:flex hidden border-r backdrop-blur-2xl bg-white z-30 flex-col mt-[4rem] truncate px-2 pt-4 left-0 
+    <div className="fixed md:flex hidden backdrop-blur-2xl bg-white z-30 flex-col mt-[4rem] truncate px-2 pt-4 left-0 
     xl:w-[4rem] lg:w-[6%] md:w-[8%] dark:text-white h-screen dark:bg-gray-700">
       <div className="flex flex-col gap-2">
         {manuList.map((icon, i) => {
@@ -26,9 +26,9 @@ export function SideManu({ setShowCreatePost }) {
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
       <div className="flex flex-col justify-center items-center overflow-y-hidden">
-        {subs.length < 0 && subs.filter(item => item.userID === userID).map((sub, i) => {
+        {subs.length > 0 && subs.filter(item => item.userID === userID).map((sub, i) => {
           return (
-            <Link to={`/Home/User/profile/${sub.videoUserID}`} className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-0.5">
+            <Link key={i} to={`/Home/User/profile/${sub.videoUserID}`} className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-0.5">
               <img src={sub.profile_photo || "/Assets/profile.png"} alt="" className="object-cover bg-white object-center h-full w-full rounded-full" />
             </Link>
           )

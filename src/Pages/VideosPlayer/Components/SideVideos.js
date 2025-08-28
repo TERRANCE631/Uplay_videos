@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { BiUserCircle } from "react-icons/bi";
 
 export function SideVideos({ videos, videoDetails, scrollRef }) {
     const { scrollIntoView } = GlobalContext();
 
     return (
-        <div onClick={() => scrollIntoView(scrollRef)} className="">
-            <div className="flex flex-col gap-2">
+        <div onClick={() => scrollIntoView(scrollRef)} className="mb-5 ">
+            <div className="flex flex-col gap-1 truncate">
                 {videos && videos.map((video, i) => {
                     return (
                         <Link
@@ -25,10 +26,12 @@ export function SideVideos({ videos, videoDetails, scrollRef }) {
                                         className="object-cover object-center w-full h-full"
                                     />
                                 </div>
-                                <div className="pl-1 truncate">
+                                <div className="pl-1 truncate grow-0">
                                     <p className="truncate">{video.title}</p>
-                                    <p className="text-gray-500 py-1 truncate flex items-center gap-2">{video.username}
-                                        <div className="flex">
+                                    <p className="py-1 truncate flex items-center gap-1">
+                                        <div><BiUserCircle size={26} color="blue" /></div>
+                                        <div>{video.username}</div>
+                                        <div className="flex gap-1 ml-1">
                                             {videoDetails.id === video.id && [1, 2, 3, 4, 5, 6].map((bar, i) => {
                                                 i += 1
                                                 return (
@@ -40,6 +43,7 @@ export function SideVideos({ videos, videoDetails, scrollRef }) {
                                             })}
                                         </div>
                                     </p>
+                                    <div className="text-xs">{video.created_At}</div>
                                 </div>
                             </div>
                         </Link>

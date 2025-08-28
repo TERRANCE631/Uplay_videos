@@ -15,7 +15,7 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
                     <div
                         onClick={() => { setShowManu(false) }}
                         role="button"
-                        className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
+                        className="rounded-full text-white hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
                         &#9776;
                     </div>
                     <Link

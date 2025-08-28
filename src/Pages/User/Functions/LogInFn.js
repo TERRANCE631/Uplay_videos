@@ -7,6 +7,7 @@ export function LogInFn(setLogin) {
     const [userToken, setToken] = useState(JSON.parse(sessionStorage.getItem("userToken")) || "");
     const [ID, setID] = useState(JSON.parse(localStorage.getItem("userID")) || 0);
     const { getUserDetails } = GlobalContext()
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate()
 
     const [userInputs, setUserInputs] = useState({
@@ -59,5 +60,5 @@ export function LogInFn(setLogin) {
         }
     };
 
-    return { UserInputs, err, setUserInputs, userInputs }
+    return { UserInputs, err, setUserInputs, userInputs, showPassword, setShowPassword }
 }

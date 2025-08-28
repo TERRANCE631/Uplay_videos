@@ -25,11 +25,6 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         await axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deleteSub/${userID}`);
     };
 
-    useEffect(() => {
-        GetSubscribers()
-        // eslint-disable-next-line
-    }, [id, userID]);
-
     const amountOfSubs = subs.length > 0 && subs.filter(item => item.videoUserID === videoDetails.userID);
 
     useEffect(() => {

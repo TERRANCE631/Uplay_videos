@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { videoFilterList } from './FilterList'
 
-export function VideoFilter() {
+export function VideoFilter({ setSelectedValue }) {
     const [ID, setID] = useState(0);
     return (
         <div
@@ -13,7 +13,7 @@ export function VideoFilter() {
                     return (
                         <div
                             key={i}
-                            onClick={() => setID(i)}
+                            onClick={() => { setID(i); setSelectedValue(title) }}
                             className={`${ID === i
                                 ? "dark:bg-blue-500 dark:text-black px-2 rounded-full py-px border border-blue-500 duration-300"
                                 : "bg-gray-400/30 px-2 rounded-full py-px border border-blue-500 duration-300 hover:text-blue-500 hover:bg-gray-400/50"}`}>

@@ -5,7 +5,6 @@ import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { ProfileDropdown } from "./ProfileDropdown";
 import { HeaderFn } from "./Functions/HeaderFn";
-import { User } from "lucide-react";
 
 export function Header({ setShowManu, setLogin, setRegister }) {
   const { currentScrollY,
@@ -24,14 +23,14 @@ export function Header({ setShowManu, setLogin, setRegister }) {
 
   return (
     <header className="fixed z-50">
-      <nav ref={scrollRef} className="fixed backdrop-blur-2xl z-20 md:border-b transition-all inset-x-0 duration-300
+      <nav ref={scrollRef} className="fixed backdrop-blur-2xl z-20 transition-all inset-x-0 duration-300
        dark:text-white h-[4.5rem] flex 
       justify-between items-center px-4">
         <section className="flex items-center">
           <div
             onClick={() => setShowManu(true)}
             role="button"
-            className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
+            className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] text-white scale-[130%] md:scale-[140%]">
             &#9776;
           </div>
           <Link to="/">
@@ -59,12 +58,12 @@ export function Header({ setShowManu, setLogin, setRegister }) {
                 ? "md:scale-[170%] scale-[155%] bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"
                 : "md:scale-[170%] opacity-40 cursor-not-allowed scale-[155%] bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"}`}
             >
-              {darkMode ? <BiMoon /> : <BiSun />}
+              {darkMode ? <BiMoon color="white" /> : <BiSun color="white" />}
             </button>
           </section>
 
           <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
-            <img src={user.profile_image || "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
+            <img src={token ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
               alt="" className="object-cover object-center h-full w-full rounded-full" />
           </button>
         </section>

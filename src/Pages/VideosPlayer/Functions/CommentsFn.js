@@ -4,27 +4,26 @@ import axios from "axios";
 
 export function CommentsFn(videoDetails) {
     const { scrollIntoView, user } = GlobalContext();
-
+    const [sendComment, setSendComment] = useState("")
     const [data, setData] = useState([]);
     const [forUseEffect, setForUseEffect] = useState("");
-    console.log(data);
-
     const comments = data.length > 0 && data.filter(item => item.videoID === videoDetails.id);
     const scrollRef = useRef(null);
 
     const sendFeedback = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
 
         const timeNdate = new Date();
-        const date = `${timeNdate.toDateString()} ${timeNdate.toLocaleDateString()}`
+        const currentDate = `${timeNdate.toDateString()} ${timeNdate.toLocaleTimeString()}`
 
-        formData.append("videoID", videoDetails.id);
-        formData.append("userID", videoDetails.userID);
-        formData.append("username", user.username);
-        formData.append("date", date);
+        const videoID = videoDetails.id;
+        const userID = user.id;
+        const username = user.username;
+        const profile_image = user.profile_image;
+        const date = currentDate;
+        const comment = sendComment;
 
-        axios.post(`${process.env.REACT_APP_API_URL}/uplay/postComments`, formData)
+        axios.post(`${process.env.REACT_APP_API_URL}/uplay/postComments`, { comment, videoID, userID, username, date, profile_image })
             .then(res => {
                 const data = res.data;
                 setForUseEffect(data.details);
@@ -36,7 +35,6 @@ export function CommentsFn(videoDetails) {
         axios.get(`${process.env.REACT_APP_API_URL}/uplay/getComments`)
             .then(res => {
                 const data = res.data;
-                console.log(data);
                 setData(data);
             });
     };
@@ -45,5 +43,5 @@ export function CommentsFn(videoDetails) {
         getComments();
     }, [forUseEffect]);
 
-    return { scrollIntoView, sendFeedback, comments, data, scrollRef }
-}
+    return { scrollIntoView, sendFeedback, comments, data, scrollRef, sendComment, setSendComment }
+};

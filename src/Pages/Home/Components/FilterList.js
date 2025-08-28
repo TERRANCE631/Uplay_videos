@@ -1,9 +1,7 @@
 export const videoFilterList = [
-    "All",
-    "Games",
-    "Education",
+    "all",
+    "gaming",
+    "education",
     "content",
-    "Music",
-    "Movies",
-    "Working Music"
-]
+    "music",
+];
