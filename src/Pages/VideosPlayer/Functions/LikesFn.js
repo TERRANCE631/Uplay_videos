@@ -9,8 +9,6 @@ export function LikesFn(id) {
     const { user, getUserDetails } = GlobalContext();
     const [like, setLike] = useState([]);
 
-    console.log(id);
-
     // filter likes from the database to get its length and render it as likes.
     // eslint-disable-next-line
     const likes = like.length > 0 && like.filter((item) => item.videoID == id);

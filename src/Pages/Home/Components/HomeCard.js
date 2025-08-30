@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
+import { LikesFn } from '../../VideosPlayer/Functions/LikesFn';
 
 export function HomeCard({ video, TokenCondition, user }) {
     // const [showDropDown, setShowDropDown] = useState(false);
     // const [videoID, setVideoID] = useState(null);
     const { likes, Likes } = GlobalContext();
     const token = JSON.parse(sessionStorage.getItem("userToken"));
-
+    const { like } = LikesFn()
     const [hover, setHover] = useState(null);
     const onHover = (onHover) => {
         setHover(onHover)
@@ -16,11 +17,12 @@ export function HomeCard({ video, TokenCondition, user }) {
     const onMouseLeave = () => {
         setHover(null)
     };
+    const videoLikes = like.filter((likes) => likes.videoID === video.id)
 
     return (
         <section className="h-full">
-            <div className="h-full w-full flex flex-col mb-4 bg-white 
-            dark:bg-gray-600 shadow-lg border border-black/40 md:border-2 md:rounded-lg dark:border-white/20">
+            <div className="h-full w-full flex flex-col pb-2 bg-white 
+            dark:bg-gray-600 shadow-md shadow-black md:rounded-lg dark:border-white/20">
                 {!hover &&
                     <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
                         <video
@@ -48,7 +50,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                     </Link>}
 
                 <section className="flex p-1 h-full">
-                    <Link to={`/videoPlayer/${video.id}`} className="flex flex-wrap truncate">
+                    <Link className="flex flex-wrap truncate">
                         {video.title.split(" ").map((title, i) => {
                             return (
                                 <section onClick={() => Likes(likes)} key={i} className='flex items-center truncate'>
@@ -73,20 +75,18 @@ export function HomeCard({ video, TokenCondition, user }) {
                     >
                         <div className="w-9 h-9 shrink-0 rounded-full border">
                             <img src={video.photo || "/Assets/profile.png"} alt="" className="shrink-0 object-cover bg-white rounded-full object-center 
-                            w-full h-full" />   
+                            w-full h-full" />
                         </div>
-                        < div
-                            className="font-semibold text-gray-600 truncate dark:text-gray-300"
-                        >
+                        <div className="font-semibold tracking-wider truncate dark:text-gray-100">
                             {video.username}
                             <p className="font-normal text-xs truncate">
-                                <span className="bg-gray-400 dark:bg-gray-800 px-2 text-white">Clicks</span>
-                                <span className="truncate w-2 mx-1">7k</span>
+                                <span className="bg-blue-700 dark:bg-blue-700 px-2 text-white">Likes</span>
+                                <span className="truncate w-2 mx-1 border bg-blue-700 px-[3px] rounded-full text-white">{videoLikes.length}</span>
                             </p>
                         </div>
                     </Link>
                 </section>
             </div>
-        </section >
+        </section>
     )
 }

@@ -3,7 +3,7 @@ import { CommentsFn } from '../Functions/CommentsFn';
 import { Link } from 'react-router-dom';
 
 export function Comments({ videoDetails }) {
-    const { scrollIntoView, sendFeedback, comments, data, scrollRef, setSendComment } = CommentsFn(videoDetails);
+    const { scrollFunction, sendFeedback, comments, data, scrollRef, setSendComment } = CommentsFn(videoDetails);
 
     return (
         <section className="">
@@ -18,7 +18,7 @@ export function Comments({ videoDetails }) {
                     onChange={(e) => setSendComment(e.target.value)}
                     id="comment"
                 />
-                <button onClick={() => scrollIntoView(scrollRef)} className="py-2.5 border border-blue-700 md:px-8 px-4 shadow-inner shadow-gray-500 
+                <button onClick={() => scrollFunction(scrollRef)} className="py-2.5 border border-blue-700 md:px-8 px-4 shadow-inner shadow-gray-500 
                 bg-blue-500 hover:bg-blue-400 text-2xl rounded-r-full">
                     <BiSolidSend />
                 </button>
@@ -31,7 +31,7 @@ export function Comments({ videoDetails }) {
                     return (
                         <div key={i} className="">
                             {comment.videoID === videoDetails.id &&
-                                <div className="flex items-center bg-gray-300/30 gap-2 mb-2 px-2 py-1">
+                                <div className="flex items-center border-r-2 rounded-lg border-blue-700 bg-gray-300/30 gap-2 mb-4 px-2 py-1">
                                     <Link to={`/Home/User/profile/${comment.userID}`} className="w-9 h-9 md:flex hidden border-2 border-blue-700 justify-center items-center rounded-full">
                                         <img src={comment.profile_image} alt="" className="rounded-full h-full w-full object-center object-cover" />
                                     </Link>
@@ -43,7 +43,7 @@ export function Comments({ videoDetails }) {
                                         </p>
                                         <p className="truncate text-sm text-gray-500 dark:text-gray-200 ">
                                             <span>Date: </span>
-                                            <span ref={scrollRef}>{comment.date}</span>
+                                            <span>{comment.date}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -52,6 +52,7 @@ export function Comments({ videoDetails }) {
                     )
                 }) : <div className="text-center">No comments</div>}
             </div>
+            <br ref={scrollRef} />
         </section>
     )
 }

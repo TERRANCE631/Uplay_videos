@@ -72,7 +72,6 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
                             )
                         })}
                     </div>
-                    <footer>footer</footer>
                 </section>
             </section>
         </section>

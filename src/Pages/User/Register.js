@@ -1,25 +1,25 @@
-import { BiErrorCircle, BiNotification, BiUndo, BiUserPlus } from 'react-icons/bi';
+import { BiErrorCircle, BiHide, BiMessage, BiNotification, BiShield, BiShow, BiUndo, BiUpload, BiUser, BiUserCircle, BiUserPlus, BiX } from 'react-icons/bi';
 import { RegisterFn } from './Functions/RegisterFn';
 
 export function Register({ setRegister, setLogin }) {
     const {
         setProfile_image,
-        registered,
+        profile_image,
+        imageRef,
         state,
         setState,
         UserInputs,
         userDetails,
-        setUserDetails
+        setUserDetails,
+        showPassword, setShowPassword
     } = RegisterFn(setRegister, setLogin);
+    console.log(profile_image);
 
     return (
-        <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-40 h-screen w-full">
-            <div className="fixed p-2 z-20 right-0 md:w-[50%] w-full border-l w-full h-screen bg-slate-100 dark:bg-gray-700">
+        <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-10 h-screen w-full">
+            <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen bg-white dark:bg-gray-700 backdrop-blur-3xl bg-opacity-60 dark:bg-opacity-60">
 
-                <p className="border-b dark:border-white border-gray-600 text-center text-xl 
-                    font-extrabold tracking-wide dark:text-white text-gray-800">Sign Up</p>
-
-                <div className={`${state.usernameErr !== ""
+                {/* <div className={`${state.usernameErr !== ""
                     ? "flex flex-col justify-center items-center duration-500 translate-x-0"
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
@@ -43,81 +43,101 @@ export function Register({ setRegister, setLogin }) {
                         <p className="text-blue-600 scale-150"><BiNotification /></p>
                         <p className="">{registered}</p>
                     </div>
-                </div>
+                </div> */}
 
-                <div className={`${state.existingUser !== ""
+                {/* <div className={`${state.existingUser !== ""
                     ? "flex flex-col justify-center items-center duration-500 translate-x-0"
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
                     <div className={`${state.existingUser !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-10 items-center rounded-lg border border-gray-600 dark:text-black"
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-50 items-center rounded-lg border border-gray-600 dark:text-black"
                         : "hidden"
                         }`}>
                         <p className="text-blue-600 scale-150"><BiErrorCircle /></p>
                         <p className="">{state.existingUser}</p>
                     </div>
-                </div>
+                </div> */}
+
+                <button onClick={() => setRegister(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
+                    <span>Close</span>
+                    <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>
+                </button>
 
                 <form onSubmit={UserInputs} className="mt-4 flex flex-col gap-2">
-                    <div className="">
-                        <label htmlFor="username" className="dark:text-white">Userame</label>
+
+                    <p className="text-center text-xl 
+                font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider dark:text-white text-gray-800">Sign Up</p>
+
+                    <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">Username</label>
+
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <BiUser className="size-5 dark:text-white" />
+                        </div>
                         <input
-                            required
                             type="text"
-                            name="username"
-                            id="username"
+                            className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
+                            placeholder="Username"
                             value={userDetails.username}
-                            onChange={(e) => {
-                                userDetails.username !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
-                                setUserDetails({ ...userDetails, username: e.target.value })
-                            }}
-                            className="w-full focus:border-blue-600 duration-100 focus:shadow-blue-600 focus:shadow-sm py-2 outline-none pl-2 
-                            dark:border-white border-gray-600 rounded-lg dark:text-white bg-transparent border"
+                            onChange={(e) => { userDetails.username !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, username: e.target.value }) }}
                         />
                     </div>
-                    <div className="">
-                        <label htmlFor="email" className="dark:text-white">E-mail</label>
+
+                    <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">E-mail</label>
+
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <BiMessage className="size-5 dark:text-white" />
+                        </div>
                         <input
-                            required
                             type="text"
-                            name="email"
-                            id="email"
+                            className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
+                            placeholder="E-mail"
                             value={userDetails.email}
-                            onChange={(e) => {
-                                userDetails.email !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
-                                setUserDetails({ ...userDetails, email: e.target.value })
-                            }}
-                            className="w-full py-2 outline-none pl-2 dark:border-white border-gray-600 
-                            dark:text-white bg-transparent border rounded-lg duration-100 focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
+                            onChange={(e) => { userDetails.email !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, email: e.target.value }) }}
                         />
                     </div>
-                    <div className="">
-                        <label htmlFor="password" className="dark:text-white">Passoword</label>
+
+                    <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">Password</label>
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <BiShield className="size-5 text-base-content/40" />
+                        </div>
+
+                        {showPassword ? <div onClick={() => setShowPassword(false)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
+                            <BiHide className="size-5 text-base-content/40" />
+                        </div>
+                            :
+                            <div onClick={() => setShowPassword(true)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
+                                <BiShow className="size-5 text-base-content/40" />
+                            </div>
+                        }
+
                         <input
-                            required
-                            type="text"
-                            name="password"
-                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black bg-transparent p-2 rounded-md tracking-wider"
+                            placeholder="Password"
                             value={userDetails.password}
-                            onChange={(e) => {
-                                userDetails.password !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
-                                setUserDetails({ ...userDetails, password: e.target.value })
-                            }}
-                            className="w-full py-2 outline-none pl-2 dark:border-white duration-100 border-gray-600 
-                            dark:text-white bg-transparent border rounded-lg focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
+                            onChange={(e) => { userDetails.password !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, password: e.target.value }) }}
                         />
                     </div>
-                    <div className="">
-                        <label htmlFor="profile_image" className="dark:text-white">Upload Profile Picture</label>
-                        <input
-                            onChange={(e) => setProfile_image(e.target.files[0])}
-                            name="profile_image"
-                            id="profile_image"
-                            type="file"
-                            className="w-full py-2 outline-none upload__btn rounded-lg border 
+                    <p className="text-center truncate">UPLOAD: {profile_image ? profile_image.name : "No Picture found"}</p>
+
+                    <div className="flex justify-center items-center">
+                        <button type="button" onClick={() => imageRef.current?.click()} className="my-2 w-[60%] py-2 rounded-lg text-white shadow-inner shadow-blue-900 bg-blue-600 flex justify-center items-center">
+                            <span>Upload your profile picture</span>
+                        </button>
+                    </div>
+
+                    <input
+                        ref={imageRef}
+                        onChange={(e) => setProfile_image(e.target.files[0])}
+                        name="profile_image"
+                        id="profile_image"
+                        type="file"
+                        className="hidden w-full py-2 outline-none upload__btn rounded-lg border 
                             dark:border-white bg-transparent border-gray-600 focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
-                        />
-                    </div>
+                    />
 
                     <p className="">
                         <span className="dark:text-white">Already have an account? </span>
@@ -130,20 +150,8 @@ export function Register({ setRegister, setLogin }) {
                     </p>
 
                     <button type="submit" className="uppercase w-full py-2 flex justify-center items-center gap-1.5 bg-blue-600 dark:text-white 
-                        text-white rounded-lg">
+                        text-white rounded-lg shadow-inner shadow-blue-900 active:shadow-none">
                         <span>Sign Up</span>
-                        <span>
-                            <BiUserPlus className="scale-150" />
-                        </span>
-                    </button>
-
-                    <button
-                        onClick={() => setRegister(false)}
-                        className="uppercase rounded-lg w-full py-2 bg-gray-400 flex justify-center items-center dark:text-white text-white">
-                        <span>Cancel</span>
-                        <span>
-                            <BiUndo className="scale-150" />
-                        </span>
                     </button>
                 </form>
             </div>

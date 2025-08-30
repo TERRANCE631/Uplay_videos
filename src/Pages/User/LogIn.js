@@ -1,17 +1,17 @@
-import { BiErrorCircle, BiHide, BiLogInCircle, BiNotification, BiShield, BiShow, BiUndo, BiUser, BiX } from 'react-icons/bi';
+import { BiErrorCircle, BiHide, BiLoader, BiLogInCircle, BiNotification, BiShield, BiShow, BiUndo, BiUser, BiX } from 'react-icons/bi';
 import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
-    const { UserInputs, err, setUserInputs, userInputs, showPassword, setShowPassword } = LogInFn(setLogin);
+    const { UserInputs, err, setUserInputs, userInputs, showPassword, setShowPassword, logingIn, setLoggingIn } = LogInFn(setLogin);
 
     return (
-        <div className="flex flex-col fixed z-20 mt-[4.5rem] text-white bg-black bg-opacity-50 h-screen w-full">
-            <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen backdrop-blur-3xl">
-                <button className="absolute flex gap-2 items-center right-2 text-white">
+        <div className="flex flex-col fixed inset-0 z-20 mt-[4.5rem] dark:text-white bg-black bg-opacity-10 h-screen w-full">
+            <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen backdrop-blur-3xl dark:bg-gray-700 bg-opacity-60 dark:bg-opacity-60 bg-white">
+                <button onClick={() => setLogin(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
                     <span>Close</span>
-                    <span className=""><BiX className="border border-white/20 hover:bg-gray-500  rounded-full bg-white/10 scale-150" /></span>
+                    <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>
                 </button>
-
+                {/* 
                 <div className={`${err.error !== ""
                     ? "flex flex-col justify-center items-center duration-500 translate-x-0"
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
@@ -36,44 +36,44 @@ export function LogIn({ setRegister, setLogin }) {
                         <p className="text-blue-600 scale-150"><BiNotification /></p>
                         <p className="text-black tracking-wide">{err.loggedIn}</p>
                     </div>
-                </div>
+                </div> */}
 
                 <form onSubmit={UserInputs} className="mt-4 flex flex-col justify-center h-[460px] gap-2">
                     <p className="text-center text-xl 
-                font-thin bg-white text-transparent bg-clip-text tracking-wider dark:text-white text-gray-800">Sign In</p>
+                font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider dark:text-white text-gray-800">Sign In</p>
 
-                    <label className="font-thin bg-white text-transparent bg-clip-text tracking-wider">Username</label>
+                    <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">Username</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <BiUser className="size-5 text-white" />
+                            <BiUser className="size-5 dark:text-white" />
                         </div>
                         <input
                             type="text"
-                            className="w-full pl-10 border text-white focus:border-blue-700 placeholder:text-white/60 border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
-                            placeholder="Terrance"
+                            className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
+                            placeholder="Username"
                             value={userInputs.username}
                             onChange={(e) => setUserInputs({ ...userInputs, username: e.target.value })}
                         />
                     </div>
-                    <label className="font-thin bg-white text-transparent bg-clip-text tracking-wider">Password</label>
+                    <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">Password</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <BiShield className="size-5 text-base-content/40" />
                         </div>
 
-                        {showPassword ? <div onClick={() => setShowPassword(false)} className="absolute inset-y-0 right-0 pr-3 flex border-l border-white/30 pl-2.5 items-center cursor-pointer">
+                        {showPassword ? <div onClick={() => setShowPassword(false)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
                             <BiHide className="size-5 text-base-content/40" />
                         </div>
                             :
-                            <div onClick={() => setShowPassword(true)} className="absolute inset-y-0 right-0 pr-3 flex border-l border-white/30 pl-2.5 items-center cursor-pointer">
+                            <div onClick={() => setShowPassword(true)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
                                 <BiShow className="size-5 text-base-content/40" />
                             </div>
                         }
 
                         <input
                             type={showPassword ? "text" : "password"}
-                            className="w-full pl-10 border focus:border-blue-700 placeholder:text-white/60 border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
-                            placeholder="******************"
+                            className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black bg-transparent p-2 rounded-md tracking-wider"
+                            placeholder="Password"
                             value={userInputs.password}
                             onChange={(e) => setUserInputs({ ...userInputs, password: e.target.value })}
                         />
@@ -88,17 +88,15 @@ export function LogIn({ setRegister, setLogin }) {
                         </span>
                     </p>
                     <button type="submit" className="">
-                        <div className="uppercase flex justify-center items-center gap-1.5 w-full py-2 bg-blue-600 dark:text-white 
+                        <div className="uppercase flex justify-center items-center gap-1.5 w-full py-2 bg-blue-600 shadow-inner shadow-blue-900 dark:text-white 
                         text-white rounded-lg">
-                            <span>Sign In </span>
+                            {logingIn ?
+                                <span className="flex justify-center items-center gap-2">
+                                    <span><BiLoader /></span>
+                                    <span>Logging in...</span>
+                                </span> : <span>Sign In </span>}
                         </div>
                     </button>
-                    {/* <div
-                        type="button"
-                        onClick={() => setLogin(false)}
-                        className="uppercase w-full  rounded-lg py-2 bg-gray-400 dark:text-white flex justify-center items-center text-white">
-                        <span>Cancel</span><span><BiUndo className="scale-150" /></span>
-                    </div> */}
                 </form>
             </div>
         </div>

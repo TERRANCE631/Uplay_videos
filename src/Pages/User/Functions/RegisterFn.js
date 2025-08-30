@@ -1,9 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 export function RegisterFn(setRegister, setLogin) {
     const [profile_image, setProfile_image] = useState(null);
     const [registered, setRegistered] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const imageRef = useRef(null);
 
     const [state, setState] = useState({
         usernameErr: "",
@@ -32,10 +35,10 @@ export function RegisterFn(setRegister, setLogin) {
     const UserInputs = (e) => {
         e.preventDefault();
         if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
-            return setState({ ...state, usernameErr: "Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers." });
+            return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers.")
 
         if (state.presentUsername > 0) {
-            setState({ ...state, existingUser: "Username already exist, try another username" })
+            toast.error("Username already exist, try another username")
         }
 
         const users = new FormData();
@@ -46,7 +49,7 @@ export function RegisterFn(setRegister, setLogin) {
         users.append("image", profile_image);
 
         try {
-            if (!state.presentUsername > 0 || state.existingUser) {
+            if (!state.presentUsername > 0 && state.existingUser) {
                 axios.post(`${process.env.REACT_APP_API_URL}/uplay/register`, users)
                     .then(res => {
                         const data = res.data
@@ -67,5 +70,5 @@ export function RegisterFn(setRegister, setLogin) {
         };
     };
 
-    return {profile_image, setProfile_image, registered, setRegistered, state, setState, UserInputs, userDetails, setUserDetails}
+    return { profile_image, imageRef, showPassword, setShowPassword, setProfile_image, registered, setRegistered, state, setState, UserInputs, userDetails, setUserDetails }
 }

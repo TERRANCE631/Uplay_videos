@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 import axios from "axios";
+import { ScrollIntoView } from "../../../Hooks/ScrollIntoView/ScrollIntoView";
 
 export function CommentsFn(videoDetails) {
-    const { scrollIntoView, user } = GlobalContext();
+    const { user } = GlobalContext();
+    const { scrollFunction } = ScrollIntoView()
     const [sendComment, setSendComment] = useState("")
     const [data, setData] = useState([]);
     const [forUseEffect, setForUseEffect] = useState("");
@@ -43,5 +45,5 @@ export function CommentsFn(videoDetails) {
         getComments();
     }, [forUseEffect]);
 
-    return { scrollIntoView, sendFeedback, comments, data, scrollRef, sendComment, setSendComment }
+    return { scrollFunction, sendFeedback, comments, data, scrollRef, sendComment, setSendComment }
 };

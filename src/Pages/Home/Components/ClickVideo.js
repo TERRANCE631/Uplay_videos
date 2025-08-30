@@ -19,20 +19,23 @@ export function ClickVideo() {
     return (
         <section>
             <VideoFilter setSelectedValue={setSelectedValue} />
-            <div className="w-full grid 2xl:grid-cols-8 xl:grid-cols-5 lg:grid-cols-4 
-            md:grid-cols-3 grid-cols-1 pb-2">
+            <div className="w-full grid 2xl:grid-cols-7 xl:grid-cols-4 lg:grid-cols-3 
+            md:grid-cols-2 grid-cols-1 pb-2">
                 {filtingVideos.length > 0 && filtingVideos.map((video, i) => {
                     return (
                         <div key={i} className="md:mb-6 mb-4 md:mx-2">
                             <HomeCard video={video} user={user} />
                         </div>
                     )
-                })}
+                })};
             </div>
-            {filtingVideos.length === 0 && <div className="flex flex-col justify-center items-center text-gray-300 text-xl">
-                <span>No videos found</span>
-                <span className="text-2xl animate-pulse">＞﹏＜</span>
-            </div>}
+            {filtingVideos.length === 0 &&
+                <div className="w-full flex justify-center items-center">
+                    <div className="flex border w-[50%] rounded-lg bg-gray-500 bg-opacity-40 py-20 flex-col justify-center items-center dark:text-gray-300 gap-3 text-xl">
+                        <span>No videos found</span>
+                        <span className="text-2xl animate-pulse font-extrabold text-blue-700 border">＞﹏＜</span>
+                    </div>
+                </div>}
         </section>
     )
 }

@@ -2,22 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { toast } from "react-toastify";
 
 export function LogInFn(setLogin) {
     const [userToken, setToken] = useState(JSON.parse(sessionStorage.getItem("userToken")) || "");
     const [ID, setID] = useState(JSON.parse(localStorage.getItem("userID")) || 0);
     const { getUserDetails } = GlobalContext()
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [logingIn, setLoggingIn] = useState(false);
 
     const [userInputs, setUserInputs] = useState({
         username: "",
         password: ""
-    });
-
-    const [err, setErr] = useState({
-        error: "",
-        loggedIn: "",
     });
 
     useEffect(() => {
@@ -26,6 +23,11 @@ export function LogInFn(setLogin) {
         // eslint-disable-next-line
     }, [userToken]);
 
+    setTimeout(() => {
+        sessionStorage.removeItem("userToken");
+        sessionStorage.removeItem("userID");
+    }, 1000 * 60 * 60 * 24);
+
     const UserInputs = async (e) => {
         e.preventDefault();
         getUserDetails();
@@ -33,32 +35,30 @@ export function LogInFn(setLogin) {
         const password = userInputs.password
 
         try {
+            setLoggingIn(true)
             await axios.post(`${process.env.REACT_APP_API_URL}/uplay/signIn`, { username, password })
                 .then(res => {
                     const data = res.data;
-                    setErr({ ...err, loggedIn: data.loggedIn })
-                    data.token === undefined
-                        ? setErr({ ...err, error: data.error })
-                        : setToken(data.token) || setID(data.id);
+                    setToken(data.token) 
+                    setID(data.id);
+                    toast.success(data.loggedIn);
+                    userToken === undefined && toast.error(data.error);
+
                     if (data.token) {
                         setTimeout(() => {
-                            setErr({ ...err, loggedIn: "", error: "" });
                             navigate("/");
                             setLogin(false);
-                            // window.location.reload();
                         }, 1000);
-                        setTimeout(() => {
-                            sessionStorage.removeItem("userToken");
-                            sessionStorage.removeItem("userID");
-                        }, 1000 * 60 * 60 * 24);
                         e.target.reset();
                     };
                 });
         } catch (error) {
             console.log("Error occured at 👉👉LogInFn function", + " | " + error)
             throw new Error(error);
+        } finally {
+            setLoggingIn(false)
         }
     };
 
-    return { UserInputs, err, setUserInputs, userInputs, showPassword, setShowPassword }
+    return { UserInputs, logingIn, setLoggingIn, setUserInputs, userInputs, showPassword, setShowPassword }
 }

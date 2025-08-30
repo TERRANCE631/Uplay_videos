@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header, SideManu } from "./Layout";
+import { Footer, Header, SideManu } from "./Layout";
 import { SlideIn } from "./Layout/SlideIn";
 import { AllRoutes } from "./Routes/AllRoutes";
 import { CreatePost } from "./Pages";
@@ -33,13 +33,14 @@ function App() {
     <div className="dark:bg-gray-700 min-h-screen overflow-hidden">
       <Header setShowManu={setShowManu} setLogin={setLogin} setRegister={setRegister} />
       <SideManu showCreatePost={showCreatePost} setShowCreatePost={setShowCreatePost} />
-      {showCreatePost && <CreatePost />}
+      {showCreatePost && <CreatePost setShowCreatePost={setShowCreatePost}/>}
       {showRegister && <Register setRegister={setRegister} setLogin={setLogin} />}
       {showLogin && <LogIn setRegister={setRegister} setLogin={setLogin} />}
       {showManu && <SlideIn setShowManu={setShowManu} setShowCreatePost={setShowCreatePost} />}
       <main className="min-h-screen md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
         <AllRoutes />
       </main>
+      <Footer />
       <ToastContainer theme="dark" position="top-center" hideProgressBar />
     </div>
   );
