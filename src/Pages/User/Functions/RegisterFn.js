@@ -8,39 +8,47 @@ export function RegisterFn(setRegister, setLogin) {
     const [showPassword, setShowPassword] = useState(false);
     const imageRef = useRef(null);
 
-    const [state, setState] = useState({
-        usernameErr: "",
-        registered: "",
-        presentUsername: 0,
-        existingUser: ""
-    });
-
     const [userDetails, setUserDetails] = useState({
         username: "",
         email: "",
         password: "",
     });
-    const { username, email } = userDetails;
+    const [foundUser, setFoundUser] = useState({});
+    const { username, email, password } = userDetails;
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/uplay/getUsername`)
             .then(res => {
                 const data = res.data;
-                const filter = data.length > 0 && data.filter((item) => item.username.includes(userDetails.username));
-                setState({ ...state, presentUsername: filter.length });
+                const filter = data.length > 0 && data.filter((item) => item.username.includes(username));
+                setFoundUser(filter)
             });
         // eslint-disable-next-line
-    }, [userDetails.username]);
+    }, [username]);
 
-    const UserInputs = (e) => {
-        e.preventDefault();
+    const validation = () => {
         if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
             return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers.")
 
-        if (state.presentUsername > 0) {
-            toast.error("Username already exist, try another username")
-        }
+        if (username && !username)
+            return toast.error("Username / Email must be provided")
 
+        if (email && !email)
+            return toast.error("Username / Email must be provided")
+
+        if (password && !password)
+            return toast.error("Password must be provided")
+
+        if (foundUser) return toast.error("Username already exist, try another username")
+
+        if (profile_image === null) return toast.error("Profile picture must be provided")
+
+        return true
+    }
+
+    const UserInputs = (e) => {
+        e.preventDefault();
+        const success = validation()
         const users = new FormData();
 
         users.append("username", userDetails.username);
@@ -49,7 +57,7 @@ export function RegisterFn(setRegister, setLogin) {
         users.append("image", profile_image);
 
         try {
-            if (!state.presentUsername > 0 && state.existingUser) {
+            if (success === true) {
                 axios.post(`${process.env.REACT_APP_API_URL}/uplay/register`, users)
                     .then(res => {
                         const data = res.data
@@ -64,11 +72,11 @@ export function RegisterFn(setRegister, setLogin) {
                         setUserDetails({ ...userDetails, username: "", email: "", password: "" });
                     })
                     .catch(error => console.log(error));
-            };
+            }
         } catch (error) {
-            console.log(error);
+            console.log("Error occured in register funtion", + " | " + error);
         };
     };
 
-    return { profile_image, imageRef, showPassword, setShowPassword, setProfile_image, registered, setRegistered, state, setState, UserInputs, userDetails, setUserDetails }
+    return { profile_image, imageRef, showPassword, setShowPassword, setProfile_image, registered, setRegistered, UserInputs, userDetails, setUserDetails }
 }

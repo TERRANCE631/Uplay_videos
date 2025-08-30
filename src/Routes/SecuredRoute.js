@@ -2,7 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const SecuredRoute = ({ children }) => {
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
+    const token = JSON.parse(sessionStorage.getItem("token"));
     const navigate = useNavigate()
 
     const checkAuth = () => {

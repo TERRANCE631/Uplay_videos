@@ -17,6 +17,5 @@ export default function ProfileDropdownLoggedOut({ setLogin, setProfile, setRegi
                 </section>
             </div>
         </section>
-
     )
 }

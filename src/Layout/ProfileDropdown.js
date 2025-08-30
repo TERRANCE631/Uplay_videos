@@ -3,17 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../Hooks/Context/useContext';
 import { BiUserCircle } from 'react-icons/bi';
+import { toast } from 'react-toastify';
 
 export function ProfileDropdown({ setProfile }) {
     const userID = JSON.parse(sessionStorage.getItem("userID"));
     const { setSubs, getUserDetails, user } = GlobalContext()
     const navigate = useNavigate()
     const logOut = () => {
-        sessionStorage.removeItem("userToken");
+        sessionStorage.removeItem("token");
         sessionStorage.removeItem("userID");
         navigate("/")
         setSubs([])
-        // window.location.reload()
+        toast.success("Logged out successfully")
     };
 
     useEffect(() => {

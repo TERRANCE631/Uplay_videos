@@ -6,65 +6,21 @@ export function Register({ setRegister, setLogin }) {
         setProfile_image,
         profile_image,
         imageRef,
-        state,
-        setState,
         UserInputs,
         userDetails,
         setUserDetails,
         showPassword, setShowPassword
     } = RegisterFn(setRegister, setLogin);
-    console.log(profile_image);
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-10 h-screen w-full">
             <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen bg-white dark:bg-gray-700 backdrop-blur-3xl bg-opacity-60 dark:bg-opacity-60">
-
-                {/* <div className={`${state.usernameErr !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${state.usernameErr !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-black"
-                        : "hidden"
-                        }`}>
-                        <p className="text-red-600 scale-150"><BiErrorCircle /></p>
-                        <p className="">{state.usernameErr}</p>
-                    </div>
-                </div>
-
-                <div className={`${registered !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${registered !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-20 items-center rounded-lg border border-gray-600 dark:text-black"
-                        : "hidden"
-                        }`}>
-                        <p className="text-blue-600 scale-150"><BiNotification /></p>
-                        <p className="">{registered}</p>
-                    </div>
-                </div> */}
-
-                {/* <div className={`${state.existingUser !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${state.existingUser !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-50 items-center rounded-lg border border-gray-600 dark:text-black"
-                        : "hidden"
-                        }`}>
-                        <p className="text-blue-600 scale-150"><BiErrorCircle /></p>
-                        <p className="">{state.existingUser}</p>
-                    </div>
-                </div> */}
-
                 <button onClick={() => setRegister(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
                     <span>Close</span>
                     <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>
                 </button>
 
                 <form onSubmit={UserInputs} className="mt-4 flex flex-col gap-2">
-
                     <p className="text-center text-xl 
                 font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider dark:text-white text-gray-800">Sign Up</p>
 
@@ -79,7 +35,7 @@ export function Register({ setRegister, setLogin }) {
                             className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
                             placeholder="Username"
                             value={userDetails.username}
-                            onChange={(e) => { userDetails.username !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, username: e.target.value }) }}
+                            onChange={(e) => setUserDetails({ ...userDetails, username: e.target.value })}
                         />
                     </div>
 
@@ -94,7 +50,7 @@ export function Register({ setRegister, setLogin }) {
                             className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
                             placeholder="E-mail"
                             value={userDetails.email}
-                            onChange={(e) => { userDetails.email !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, email: e.target.value }) }}
+                            onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
                         />
                     </div>
 
@@ -118,7 +74,7 @@ export function Register({ setRegister, setLogin }) {
                             className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black bg-transparent p-2 rounded-md tracking-wider"
                             placeholder="Password"
                             value={userDetails.password}
-                            onChange={(e) => { userDetails.password !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" }); setUserDetails({ ...userDetails, password: e.target.value }) }}
+                            onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
                         />
                     </div>
                     <p className="text-center truncate">UPLOAD: {profile_image ? profile_image.name : "No Picture found"}</p>
@@ -155,7 +111,6 @@ export function Register({ setRegister, setLogin }) {
                     </button>
                 </form>
             </div>
-
         </div>
     )
 }

@@ -27,7 +27,7 @@ export function ClickVideo() {
                             <HomeCard video={video} user={user} />
                         </div>
                     )
-                })};
+                })}
             </div>
             {filtingVideos.length === 0 &&
                 <div className="w-full flex justify-center items-center">

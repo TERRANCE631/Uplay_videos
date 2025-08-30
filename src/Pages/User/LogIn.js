@@ -2,7 +2,7 @@ import { BiErrorCircle, BiHide, BiLoader, BiLogInCircle, BiNotification, BiShiel
 import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
-    const { UserInputs, err, setUserInputs, userInputs, showPassword, setShowPassword, logingIn, setLoggingIn } = LogInFn(setLogin);
+    const { UserInputs, setUserInputs, userInputs, showPassword, setShowPassword, logingIn } = LogInFn(setLogin);
 
     return (
         <div className="flex flex-col fixed inset-0 z-20 mt-[4.5rem] dark:text-white bg-black bg-opacity-10 h-screen w-full">

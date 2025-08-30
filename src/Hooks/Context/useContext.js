@@ -14,7 +14,7 @@ export function GlobalState({ children }) {
 
     const getUserDetails = async () => {
         try {
-            await axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`)
+            await axios.get(`http://localhost:9000/uplay/GetUseId/${812465665}`)
                 .then(res => {
                     const data = res.data
                     setUser(data)
