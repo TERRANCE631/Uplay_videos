@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { GlobalContext } from '../Hooks/Context/useContext'
 
 export function SlideIn({ setShowManu, setShowCreatePost }) {
-    const { subs } = GlobalContext();
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
+    const { subs, userID } = GlobalContext();
 
     return (
-        <section onClick={() => { setShowManu(false) }} className="fixed w-full flex flex-col z-50 bg-black bg-opacity-50 px-4 pt-4 left-0 text-black 
+        <section onClick={() => { setShowManu(false) }} className="fixed w-full flex flex-col z-50 bg-black bg-opacity-10 px-4 pt-4 left-0 text-black backdrop-blur-[1.5px]
          dark:text-white h-screen">
-            <section className="fixed bg-slate-200 dark:bg-gray-800 shadow-black shadow-xl 2xl:w-[16.5%] xl:w-[18.9%] lg:w-[22%] md:w-[30%] w-[50%] md:flex 
+            <section className="fixed bg-slate-200 dark:bg-gray-800 shadow-black shadow-lg 2xl:w-[16.5%] xl:w-[20%] lg:w-[30%] md:w-[30%] w-[55%] md:flex 
             flex-col z-50 truncate px-4 pt-4 left-0 top-0 h-screen">
                 <section className="flex items-center">
                     <div

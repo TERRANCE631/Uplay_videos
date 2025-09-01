@@ -6,7 +6,7 @@ export function LogIn({ setRegister, setLogin }) {
 
     return (
         <div className="flex flex-col fixed inset-0 z-20 mt-[4.5rem] dark:text-white bg-black bg-opacity-10 h-screen w-full">
-            <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen backdrop-blur-3xl dark:bg-gray-700 bg-opacity-60 dark:bg-opacity-60 bg-white">
+            <div className="fixed p-2 z-20 right-0 md:w-[50%] lg:w-[40%] w-full h-screen backdrop-blur-3xl dark:bg-gray-700 bg-opacity-60 dark:bg-opacity-60 bg-white">
                 <button onClick={() => setLogin(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
                     <span>Close</span>
                     <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>

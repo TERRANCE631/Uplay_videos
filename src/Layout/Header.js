@@ -78,7 +78,7 @@ export function Header({ setShowManu, setLogin, setRegister }) {
       {!Loading && !user && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
       {!Loading && user && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
 
-      <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
+      <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} setShowSearch={setShowSearch} />
 
     </header>
   )

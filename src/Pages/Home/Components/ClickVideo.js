@@ -7,7 +7,6 @@ export function ClickVideo() {
     const { videos, user } = ClickVideoFn();
     const [selectedValue, setSelectedValue] = useState("");
     const filtingVideos = videos.length > 0 && videos.filter((video) => video.category.includes(selectedValue));
-    console.log(selectedValue);
 
     switch (selectedValue) {
         case "all":

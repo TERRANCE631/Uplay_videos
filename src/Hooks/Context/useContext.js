@@ -10,6 +10,8 @@ export function GlobalState({ children }) {
     const [Loading, setLoading] = useState(true);
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
+    const [profile, setProfile] = useState({});
+
     const userId = user && user.id
     const userID = user && user.id
 
@@ -75,7 +77,9 @@ export function GlobalState({ children }) {
         getUserDetails,
         userID,
         setUser,
-        userId
+        userId,
+        profile,
+        setProfile
     };
 
     return (

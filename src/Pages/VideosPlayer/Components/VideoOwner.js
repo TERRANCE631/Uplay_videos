@@ -16,7 +16,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
     user,
     getLikes,
     userId
-  } = LikesFn(id);
+  } = LikesFn(id, videoDetails);
 
   const {
     exist,

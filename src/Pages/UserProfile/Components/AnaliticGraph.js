@@ -6,11 +6,13 @@ import {
     XAxis,
     YAxis
 } from 'recharts';
-import { data } from './Dashboard';
+import { dataForGraph } from './Dashboard';
 
 export function AnaliticGraph() {
+    const { data } = dataForGraph();
+
     return (
-        <div className="reletive h-screen my-2 pt-4 md:w-full flex justify-center border items-center">
+        <div className="md:h-[600px] h-[550px] my-2 pt-4 md:w-[60%] w-[86%] flex justify-center items-center">
             <ResponsiveContainer>
                 <BarChart data={data}>
                     <XAxis dataKey="title" />

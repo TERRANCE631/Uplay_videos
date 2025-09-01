@@ -1,9 +1,8 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 import { AxiosInstance } from '../../../Lib/AxiosInstance';
 
-export function LikesFn(id) {
+export function LikesFn(id, videoDetails) {
     // const userId = JSON.parse(sessionStorage.getItem("userID"));
     const [showDropDown, setShowDropDown] = useState(false);
     const [existOrNot, setExistOrNot] = useState(false);
@@ -23,9 +22,10 @@ export function LikesFn(id) {
     const Likes = () => {
         const username = user.username
         const userID = userId
+        const videoUserID = videoDetails.userID
         const videoID = id
 
-        AxiosInstance.post(`/uplay/likes`, { username, userID, videoID })
+        AxiosInstance.post(`/uplay/likes`, { username, userID, videoUserID, videoID })
     };
 
     const getLikes = async () => {

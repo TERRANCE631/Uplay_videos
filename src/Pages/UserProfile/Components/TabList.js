@@ -1,13 +1,8 @@
-import React from 'react'
 import { VideoList } from './VideoList'
 import { Tabs } from './Tabs';
 import { Graph } from './Graph';
 
 export function TabList({ dashboardList, videos, user, getVideos }) {
-    const consoleIndex = (index) => {
-        console.log(index);
-    };
-
     const tabs = [
         {
             title: "Videos",
@@ -19,5 +14,5 @@ export function TabList({ dashboardList, videos, user, getVideos }) {
         }
     ];
 
-    return <Tabs NavBar={tabs} onClick={consoleIndex} />
+    return <Tabs NavBar={tabs} />
 }

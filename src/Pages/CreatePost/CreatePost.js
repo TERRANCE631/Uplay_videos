@@ -6,10 +6,12 @@ import { useRef } from "react";
 import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 export function CreatePost({ setShowCreatePost }) {
-    const { Loading, user } = GlobalContext();
+    const { user } = GlobalContext();
     const [post, setPost] = useState(false);
-    // const token = JSON.parse(sessionStorage.getItem("userToken"));
     const uploadVideo = useRef(null);
+    const [upload, setUpload] = useState(null);
+
+    console.log(upload);
 
     const postVideo = async (e) => {
         e.preventDefault();
@@ -36,7 +38,7 @@ export function CreatePost({ setShowCreatePost }) {
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] bg-black bg-opacity-10 h-screen w-full">
-            <form onSubmit={postVideo} className="lg:w-[40%] md:w-[40%] w-[100%] flex flex-col gap-6 bg-slate-100 h-full  p-2 
+            <form onSubmit={postVideo} className="lg:w-[40%] md:w-[50%] w-[100%] flex flex-col gap-6 bg-slate-100 h-full  p-2 
             dark:bg-gray-700 dark:text-white backdrop-blur-3xl bg-opacity-60">
                 <div className="justify-end flex">
                     <button onClick={() => setShowCreatePost(false)} type="button" className="flex gap-2 items-center right-2 dark:text-white">
@@ -56,6 +58,9 @@ export function CreatePost({ setShowCreatePost }) {
                         className="w-full tracking-wider bg-white/80 bg-opacity-60 dark:bg-gray-700 rounded-lg shadow-md shadow-black p-1 outline-none border placeholder:text-black/75 dark:placeholder:text-white/80 border-white/20"
                     />
                 </div>
+                <p className="text-center truncate dark:text-white tracking-wider">
+                    UPLOAD: {upload ? upload.name : "Video title..."}
+                </p>
 
                 <div className="flex w-full justify-between items-center gap-2">
                     <div className="w-full">
@@ -72,7 +77,14 @@ export function CreatePost({ setShowCreatePost }) {
                     </button>
                 </div>
 
-                <input ref={uploadVideo} required name="video" type="file" accept="video/mp4" className="w-full py-2 outline-none upload__btn border hidden
+                <input
+                    ref={uploadVideo}
+                    required
+                    name="video"
+                    type="file"
+                    accept="video/mp4"
+                    onChange={(e) => setUpload(e.target.files[0])}
+                    className="w-full py-2 outline-none upload__btn border hidden
                     dark:border-white bg-transparent border-gray-600" />
 
                 <div className="">

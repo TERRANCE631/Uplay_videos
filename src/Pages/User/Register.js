@@ -14,7 +14,7 @@ export function Register({ setRegister, setLogin }) {
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-10 h-screen w-full">
-            <div className="fixed p-2 z-20 right-0 md:w-[40%] w-full h-screen bg-white dark:bg-gray-700 backdrop-blur-3xl bg-opacity-60 dark:bg-opacity-60">
+            <div className="fixed p-2 z-20 right-0 lg:w-[40%] md:w-[50%] w-full h-screen bg-white dark:bg-gray-700 backdrop-blur-3xl bg-opacity-60 dark:bg-opacity-60">
                 <button onClick={() => setRegister(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
                     <span>Close</span>
                     <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>
@@ -58,15 +58,15 @@ export function Register({ setRegister, setLogin }) {
 
                     <label className="font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider">Password</label>
                     <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <div className="absolute inset-y-0 left-0 dark:text-white pl-3 flex items-center pointer-events-none">
                             <BiShield className="size-5 text-base-content/40" />
                         </div>
 
-                        {showPassword ? <div onClick={() => setShowPassword(false)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
+                        {showPassword ? <div onClick={() => setShowPassword(false)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer dark:text-white">
                             <BiHide className="size-5 text-base-content/40" />
                         </div>
                             :
-                            <div onClick={() => setShowPassword(true)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer">
+                            <div onClick={() => setShowPassword(true)} className="absolute inset-y-0 right-0 pr-3 flex border-l dark:border-white/30 border-black pl-2.5 items-center cursor-pointer dark:text-white">
                                 <BiShow className="size-5 text-base-content/40" />
                             </div>
                         }
@@ -80,11 +80,11 @@ export function Register({ setRegister, setLogin }) {
                             onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
                         />
                     </div>
-                    <p className="text-center truncate">UPLOAD: {profile_image ? profile_image.name : "No Picture found"}</p>
+                    <p className="text-center tracking-wider truncate dark:text-white">UPLOAD: {profile_image ? profile_image.name : "Picture's title..."}</p>
 
                     <div className="flex justify-center items-center">
                         <button type="button" onClick={() => imageRef.current?.click()} className="my-2 w-[60%] py-2 rounded-lg text-white shadow-inner shadow-blue-900 bg-blue-600 flex justify-center items-center">
-                            <span>Upload your profile picture</span>
+                            <span>Profile picture</span>
                         </button>
                     </div>
 

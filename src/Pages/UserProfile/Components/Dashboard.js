@@ -1,4 +1,7 @@
 import { BiSolidAddToQueue, BiSolidLike } from "react-icons/bi";
+import { VideoListFn } from "../Functions/VideoListFn";
+import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { LikesFn } from "../../VideosPlayer/Functions";
 
 export const dashboardList = [
     {
@@ -15,14 +18,25 @@ export const dashboardList = [
     }
 ]
 
-export const data = [
-    {
-        title: "Subscribers",
-        count: 2000,
-    },
-    {
-        title: "Likes",
-        count: 3000
-    }
-];
+
+export const dataForGraph = () => {
+    const { profile, subs } = GlobalContext()
+    const { like } = LikesFn()
+
+    const userLikes = like.filter((likes) => likes.videoUserID === profile.id)
+    const userSubs = subs.filter((subscribe) => subscribe.videoUserID === profile.id)
+
+    const data = [
+        {
+            title: "Subscribers",
+            count: userSubs.length
+        },
+        {
+            title: "Likes",
+            count: userLikes.length
+        }
+    ];
+
+    return { data }
+}
 

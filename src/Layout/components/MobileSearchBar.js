@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { GlobalContext } from '../../Hooks/Context/useContext';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AxiosInstance } from '../../Lib/AxiosInstance';
 
-export function MobileSearchBar({ currentScrollY, showSearch }) {
-    const { setValue, value } = GlobalContext();
+export function MobileSearchBar({ currentScrollY, showSearch, setShowSearch }) {
+    const { setValue, value, user } = GlobalContext();
     const [videos, setVideos] = useState([])
 
     const getVideos = async () => {
-        await axios.get("http://localhost:9000/uplay/getVideos?_sort=id&&_order=dis")
+        await AxiosInstance.get("/uplay/getVideos")
             .then(res => {
                 const data = res.data;
                 setVideos(data);
             })
     };
 
-    // useEffect(() => {
-    //     getVideos();
-    // }, []);
+    useEffect(() => {
+        getVideos();
+    }, [value]);
 
-    const filter = videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) });
+    const filter = videos && videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) });
 
     return (
-        <section className={`${currentScrollY > 0 ? "w-screen transition-all duration-500"
-            : showSearch ? "w-screen h-screen bg-black bg-opacity-20 transition-all duration-500"
-                : "w-screen transition-all duration-500 shadow-xl shadow-black"}`}>
-            {showSearch &&
+        <section className={`${user && currentScrollY > 0 && showSearch ? "w-screen h-screen bg-black bg-opacity-10 backdrop-blur-lg"
+            : user && showSearch ? "w-screen h-screen bg-black bg-opacity-10 backdrop-blur-lg"
+                : "w-screen shadow-xl shadow-black"}`}>
+            {showSearch && user &&
                 <nav className="flex items-center my-1 flex-grow w-full justify-center">
                     <section className="mt-[4.7rem] flex w-full flex-grow px-0.5 items-center md:hidden">
                         <input
@@ -36,28 +36,28 @@ export function MobileSearchBar({ currentScrollY, showSearch }) {
                             className="bg-gray-200 flex border flex-grow w-full shadow-inner shadow-black outline-none border-gray-500 py-2 pl-4 rounded-l-full"
                             placeholder="Search video here"
                         />
-                        {value !== "" &&
+                        {/* {value !== "" &&
                             <button
                                 onClick={() => setValue("")}
                                 className="absolute right-[25.5%] text-white bg-gray-500/30 hover:bg-gray-500/10 
                                 rounded-full scale-[165%] font-thin px-2"
                             >
                                 &times;
-                            </button>}
+                            </button>} */}
                         <span className="text-2xl text-white border bg-gray-500 py-2 px-6 rounded-r-full border-gray-500">
                             <BiSearch />
                         </span>
                     </section>
                 </nav>}
             {value !== "" &&
-                <result className="flex md:hidden my-[3.5rem] justify-center items-center inset-x-0 top-[4.5rem] min-h-20 absolute">
-                    <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
+                <result className="flex my-[3.5rem] justify-center md:hidden items-center inset-x-0 top-[4.5rem] min-h-20 absolute">
+                    {filter.length !== 0 ? <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.slice(0, 8).map((name, i) => {
                             return (
                                 <Link
-                                    onClick={() => setValue("")}
+                                    onClick={() => { setValue(""); setShowSearch(false) }}
                                     key={i}
-                                    to={`/videoPlayer/${name.id}`}
+                                    to={user && `/videoPlayer/${name.id}`}
                                     className="border-gray-400 shadow-lg truncate rounded-lg border p-2 my-0.5"
                                 >
                                     {name.title}
@@ -65,6 +65,13 @@ export function MobileSearchBar({ currentScrollY, showSearch }) {
                             )
                         })}
                     </section>
+                        : <result className="flex justify-center items-center inset-x-0 top-[1.5rem] md:hidden absolute">
+                            <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
+                                <div className="border-gray-400 text-center font-bold tracking-wide rounded-lg p-2 my-0.5">
+                                    No results found
+                                </div>
+                            </section>
+                        </result>}
                 </result>}
         </section>
 
