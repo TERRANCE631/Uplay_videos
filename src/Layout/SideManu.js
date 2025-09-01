@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../Hooks/Context/useContext";
 
 export function SideManu({ setShowCreatePost }) {
-  const { subs } = GlobalContext();
-  const userID = JSON.parse(sessionStorage.getItem("userID"));
+  const { subs, userID } = GlobalContext();
 
   return (
     <div className="fixed md:flex hidden backdrop-blur-2xl bg-white z-30 flex-col mt-[4rem] truncate px-2 pt-4 left-0 

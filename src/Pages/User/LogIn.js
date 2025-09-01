@@ -80,12 +80,12 @@ export function LogIn({ setRegister, setLogin }) {
                     </div>
                     <p className="">
                         <span className="dark:text-white">Don't have an account? </span>
-                        <span
-                            type="submit"
+                        <button
+                            type="button"
                             onClick={() => { setRegister(true); setLogin(false) }}
                             className="text-blue-600 hover:underline">
                             Sign Up
-                        </span>
+                        </button>
                     </p>
                     <button type="submit" className="">
                         <div className="uppercase flex justify-center items-center gap-1.5 w-full py-2 bg-blue-600 shadow-inner shadow-blue-900 dark:text-white 

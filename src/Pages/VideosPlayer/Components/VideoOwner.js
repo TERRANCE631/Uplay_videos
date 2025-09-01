@@ -117,7 +117,6 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
               </section>
             }
 
-
             {!existOrNot &&
               <section>
                 <button

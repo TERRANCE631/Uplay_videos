@@ -1,29 +1,42 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../Hooks/Context/useContext';
 import { BiUserCircle } from 'react-icons/bi';
 import { toast } from 'react-toastify';
+import { AxiosInstance } from '../Lib/AxiosInstance';
 
 export function ProfileDropdown({ setProfile }) {
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-    const { setSubs, getUserDetails, user } = GlobalContext()
-    const navigate = useNavigate()
+    // const userID = JSON.parse(sessionStorage.getItem("userID"));
+    const { setSubs, user, setUser } = GlobalContext()
+    const navigate = useNavigate();
+    const [offlineUser, setOfflineUser] = useState(false);
+
     const logOut = () => {
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("userID");
-        navigate("/")
-        setSubs([])
-        toast.success("Logged out successfully")
+        try {
+            AxiosInstance.get("/uplay/logout").then(() => {
+                setUser(null)
+                if (user) {
+                    setOfflineUser(true)
+                } else {
+                    setOfflineUser(false)
+                }
+            });
+            navigate("/")
+            setSubs([])
+            setUser(null)
+            toast.success("Logged out successfully")
+            if (offlineUser) {
+                setUser(null)
+            };
+
+        } catch (error) {
+            console.log("Error in 👉👉logOut function", + " | " + error);
+        }
     };
 
-    useEffect(() => {
-        getUserDetails()
-        // eslint-disable-next-line
-    }, [userID])
-
     return (
-        <section onClick={() => setProfile(false)} className="w-full h-screen shadow-xl shadow-black bg-opacity-20 bg-black">
+        <section onClick={() => setProfile(false)} className="w-full h-screen shadow-xl shadow-black bg-opacity-10 bg-black">
             <div className="fixed backdrop-blur-lg z-40 md:w-[30%] w-[97.5%] shadow-inner shadow-gray-800 border-2 
         border-gray-500 rounded-lg right-1 top-[4rem] min-h-[20rem] bg-white/20">
                 <section className="">

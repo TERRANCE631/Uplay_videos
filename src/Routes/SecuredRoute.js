@@ -1,14 +1,15 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { GlobalContext } from "../Hooks/Context/useContext";
 
 export const SecuredRoute = ({ children }) => {
-    const token = JSON.parse(sessionStorage.getItem("token"));
+    const { user } = GlobalContext()
     const navigate = useNavigate()
 
     const checkAuth = () => {
-        if (token) {
-            return token ? children : <Navigate to={"/"} />;
-        } else if (!token) {
+        if (user) {
+            return user ? children : <Navigate to={"/"} />;
+        } else if (!user) {
             toast.error("Sign in to your account");
             navigate("/")
         };

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { YesOrNo } from "./YesOrNo";
 import { VideoListFn } from "../Functions/VideoListFn";
+import { Bike } from "lucide-react";
 
 export function VideoList({ user, videos, getVideos }) {
     const { ID, setID, toggle, setToggle, userID, deleteVideo } = VideoListFn(videos, getVideos);
@@ -34,7 +35,10 @@ export function VideoList({ user, videos, getVideos }) {
                         <div className="h-full p-1 w-full">
                             {vid.userID === userID && <button className="flex justify-end shadow-red-900 shadow-inner rounded-lg">
                                 <p onClick={() => { setToggle(true); setID(vid.id) }}
-                                    className="py-2 px-2 bg-red-600 shadow-red-600 shadow-lg hover:bg-red-500 text-white rounded-lg mb-1">Delete {vid.id}</p>
+                                    className="py-2 px-2 bg-red-600 shadow-red-600 shadow-lg hover:bg-red-500 text-white rounded-lg mb-1"
+                                >
+                                    <span><Bike/></span>
+                                </p>
                             </button>}
                             {/* <Link to={`/videoPlayer/${vid.id}`}>
                                 <p className="font-bold">{vid.title}</p>
@@ -49,7 +53,7 @@ export function VideoList({ user, videos, getVideos }) {
                 <div className="w-screen flex flex-col justify-center items-center">
                     <div className="my-2 text-xl">Oops no videos found, post videos</div>
                     <div className="md:text-6xl text-4xl">{".·´¯`(>▂<)´¯`·."}</div>
-                </div >
+                </div>
             }
         </div>
     )

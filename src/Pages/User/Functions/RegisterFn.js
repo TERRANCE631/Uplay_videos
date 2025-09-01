@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { AxiosInstance } from "../../../Lib/AxiosInstance";
 
 export function RegisterFn(setRegister, setLogin) {
     const [profile_image, setProfile_image] = useState(null);
@@ -13,15 +13,17 @@ export function RegisterFn(setRegister, setLogin) {
         email: "",
         password: "",
     });
+
     const [foundUser, setFoundUser] = useState({});
     const { username, email, password } = userDetails;
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/uplay/getUsername`)
+        AxiosInstance.get("/uplay/getUsername")
             .then(res => {
                 const data = res.data;
-                const filter = data.length > 0 && data.filter((item) => item.username.includes(username));
+                const filter = data.length > 0 && data.find((item) => item.username.includes(username || 0));
                 setFoundUser(filter)
+                console.log(filter);
             });
         // eslint-disable-next-line
     }, [username]);
@@ -30,21 +32,13 @@ export function RegisterFn(setRegister, setLogin) {
         if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
             return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers.")
 
-        if (username && !username)
-            return toast.error("Username / Email must be provided")
-
-        if (email && !email)
-            return toast.error("Username / Email must be provided")
-
-        if (password && !password)
-            return toast.error("Password must be provided")
+        if (!username || !email || !password || !profile_image)
+            return toast.error("User details must be provided")
 
         if (foundUser) return toast.error("Username already exist, try another username")
 
-        if (profile_image === null) return toast.error("Profile picture must be provided")
-
         return true
-    }
+    };
 
     const UserInputs = (e) => {
         e.preventDefault();
@@ -58,7 +52,7 @@ export function RegisterFn(setRegister, setLogin) {
 
         try {
             if (success === true) {
-                axios.post(`${process.env.REACT_APP_API_URL}/uplay/register`, users)
+                AxiosInstance.post("/uplay/register", users)
                     .then(res => {
                         const data = res.data
                         setRegistered(data.registered);
@@ -79,4 +73,4 @@ export function RegisterFn(setRegister, setLogin) {
     };
 
     return { profile_image, imageRef, showPassword, setShowPassword, setProfile_image, registered, setRegistered, UserInputs, userDetails, setUserDetails }
-}
+};

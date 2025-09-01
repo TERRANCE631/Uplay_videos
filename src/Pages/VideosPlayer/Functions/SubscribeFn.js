@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
+import { AxiosInstance } from '../../../Lib/AxiosInstance';
 
 export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, username, user, photo) {
     const [exist, setExist] = useState(false);
@@ -14,7 +15,7 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         formData.append("profile_photo", photo);
         formData.append("sub__To", username);
 
-        axios.post(`${process.env.REACT_APP_API_URL}/uplay/postSubs`, formData)
+        AxiosInstance.post(`/uplay/postSubs`, formData)
             .then(res => {
                 const data = res.data;
                 console.log(data);
@@ -22,7 +23,7 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
     };
 
     const DeleteSub = async (userID) => {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deleteSub/${userID}`);
+        await AxiosInstance.delete(`/uplay/deleteSub/${userID}`);
     };
 
     const amountOfSubs = subs.length > 0 && subs.filter(item => item.videoUserID === videoDetails.userID);

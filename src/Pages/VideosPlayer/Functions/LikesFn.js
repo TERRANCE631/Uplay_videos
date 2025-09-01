@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { GlobalContext } from '../../../Hooks/Context/useContext';
+import { AxiosInstance } from '../../../Lib/AxiosInstance';
 
 export function LikesFn(id) {
-    const userId = JSON.parse(sessionStorage.getItem("userID"));
+    // const userId = JSON.parse(sessionStorage.getItem("userID"));
     const [showDropDown, setShowDropDown] = useState(false);
     const [existOrNot, setExistOrNot] = useState(false);
-    const { user, getUserDetails } = GlobalContext();
+    const { user, getUserDetails, userId } = GlobalContext();
     const [like, setLike] = useState([]);
 
     // filter likes from the database to get its length and render it as likes.
@@ -15,7 +16,7 @@ export function LikesFn(id) {
     console.log(likes);
 
     const handleDelete = async (id) => {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deletelike/${id}`)
+        await AxiosInstance.delete(`/uplay/deletelike/${id}`)
     };
 
     // posting likes, username, videoID and id as primary key
@@ -24,11 +25,11 @@ export function LikesFn(id) {
         const userID = userId
         const videoID = id
 
-        axios.post(`${process.env.REACT_APP_API_URL}/uplay/likes`, { username, userID, videoID })
+        AxiosInstance.post(`/uplay/likes`, { username, userID, videoID })
     };
 
     const getLikes = async () => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/getLikes`)
+        await AxiosInstance.get(`/uplay/getLikes`)
             .then(res => {
                 const data = res.data;
                 setLike(data);
@@ -54,7 +55,7 @@ export function LikesFn(id) {
             setExistOrNot(false);
         };
         // eslint-disable-next-line
-    }, [like, user.username, id, getLikes]);
+    }, [like, user && user.username, id, getLikes]);
 
     return { showDropDown, setShowDropDown, existOrNot, setExistOrNot, user, like, likes, handleDelete, Likes, getLikes, userId }
 }

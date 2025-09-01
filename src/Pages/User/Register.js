@@ -1,4 +1,4 @@
-import { BiErrorCircle, BiHide, BiMessage, BiNotification, BiShield, BiShow, BiUndo, BiUpload, BiUser, BiUserCircle, BiUserPlus, BiX } from 'react-icons/bi';
+import { BiHide, BiMessage, BiShield, BiShow, BiUser, BiX } from 'react-icons/bi';
 import { RegisterFn } from './Functions/RegisterFn';
 
 export function Register({ setRegister, setLogin }) {
@@ -33,6 +33,7 @@ export function Register({ setRegister, setLogin }) {
                         <input
                             type="text"
                             className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
+                            required
                             placeholder="Username"
                             value={userDetails.username}
                             onChange={(e) => setUserDetails({ ...userDetails, username: e.target.value })}
@@ -48,6 +49,7 @@ export function Register({ setRegister, setLogin }) {
                         <input
                             type="text"
                             className="w-full pl-10 border dark:text-white focus:border-blue-700 dark:placeholder:text-white/60 placeholder:text-black border-black dark:border-white/30 outline-none bg-transparent p-2 rounded-md tracking-wider"
+                            required
                             placeholder="E-mail"
                             value={userDetails.email}
                             onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
@@ -72,6 +74,7 @@ export function Register({ setRegister, setLogin }) {
                         <input
                             type={showPassword ? "text" : "password"}
                             className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black bg-transparent p-2 rounded-md tracking-wider"
+                            required
                             placeholder="Password"
                             value={userDetails.password}
                             onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
@@ -88,6 +91,7 @@ export function Register({ setRegister, setLogin }) {
                     <input
                         ref={imageRef}
                         onChange={(e) => setProfile_image(e.target.files[0])}
+                        required
                         name="profile_image"
                         id="profile_image"
                         type="file"

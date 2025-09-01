@@ -5,8 +5,8 @@ import { GlobalContext } from "../../Hooks/Context/useContext";
 export function HeaderFn() {
     const [showSearch, setShowSearch] = useState(false);
     const [showProfile, setProfile] = useState(false);
-    const { setValue, profileDetails, Loading, user } = GlobalContext()
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
+    const { setValue, profileDetails, Loading, user, userOffline } = GlobalContext()
+    // const token = JSON.parse(sessionStorage.getItem("token") || "");
 
     const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
     const { y: currentScrollY } = useWindowScroll();
@@ -52,12 +52,12 @@ export function HeaderFn() {
         showProfile,
         profileDetails,
         showSearch,
-        token,
         setDarkMode,
         Loading,
         setShowSearch,
         setProfile,
         scrollRef,
-        user
+        user,
+        userOffline
     };
 }

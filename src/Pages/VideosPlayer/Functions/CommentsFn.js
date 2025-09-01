@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
-import axios from "axios";
 import { ScrollIntoView } from "../../../Hooks/ScrollIntoView/ScrollIntoView";
+import { AxiosInstance } from "../../../Lib/AxiosInstance";
 
 export function CommentsFn(videoDetails) {
     const { user } = GlobalContext();
@@ -25,7 +25,7 @@ export function CommentsFn(videoDetails) {
         const date = currentDate;
         const comment = sendComment;
 
-        axios.post(`${process.env.REACT_APP_API_URL}/uplay/postComments`, { comment, videoID, userID, username, date, profile_image })
+        AxiosInstance.post("/uplay/postComments", { comment, videoID, userID, username, date, profile_image })
             .then(res => {
                 const data = res.data;
                 setForUseEffect(data.details);
@@ -34,7 +34,7 @@ export function CommentsFn(videoDetails) {
     };
 
     const getComments = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/uplay/getComments`)
+        AxiosInstance.get("/uplay/getComments")
             .then(res => {
                 const data = res.data;
                 setData(data);

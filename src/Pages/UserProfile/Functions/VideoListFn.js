@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { GlobalContext } from "../../../Hooks/Context/useContext";
 
 export function VideoListFn(videos, getVideos) {
     const [ID, setID] = useState(null);
     const [toggle, setToggle] = useState(false);
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-
+    const { userID } = GlobalContext()
     const deleteVideo = (id) => {
         axios.delete(`http://localhost:9000/uplay/deleteVideo/${id}`);
         videos.filter((item) => item.id !== id);

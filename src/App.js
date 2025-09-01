@@ -13,14 +13,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { showLogin, setLogin, getUserDetails, userID, getVideos, GetSubscribers } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers, user } = GlobalContext();
   const { Loading } = ClickVideoFn();
 
   const [showRegister, setRegister] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
 
-  useEffect(() => { getUserDetails(); getVideos(); GetSubscribers() }, [userID]);
+  useEffect(() => { getUserDetails(); getVideos(); GetSubscribers() }, []);
 
   if (Loading) return (
     <div className="flex dark:bg-gray-700 dark:text-white justify-center gap-1 items-center absolute inset-0">
@@ -33,7 +33,7 @@ function App() {
     <div className="dark:bg-gray-700 min-h-screen overflow-hidden">
       <Header setShowManu={setShowManu} setLogin={setLogin} setRegister={setRegister} />
       <SideManu showCreatePost={showCreatePost} setShowCreatePost={setShowCreatePost} />
-      {showCreatePost && <CreatePost setShowCreatePost={setShowCreatePost}/>}
+      {showCreatePost && <CreatePost setShowCreatePost={setShowCreatePost} />}
       {showRegister && <Register setRegister={setRegister} setLogin={setLogin} />}
       {showLogin && <LogIn setRegister={setRegister} setLogin={setLogin} />}
       {showManu && <SlideIn setShowManu={setShowManu} setShowCreatePost={setShowCreatePost} />}

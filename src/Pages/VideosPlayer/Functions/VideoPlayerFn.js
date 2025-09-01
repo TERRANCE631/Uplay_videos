@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { AxiosInstance } from "../../../Lib/AxiosInstance";
 
 export function VideoPlayerFn(id) {
     const [videoDetails, setVideoDetails] = useState({});
@@ -9,7 +10,7 @@ export function VideoPlayerFn(id) {
     const { getVideos, videos } = GlobalContext()
 
     const getVideoByID = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/uplay/VideoPlayer/${id}`)
+        AxiosInstance.get(`/uplay/VideoPlayer/${id}`)
             .then(res => {
                 const data = res.data;
                 setVideoDetails(data);

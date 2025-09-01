@@ -3,11 +3,12 @@ import { GlobalContext } from "../../Hooks/Context/useContext";
 import { useState } from "react";
 import { BiLoader, BiUpload, BiX } from "react-icons/bi";
 import { useRef } from "react";
+import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 export function CreatePost({ setShowCreatePost }) {
     const { Loading, user } = GlobalContext();
     const [post, setPost] = useState(false);
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
+    // const token = JSON.parse(sessionStorage.getItem("userToken"));
     const uploadVideo = useRef(null);
 
     const postVideo = async (e) => {
@@ -21,7 +22,7 @@ export function CreatePost({ setShowCreatePost }) {
 
         try {
             setPost(true)
-            await axios.post(`${process.env.REACT_APP_API_URL}/uplay/videos`, formData)
+            await AxiosInstance.post(`/uplay/videos`, formData)
                 .then(() => {
                     window.location.reload()
                 });
@@ -76,12 +77,12 @@ export function CreatePost({ setShowCreatePost }) {
 
                 <div className="">
                     <button
-                        disabled={token ? "" : "disabeled"}
+                        disabled={user && user.id ? "" : "disabeled"}
                         type="submit"
-                        className={!Loading && token ? "bg-blue-700 hover:bg-blue-600 py-2 rounded-lg w-full text-white"
+                        className={user && user.id ? "bg-blue-700 hover:bg-blue-600 py-2 rounded-lg w-full text-white"
                             : "bg-blue-700 hover:bg-blue-600 opacity-50 cursor-not-allowed rounded-lg py-2 w-full text-white uppercase"}
                     >
-                        {token && !Loading ?
+                        {user && user.id ?
                             <div className="">
                                 {post ?
                                     <div className="flex items-center justify-center gap-2">

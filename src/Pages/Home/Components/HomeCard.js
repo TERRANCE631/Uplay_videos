@@ -7,7 +7,6 @@ export function HomeCard({ video, TokenCondition, user }) {
     // const [showDropDown, setShowDropDown] = useState(false);
     // const [videoID, setVideoID] = useState(null);
     const { likes, Likes } = GlobalContext();
-    const token = JSON.parse(sessionStorage.getItem("userToken"));
     const { like } = LikesFn()
     const [hover, setHover] = useState(null);
     const onHover = (onHover) => {
@@ -70,7 +69,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                 <div className="text-xs px-1">{video.created_At}</div>
 
                 <section className="flex p-1 h-full items-center justify-between">
-                    <Link to={token && `/Home/User/profile/${video.userID}`}
+                    <Link to={user && `/Home/User/profile/${video.userID}`}
                         className="flex items-center mt-2 md:-mb-2 gap-1"
                     >
                         <div className="w-9 h-9 shrink-0 rounded-full border">

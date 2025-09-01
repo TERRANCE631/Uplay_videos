@@ -12,7 +12,7 @@ export function Header({ setShowManu, setLogin, setRegister }) {
     showProfile,
     profileDetails,
     showSearch,
-    token,
+    userId,
     setDarkMode,
     Loading,
     setShowSearch,
@@ -63,7 +63,7 @@ export function Header({ setShowManu, setLogin, setRegister }) {
           </section>
 
           <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
-            <img src={token ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
+            <img src={user ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
               alt="" className="object-cover object-center h-full w-full rounded-full" />
           </button>
         </section>
@@ -75,8 +75,8 @@ export function Header({ setShowManu, setLogin, setRegister }) {
         </div>
       }
 
-      {!Loading && !token && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
-      {!Loading && token && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
+      {!Loading && !user && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
+      {!Loading && user && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
 
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
 

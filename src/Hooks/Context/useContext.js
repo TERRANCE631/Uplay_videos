@@ -1,34 +1,35 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react"
+import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 const ContextWrapper = createContext(null);
 export function GlobalState({ children }) {
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-
     const [value, setValue] = useState("");
     const [subs, setSubs] = useState([]);
     const [showLogin, setLogin] = useState(false);
     const [Loading, setLoading] = useState(true);
     const [videos, setVideos] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
+    const userId = user && user.id
+    const userID = user && user.id
 
     const getUserDetails = async () => {
         try {
-            await axios.get(`http://localhost:9000/uplay/GetUseId/${812465665}`)
+            await AxiosInstance.get("/uplay/checkAuth")
                 .then(res => {
                     const data = res.data
-                    setUser(data)
+                    setUser(data ? data : null)
                 });
         } catch (error) {
             console.log(error);
         } finally {
             setLoading(false)
-        }
+        };
     };
 
     const getVideos = async () => {
         try {
-            await axios.get(`${process.env.REACT_APP_API_URL}/uplay/getVideos`)
+            await AxiosInstance.get("/uplay/getVideos")
                 .then(res => {
                     const data = res.data;
                     setVideos(data);
@@ -42,14 +43,14 @@ export function GlobalState({ children }) {
 
     const GetSubscribers = () => {
         try {
-            axios.get(`${process.env.REACT_APP_API_URL}/uplay/getSubs`)
+            AxiosInstance.get("/uplay/getSubs")
                 .then(res => {
                     const data = res.data;
                     setSubs(data);
                 })
         } catch (error) {
             console.log(error);
-        } 
+        }
     };
 
     const scrollIntoView = (ref) => {
@@ -72,7 +73,9 @@ export function GlobalState({ children }) {
         setVideos,
         user,
         getUserDetails,
-        userID
+        userID,
+        setUser,
+        userId
     };
 
     return (
