@@ -92,7 +92,7 @@ export function LogIn({ setRegister, setLogin }) {
                         text-white rounded-lg">
                             {logingIn ?
                                 <span className="flex justify-center items-center gap-2">
-                                    <span><BiLoader /></span>
+                                    <span><BiLoader className="animate-spin h-6 w-6 text-white"/></span>
                                     <span>Logging in...</span>
                                 </span> : <span>Sign In </span>}
                         </div>

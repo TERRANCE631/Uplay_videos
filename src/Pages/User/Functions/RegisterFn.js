@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosInstance } from "../../../Lib/AxiosInstance";
+import { GlobalContext } from "../../../Hooks/Context/useContext";
 
 export function RegisterFn(setRegister, setLogin) {
     const [profile_image, setProfile_image] = useState(null);
-    const [registered, setRegistered] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [signingUp, setSigningUp] = useState();
+    const { getUserDetails } = GlobalContext()
     const imageRef = useRef(null);
 
     const [userDetails, setUserDetails] = useState({
@@ -23,7 +25,6 @@ export function RegisterFn(setRegister, setLogin) {
                 const data = res.data;
                 const filter = data.length > 0 && data.find((item) => item.username.includes(username || 0));
                 setFoundUser(filter)
-                console.log(filter);
             });
         // eslint-disable-next-line
     }, [username]);
@@ -55,22 +56,22 @@ export function RegisterFn(setRegister, setLogin) {
                 AxiosInstance.post("/uplay/register", users)
                     .then(res => {
                         const data = res.data
-                        setRegistered(data.registered);
+                        toast.success(data.registered);
                         setTimeout(() => {
-                            setLogin(true);
+                            // setLogin(true);
                             setRegister(false);
-                        }, 2000);
-                        setTimeout(() => {
-                            setRegistered("");
-                        }, 2000);
+                        }, 1000);
                         setUserDetails({ ...userDetails, username: "", email: "", password: "" });
                     })
                     .catch(error => console.log(error));
             }
         } catch (error) {
             console.log("Error occured in register funtion", + " | " + error);
-        };
+        } finally {
+            setSigningUp(false)
+            getUserDetails()
+        }
     };
 
-    return { profile_image, imageRef, showPassword, setShowPassword, setProfile_image, registered, setRegistered, UserInputs, userDetails, setUserDetails }
+    return { profile_image, signingUp, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
 };

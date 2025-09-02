@@ -1,4 +1,4 @@
-import { BiHide, BiMessage, BiShield, BiShow, BiUser, BiX } from 'react-icons/bi';
+import { BiHide, BiLoader, BiMessage, BiShield, BiShow, BiUser, BiX } from 'react-icons/bi';
 import { RegisterFn } from './Functions/RegisterFn';
 
 export function Register({ setRegister, setLogin }) {
@@ -6,6 +6,7 @@ export function Register({ setRegister, setLogin }) {
         setProfile_image,
         profile_image,
         imageRef,
+        signingUp,
         UserInputs,
         userDetails,
         setUserDetails,
@@ -111,7 +112,11 @@ export function Register({ setRegister, setLogin }) {
 
                     <button type="submit" className="uppercase w-full py-2 flex justify-center items-center gap-1.5 bg-blue-600 dark:text-white 
                         text-white rounded-lg shadow-inner shadow-blue-900 active:shadow-none">
-                        <span>Sign Up</span>
+                        {signingUp ?
+                            <span className="flex justify-center items-center gap-2">
+                                <span><BiLoader className="animate-spin h-6 w-6 text-white" /></span>
+                                <span>Signing up...</span>
+                            </span> : <span>Sign up </span>}
                     </button>
                 </form>
             </div>
