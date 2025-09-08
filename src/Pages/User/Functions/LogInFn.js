@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
@@ -9,7 +8,7 @@ export function LogInFn(setLogin) {
     const { getUserDetails } = GlobalContext()
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const [logingIn, setLoggingIn] = useState(false);
+    const [buttonLoader, setbuttonLoader] = useState(false);
 
     const [userInputs, setUserInputs] = useState({
         username: "",
@@ -29,8 +28,8 @@ export function LogInFn(setLogin) {
         e.preventDefault();
         const success = validation();
         try {
+            setbuttonLoader(true)
             if (success === true) {
-                setLoggingIn(true)
                 await AxiosInstance.post("/uplay/signIn", { username, password })
                     .then((res) => {
                         const data = res.data
@@ -48,10 +47,10 @@ export function LogInFn(setLogin) {
             console.log("Error occured at 👉👉LogInFn function", + " | " + error)
             throw new Error(error);
         } finally {
-            setLoggingIn(false);
+            setbuttonLoader(false);
             getUserDetails();
         };
     };
 
-    return { UserInputs, logingIn, setLoggingIn, setUserInputs, userInputs, showPassword, setShowPassword }
+    return { UserInputs, buttonLoader, setbuttonLoader, setUserInputs, userInputs, showPassword, setShowPassword }
 };

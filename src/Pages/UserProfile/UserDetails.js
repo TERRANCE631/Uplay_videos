@@ -29,13 +29,13 @@ export function UserDetails() {
     const videoLenght = videos.filter((prev) => prev.userID === profile.id);
 
     return (
-        <section className="bg-black/80 dark:bg-gray-700">
+        <section className="bg-black/80 w-full dark:bg-gray-700 overflow-hidden">
             <div className="min-h-full">
                 <div className="">
                     <div className="">
                         <UserInfor user={profile} videoLenght={videoLenght} />
                     </div>
-                    <div className="md:pt-[6rem] pt-[4rem] h-full">
+                    <div className="md:pt-[6rem] pt-[4rem] h-full w-full">
                         <TabList videos={videos} getVideos={getVideos} user={profile} dashboardList={dashboardList} />
                     </div>
                 </div>

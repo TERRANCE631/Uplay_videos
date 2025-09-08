@@ -6,7 +6,7 @@ export function Register({ setRegister, setLogin }) {
         setProfile_image,
         profile_image,
         imageRef,
-        signingUp,
+        buttonLoader,
         UserInputs,
         userDetails,
         setUserDetails,
@@ -74,7 +74,7 @@ export function Register({ setRegister, setLogin }) {
 
                         <input
                             type={showPassword ? "text" : "password"}
-                            className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black bg-transparent p-2 rounded-md tracking-wider"
+                            className="w-full pl-10 border focus:border-blue-700 dark:placeholder:text-white/60 dark:border-white/30 border-black outline-none placeholder:text-black dark:text-white bg-transparent p-2 rounded-md tracking-wider"
                             required
                             placeholder="Password"
                             value={userDetails.password}
@@ -112,7 +112,7 @@ export function Register({ setRegister, setLogin }) {
 
                     <button type="submit" className="uppercase w-full py-2 flex justify-center items-center gap-1.5 bg-blue-600 dark:text-white 
                         text-white rounded-lg shadow-inner shadow-blue-900 active:shadow-none">
-                        {signingUp ?
+                        {buttonLoader ?
                             <span className="flex justify-center items-center gap-2">
                                 <span><BiLoader className="animate-spin h-6 w-6 text-white" /></span>
                                 <span>Signing up...</span>

@@ -1,38 +1,42 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../Hooks/Context/useContext';
 import { BiUserCircle } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { AxiosInstance } from '../Lib/AxiosInstance';
 
 export function ProfileDropdown({ setProfile }) {
-    // const userID = JSON.parse(sessionStorage.getItem("userID"));
-    const { setSubs, user, setUser } = GlobalContext()
+    const { setSubs, user, setUser, getUserDetails } = GlobalContext()
     const navigate = useNavigate();
     const [offlineUser, setOfflineUser] = useState(false);
 
     const logOut = () => {
         try {
-            AxiosInstance.get("/uplay/logout").then(() => {
+            AxiosInstance.get("/uplay/logout").then((res) => {
+                const data = res.data
+                toast.success(data.message)
                 setUser(null)
-                if (user) {
+                getUserDetails()
+                if (user && data.message) {
+                    setUser(null)
                     setOfflineUser(true)
-                } else {
-                    setOfflineUser(false)
+                    getUserDetails()
                 }
             });
             navigate("/")
             setSubs([])
             setUser(null)
-            toast.success("Logged out successfully")
+            getUserDetails()
+
             if (offlineUser) {
                 setUser(null)
+                getUserDetails()
             };
-
         } catch (error) {
             console.log("Error in 👉👉logOut function", + " | " + error);
-        }
+        } finally {
+            getUserDetails()
+        };
     };
 
     return (
@@ -58,7 +62,7 @@ export function ProfileDropdown({ setProfile }) {
 
                     <section onClick={() => { setProfile(false); logOut() }} className="w-full flex justify-center">
                         <button className="bg-rose-500 shadow-inner shadow-red-600 py-2 w-[90%] my-4 rounded-full hover:bg-rose-600 transition-all duration-300 text-white">
-                            Sign Out
+                            <span>Sign out</span>
                         </button>
                     </section>
                 </section>

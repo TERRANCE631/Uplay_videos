@@ -2,13 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosInstance } from "../../../Lib/AxiosInstance";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { useNavigate } from "react-router-dom";
+import { LogInFn } from "./LogInFn";
 
 export function RegisterFn(setRegister, setLogin) {
     const [profile_image, setProfile_image] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
-    const [signingUp, setSigningUp] = useState();
-    const { getUserDetails } = GlobalContext()
+    const { getUserDetails } = GlobalContext();
+    const { buttonLoader, setbuttonLoader } = LogInFn();
+
     const imageRef = useRef(null);
+    const navigate = useNavigate();
 
     const [userDetails, setUserDetails] = useState({
         username: "",
@@ -52,26 +56,31 @@ export function RegisterFn(setRegister, setLogin) {
         users.append("image", profile_image);
 
         try {
+            setbuttonLoader(true)
             if (success === true) {
                 AxiosInstance.post("/uplay/register", users)
                     .then(res => {
                         const data = res.data
                         toast.success(data.registered);
+                        getUserDetails();
                         setTimeout(() => {
                             // setLogin(true);
                             setRegister(false);
-                        }, 1000);
+                        }, 2000);
                         setUserDetails({ ...userDetails, username: "", email: "", password: "" });
                     })
-                    .catch(error => console.log(error));
+                navigate("/");
+                e.target.reset();
+                getUserDetails();
             }
+            getUserDetails();
         } catch (error) {
             console.log("Error occured in register funtion", + " | " + error);
         } finally {
-            setSigningUp(false)
-            getUserDetails()
-        }
+            setbuttonLoader(false);
+            getUserDetails();
+        };
     };
 
-    return { profile_image, signingUp, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
+    return { profile_image, buttonLoader, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
 };
