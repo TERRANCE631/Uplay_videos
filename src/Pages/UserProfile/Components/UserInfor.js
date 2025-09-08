@@ -4,7 +4,7 @@ import { BiEdit } from 'react-icons/bi'
 export function UserInfor({ user, videoLenght }) {
     return (
         <section className="-mt-3">
-            <div className="sticky w-full md:h-[10rem] h-[6rem] z-10 bg-black border-b border-white/60">
+            <div className="sticky w-full md:h-[10rem] h-[6rem] z- bg-black border-b border-white/60">
                 <img src={user.profile_image} alt="" className="objec-center object-cover opacity-30 w-full h-full -z-10" />
 
                 <div className="absolute bottom-0 right-[1rem] text-right w-full text-white">

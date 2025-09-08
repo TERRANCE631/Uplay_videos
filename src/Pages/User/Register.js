@@ -10,7 +10,10 @@ export function Register({ setRegister, setLogin }) {
         UserInputs,
         userDetails,
         setUserDetails,
-        showPassword, setShowPassword
+        showPassword,
+        setShowPassword,
+        triggerAnimation,
+        stopAnimation
     } = RegisterFn(setRegister, setLogin);
 
     return (
@@ -84,7 +87,7 @@ export function Register({ setRegister, setLogin }) {
                     <p className="text-center tracking-wider truncate dark:text-white">UPLOAD: {profile_image ? profile_image.name : "Picture's title..."}</p>
 
                     <div className="flex justify-center items-center">
-                        <button type="button" onClick={() => imageRef.current?.click()} className="my-2 w-[60%] py-2 rounded-lg text-white shadow-inner shadow-blue-900 bg-blue-600 flex justify-center items-center">
+                        <button type="button" onClick={() => { imageRef.current?.click(); stopAnimation() }} className={`my-2 w-[60%] py-2 rounded-lg text-white shadow-inner shadow-blue-900 bg-blue-600 flex justify-center items-center ${triggerAnimation ? "!border-2 rounded-lg border-red-500 animate-pulse" : ""} `}>
                             <span>Profile picture</span>
                         </button>
                     </div>
@@ -92,7 +95,6 @@ export function Register({ setRegister, setLogin }) {
                     <input
                         ref={imageRef}
                         onChange={(e) => setProfile_image(e.target.files[0])}
-                        required
                         name="profile_image"
                         id="profile_image"
                         type="file"

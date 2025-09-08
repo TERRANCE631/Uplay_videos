@@ -16,9 +16,9 @@ export function VideoList({ user, videos, getVideos }) {
                     <UserVideos i={i} setID={setID} vid={vid} toggle={toggle} user={user} like={like} ID={ID} getVideos={getVideos} YesOrNo={YesOrNo} deleteVideo={deleteVideo} userID={userID} setToggle={setToggle} />
                 )
             }) :
-                <div className="absolute inset-x-0 md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] flex text-white flex-col justify-center items-center">
+                <div className="absolute inset-x-0 md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] flex dark:text-white flex-col justify-center items-center">
                     <div className="my-2 text-xl">Oops no videos found, post videos</div>
-                    <div className="md:text-6xl text-4xl border p-2 animate-pulse">{".·´¯`(>▂<)´¯`·."}</div>
+                    <div className="md:text-6xl text-4xl p-2 animate-pulse">{".·´¯`(>▂<)´¯`·."}</div>
                 </div>
             }
         </div>

@@ -33,7 +33,7 @@ export const UserVideos = ({ i, setID, vid, toggle, user, like, ID, getVideos, Y
                     <div className="flex justify-between items-center">
                         <p className="text-xs">{vid.created_At}</p>
                         {vid.userID === userID && <button className="flex justify-end">
-                            <p onClick={() => { setToggle(true); setID(vid.id) }}
+                            <p onClick={() => { setToggle(true); setID(vid.title) }}
                                 className="font-semibold hover:underline tracking-wide"
                             >
                                 <span>Delete</span>

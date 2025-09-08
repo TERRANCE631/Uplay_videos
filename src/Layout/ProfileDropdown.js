@@ -51,13 +51,14 @@ export function ProfileDropdown({ setProfile }) {
 
                         <section className="truncate flex flex-col items-center justify-center">
                             <div className="text-2xl truncate text-white tracking-wider font-bold">{user.username}</div>
-                            <div className="text-xs truncate tracking-wider">{user.email}</div>
+
+                            <Link to={`/Home/User/profile/${user.id}`} className="flex items-center gap-1 bg-blue-700 transition-all duration-300 rounded-full px-1.5 text-white py-1 mb-2 border hover:bg-gray-600 text-w justify-center">
+                                <div className=""><BiUserCircle size={22} /></div>
+                                <div className="text-sm tracking-wide">Profile</div>
+                            </Link>
+                            <div className="text-xs truncate tracking-widest font-thin text-gray-200">{user.email}</div>
                         </section>
 
-                        <Link to={`/Home/User/profile/${user.id}`} className="flex items-center gap-1 bg-blue-700 transition-all duration-300 rounded-full px-1.5 text-white py-1 mt-2 border hover:bg-gray-600 text-w justify-center">
-                            <div className=""><BiUserCircle size={22} /></div>
-                            <div className="text-sm tracking-wide">Profile</div>
-                        </Link>
                     </div>
 
                     <section onClick={() => { setProfile(false); logOut() }} className="w-full flex justify-center">

@@ -10,6 +10,8 @@ export function RegisterFn(setRegister, setLogin) {
     const [showPassword, setShowPassword] = useState(false);
     const { getUserDetails } = GlobalContext();
     const { buttonLoader, setbuttonLoader } = LogInFn();
+    const [triggerAnimation, setTriggerAnimation] = useState(false);
+    console.log(triggerAnimation);
 
     const imageRef = useRef(null);
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ export function RegisterFn(setRegister, setLogin) {
     });
 
     const [foundUser, setFoundUser] = useState({});
-    const { username, email, password } = userDetails;
+    const { username, email } = userDetails;
 
     useEffect(() => {
         AxiosInstance.get("/uplay/getUsername")
@@ -37,8 +39,8 @@ export function RegisterFn(setRegister, setLogin) {
         if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
             return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers.")
 
-        if (!username || !email || !password || !profile_image)
-            return toast.error("User details must be provided")
+        if (!profile_image)
+            return toast.error("Profile picture must be provided")
 
         if (foundUser) return toast.error("Username already exist, try another username")
 
@@ -49,6 +51,7 @@ export function RegisterFn(setRegister, setLogin) {
         e.preventDefault();
         const success = validation()
         const users = new FormData();
+        if (!profile_image) { setTriggerAnimation(true) }
 
         users.append("username", userDetails.username);
         users.append("email", userDetails.email);
@@ -82,5 +85,9 @@ export function RegisterFn(setRegister, setLogin) {
         };
     };
 
-    return { profile_image, buttonLoader, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
+    const stopAnimation = () => {
+        setTriggerAnimation(false)
+    }
+
+    return { profile_image, stopAnimation, buttonLoader, triggerAnimation, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
 };

@@ -53,7 +53,7 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
 
                     <p className="text-sm">Subscribtions</p>
                     <div role="button" className="">
-                        {subs.filter(item => item.userID === userID).map((sub, i) => {
+                        {subs.filter(item => item.userID !== userID).map((sub, i) => {
                             return (
                                 <Link
                                     onClick={() => setShowManu(false)}
