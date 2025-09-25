@@ -19,7 +19,7 @@ export function LogInFn(setLogin) {
     const password = userInputs.password
 
     const validation = () => {
-        if (!password || !username) return toast.error("Please fill in the form");
+        if (!password || !username) return toast.error("Fill in the form");
 
         return true
     };
@@ -27,19 +27,21 @@ export function LogInFn(setLogin) {
     const UserInputs = async (e) => {
         e.preventDefault();
         const success = validation();
+        
         try {
-            setbuttonLoader(true)
             if (success === true) {
                 await AxiosInstance.post("/uplay/signIn", { username, password })
                     .then((res) => {
                         const data = res.data
-                        if (data) {
+                        console.log(data);
+
+                        if (data.user) {
                             navigate("/");
                             setLogin(false);
                             e.target.reset();
                             toast.success("Signed in successfully")
                         } else {
-                            toast.error("Incorrect username / password")
+                            toast.error(data.message)
                         }
                     });
             };

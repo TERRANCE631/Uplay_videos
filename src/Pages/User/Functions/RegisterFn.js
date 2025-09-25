@@ -3,16 +3,13 @@ import { toast } from "react-toastify";
 import { AxiosInstance } from "../../../Lib/AxiosInstance";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 import { useNavigate } from "react-router-dom";
-import { LogInFn } from "./LogInFn";
 
 export function RegisterFn(setRegister, setLogin) {
     const [profile_image, setProfile_image] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const { getUserDetails } = GlobalContext();
-    const { buttonLoader, setbuttonLoader } = LogInFn();
     const [triggerAnimation, setTriggerAnimation] = useState(false);
-    console.log(triggerAnimation);
-
+    const [buttonLoader, setbuttonLoader] = useState(false);
     const imageRef = useRef(null);
     const navigate = useNavigate();
 

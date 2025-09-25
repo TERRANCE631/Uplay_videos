@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { AxiosInstance } from '../../../Lib/AxiosInstance';
 
@@ -16,10 +15,6 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         formData.append("sub__To", username);
 
         AxiosInstance.post(`/uplay/postSubs`, formData)
-            .then(res => {
-                const data = res.data;
-                console.log(data);
-            })
     };
 
     const DeleteSub = async (userID) => {
@@ -31,7 +26,6 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
     useEffect(() => {
         // eslint-disable-next-line 
         const existOrNot = subs.length > 0 && subs.findIndex(item => item.videoUserID === videoDetails.userID && item.userID === userID);
-        console.log(existOrNot);
 
         if (subs.length > 0 && existOrNot !== -1) {
             setExist(true);

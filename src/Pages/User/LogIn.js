@@ -1,8 +1,8 @@
-import { BiErrorCircle, BiHide, BiLoader, BiLogInCircle, BiNotification, BiShield, BiShow, BiUndo, BiUser, BiX } from 'react-icons/bi';
+import { BiHide, BiLoader, BiShield, BiShow, BiUser, BiX } from 'react-icons/bi';
 import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
-    const { UserInputs, setUserInputs, userInputs, showPassword, setShowPassword, logingIn } = LogInFn(setLogin);
+    const { UserInputs, setUserInputs, userInputs, showPassword, setShowPassword, buttonLoader } = LogInFn(setLogin);
 
     return (
         <div className="flex flex-col fixed inset-0 z-20 mt-[4.5rem] dark:text-white bg-black bg-opacity-10 h-screen w-full">
@@ -87,12 +87,12 @@ export function LogIn({ setRegister, setLogin }) {
                             Sign Up
                         </button>
                     </p>
-                    <button type="submit" className="">
+                    <button type="submit" disabled={buttonLoader ? "disabled" : ""} className="">
                         <div className="uppercase flex justify-center items-center gap-1.5 w-full py-2 bg-blue-600 shadow-inner shadow-blue-900 dark:text-white 
                         text-white rounded-lg">
-                            {logingIn ?
-                                <span className="flex justify-center items-center gap-2">
-                                    <span><BiLoader className="animate-spin h-6 w-6 text-white"/></span>
+                            {buttonLoader ?
+                                <span className="flex justify-center opacity-70 items-center gap-2">
+                                    <span><BiLoader className="animate-spin h-6 w-6 text-white" /></span>
                                     <span>Logging in...</span>
                                 </span> : <span>Sign In </span>}
                         </div>

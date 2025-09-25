@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 const ContextWrapper = createContext(null);
@@ -11,6 +11,25 @@ export function GlobalState({ children }) {
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState({});
+    const [index, setIndex] = useState(JSON.parse(sessionStorage.getItem("videoIndex")) || 0)
+
+    const getVideos = async () => {
+        try {
+            await AxiosInstance.get("/uplay/getVideos")
+                .then(res => {
+                    const data = res.data;
+                    setVideos(data);
+                })
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false)
+        }
+    };
+
+    useEffect(() => {
+        sessionStorage.setItem("videoIndex", JSON.stringify(index))
+    }, [index, getVideos])
 
     const userId = user && user.id
     const userID = user && user.id
@@ -29,20 +48,6 @@ export function GlobalState({ children }) {
         };
     };
 
-    const getVideos = async () => {
-        try {
-            await AxiosInstance.get("/uplay/getVideos")
-                .then(res => {
-                    const data = res.data;
-                    setVideos(data);
-                })
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false)
-        }
-    };
-
     const GetSubscribers = () => {
         try {
             AxiosInstance.get("/uplay/getSubs")
@@ -57,6 +62,14 @@ export function GlobalState({ children }) {
 
     const scrollIntoView = (ref) => {
         ref.current.scrollIntoView({ behavior: "smooth" })
+    };
+
+    const getIndex = (index) => {
+        setIndex(index)
+    };
+
+    const getHomeVideoIndex = (index) => {
+        setIndex(index)
     };
 
     const values = {
@@ -79,7 +92,10 @@ export function GlobalState({ children }) {
         setUser,
         userId,
         profile,
-        setProfile
+        setProfile,
+        getIndex,
+        index,
+        getHomeVideoIndex
     };
 
     return (

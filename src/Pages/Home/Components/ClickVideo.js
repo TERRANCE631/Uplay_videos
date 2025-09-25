@@ -2,12 +2,12 @@ import { HomeCard } from './HomeCard'
 import { VideoFilter } from './VideoFilter';
 import { ClickVideoFn } from './Functions/ClickVideoFn';
 import { useState } from 'react';
+import { GlobalContext } from '../../../Hooks/Context/useContext';
 
 export function ClickVideo() {
     const { videos, user } = ClickVideoFn();
     const [selectedValue, setSelectedValue] = useState("");
     const filtingVideos = videos.length > 0 && videos.filter((video) => video.category.includes(selectedValue));
-
     switch (selectedValue) {
         case "all":
             return setSelectedValue("");
@@ -21,9 +21,10 @@ export function ClickVideo() {
             <div className="w-full grid 2xl:grid-cols-7 xl:grid-cols-4 lg:grid-cols-3 
             md:grid-cols-2 grid-cols-1 pb-2">
                 {filtingVideos.length > 0 && filtingVideos.map((video, i) => {
+                    i += 1
                     return (
                         <div key={i} className="md:mb-6 mb-4 md:mx-2">
-                            <HomeCard video={video} user={user} />
+                            <HomeCard video={video} user={user} i={i} />
                         </div>
                     )
                 })}

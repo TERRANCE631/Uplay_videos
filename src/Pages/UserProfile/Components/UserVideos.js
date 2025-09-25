@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { YesOrNo } from './YesOrNo';
 
-export const UserVideos = ({ i, setID, vid, toggle, user, like, ID, getVideos, YesOrNo, deleteVideo, userID, setToggle }) => {
+export const UserVideos = ({ i, setVideoDetails, vid, toggle, like, videoDetails, getVideos, deleteVideo, userID, setToggle }) => {
     const videoLikes = like.filter((likes) => likes.videoID === vid.id);
 
     return (
@@ -19,7 +20,7 @@ export const UserVideos = ({ i, setID, vid, toggle, user, like, ID, getVideos, Y
                     </Link>
 
                     {toggle && <YesOrNo
-                        ID={ID}
+                        videoDetails={videoDetails}
                         getVideos={getVideos}
                         deleteVideo={deleteVideo}
                         setToggle={setToggle}
@@ -33,7 +34,7 @@ export const UserVideos = ({ i, setID, vid, toggle, user, like, ID, getVideos, Y
                     <div className="flex justify-between items-center">
                         <p className="text-xs">{vid.created_At}</p>
                         {vid.userID === userID && <button className="flex justify-end">
-                            <p onClick={() => { setToggle(true); setID(vid.title) }}
+                            <p onClick={() => { setToggle(true); setVideoDetails({ ...videoDetails, id: vid.id, title: vid.title }) }}
                                 className="font-semibold hover:underline tracking-wide"
                             >
                                 <span>Delete</span>

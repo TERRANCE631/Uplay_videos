@@ -1,4 +1,3 @@
-import axios from "axios"
 import { GlobalContext } from "../../Hooks/Context/useContext";
 import { useState } from "react";
 import { BiLoader, BiUpload, BiX } from "react-icons/bi";
@@ -6,12 +5,10 @@ import { useRef } from "react";
 import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 export function CreatePost({ setShowCreatePost }) {
-    const { user } = GlobalContext();
+    const { user, getVideos } = GlobalContext();
     const [post, setPost] = useState(false);
     const uploadVideo = useRef(null);
     const [upload, setUpload] = useState(null);
-
-    console.log(upload);
 
     const postVideo = async (e) => {
         e.preventDefault();
@@ -26,12 +23,14 @@ export function CreatePost({ setShowCreatePost }) {
             setPost(true)
             await AxiosInstance.post(`/uplay/videos`, formData)
                 .then(() => {
-                    window.location.reload()
+                    getVideos()
                 });
         } catch (error) {
             console.log("Error occurred in postVideo function", + " | " + error);
         } finally {
             setPost(false)
+            getVideos()
+            setShowCreatePost(false)
         }
 
     };

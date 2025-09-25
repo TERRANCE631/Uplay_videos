@@ -1,19 +1,30 @@
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import { GlobalContext } from "../../../Hooks/Context/useContext";
 
-export function SideVideos({ videos, videoDetails}) {
+export function SideVideos({ videos, videoDetails }) {
+    const videoIndex = JSON.parse(sessionStorage.getItem("videoIndex"))
+    const { getIndex } = GlobalContext();
     const scrollToCurrentVideo = () => {
         window.scrollTo(0, 0);
     };
 
     return (
         <div onClick={() => scrollToCurrentVideo()} className="mb-5">
+            <div className="flex gap-0.5 bg-gray-700 dark:bg-gray-900  text-white border px-2 rounded-t-md">
+                <p className="">{videoIndex}</p>
+                <p className="">/</p>
+                <p className="">{videos.length}</p>
+            </div>
             <div className="flex flex-col gap-1 truncate">
                 {videos && videos.map((video, i) => {
+                    i += 1
                     return (
                         <Link
                             to={`/videoPlayer/${video.id}`}
-                            key={i}
+                            key={video.id}
+                            onClick={() => getIndex(i)}
                             className={`w-full h-[5rem] truncate hover:bg-gray-500/30 ${videoDetails.id !== video.id && "hover:border-r-4"} hover:rounded-r-md border-blue-500 border-opacity-40`}
                         >
                             <div

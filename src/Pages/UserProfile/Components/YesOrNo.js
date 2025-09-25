@@ -1,12 +1,12 @@
-export function YesOrNo({ setToggle, deleteVideo, ID, getVideos }) {
+export function YesOrNo({ setToggle, deleteVideo, videoDetails, getVideos }) {
 
     return (
         <div className="fixed text-white backdrop-blur-xl bg-black bg-opacity-50 mt-[4.5rem] md:pl-[4rem] text-center inset-0 flex justify-center items-center">
             <div className="flex flex-col fixed z-10">
-                <p className="text-white">Are you sure you want to delete this video (<span className="text-red-600"> {ID} </span>)?</p>
+                <p className="text-white">Are you sure you want to delete this video (<span className="text-red-600"> {videoDetails.title} </span>)?</p>
                 <div className="flex gap-6 justify-center items-center my-2" >
                     <button
-                        onClick={(e) => { deleteVideo(ID); setToggle(false); getVideos(); e.preventDefault() }}
+                        onClick={(e) => { deleteVideo(videoDetails.id); setToggle(false); getVideos(); e.preventDefault() }}
                         className="bg-red-600 py-2 px-10 rounded-lg"
                     >
                         Yes

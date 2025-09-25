@@ -12,7 +12,6 @@ export function LikesFn(id, videoDetails) {
     // filter likes from the database to get its length and render it as likes.
     // eslint-disable-next-line
     const likes = like.length > 0 && like.filter((item) => item.videoID == id);
-    console.log(likes);
 
     const handleDelete = async (id) => {
         await AxiosInstance.delete(`/uplay/deletelike/${id}`)
@@ -33,7 +32,6 @@ export function LikesFn(id, videoDetails) {
             .then(res => {
                 const data = res.data;
                 setLike(data);
-                console.log(data);
             })
     };
 

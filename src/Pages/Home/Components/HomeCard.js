@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 import { LikesFn } from '../../VideosPlayer/Functions/LikesFn';
 
-export function HomeCard({ video, TokenCondition, user }) {
+export function HomeCard({ video, user, i }) {
     // const [showDropDown, setShowDropDown] = useState(false);
     // const [videoID, setVideoID] = useState(null);
-    const { likes, Likes } = GlobalContext();
+    const { likes, Likes, getHomeVideoIndex } = GlobalContext();
     const { like } = LikesFn()
     const [hover, setHover] = useState(null);
     const onHover = (onHover) => {
         setHover(onHover)
     };
+    const videoIndex = JSON.parse(sessionStorage.getItem("videoIndex"))
 
+    console.log(videoIndex);
     const onMouseLeave = () => {
         setHover(null)
     };
@@ -30,6 +32,7 @@ export function HomeCard({ video, TokenCondition, user }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
+                            onClick={() => getHomeVideoIndex(i)}
                             className="h-[10rem] mask md:rounded-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
@@ -43,13 +46,13 @@ export function HomeCard({ video, TokenCondition, user }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            onClick={TokenCondition}
+                            onClick={() => getHomeVideoIndex(i)}
                             className="h-[10rem] bg-white w-full rounded-lg object-cover object-center md:rounded-t-lg"
                         />
                     </Link>}
 
                 <section className="flex p-1 h-full">
-                    <Link className="flex flex-wrap truncate">
+                    <Link onClick={() => getHomeVideoIndex(i)} className="flex flex-wrap truncate">
                         {video.title.split(" ").map((title, i) => {
                             return (
                                 <section onClick={() => Likes(likes)} key={i} className='flex items-center truncate'>
