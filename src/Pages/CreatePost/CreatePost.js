@@ -1,39 +1,8 @@
-import { GlobalContext } from "../../Hooks/Context/useContext";
-import { useState } from "react";
 import { BiLoader, BiUpload, BiX } from "react-icons/bi";
-import { useRef } from "react";
-import { AxiosInstance } from "../../Lib/AxiosInstance";
+import { CreatePostFn } from "./Functions/CreatePostFn";
 
 export function CreatePost({ setShowCreatePost }) {
-    const { user, getVideos } = GlobalContext();
-    const [post, setPost] = useState(false);
-    const uploadVideo = useRef(null);
-    const [upload, setUpload] = useState(null);
-
-    const postVideo = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-
-        formData.append("username", user.username);
-        formData.append("photo", user.profile_image);
-        formData.append("userID", user.id);
-
-        try {
-            setPost(true)
-            await AxiosInstance.post(`/uplay/videos`, formData)
-                .then(() => {
-                    getVideos()
-                });
-        } catch (error) {
-            console.log("Error occurred in postVideo function", + " | " + error);
-        } finally {
-            setPost(false)
-            getVideos()
-            setShowCreatePost(false)
-        }
-
-    };
+    const { post, uploadVideo, user, upload, setUpload, postVideo } = CreatePostFn(setShowCreatePost);
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] bg-black bg-opacity-10 h-screen w-full">
@@ -52,7 +21,7 @@ export function CreatePost({ setShowCreatePost }) {
                         required
                         rows={7}
                         name="title"
-                        placeholder="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga quod nobis porro quasi harum provident placeat, laboriosam in sapiente aperiam dignissimos corrupti alias omnis cupiditate. Expedita at assumenda sed commodi a voluptate beatae ipsam minus mollitia blanditiis porro, quo rerum debitis, consectetur fugiat enim autem tenetur delectus laborum aliquam qui!"
+                        placeholder="Type in video's description here..."
                         type="text"
                         className="w-full tracking-wider bg-white/80 bg-opacity-60 dark:bg-gray-700 rounded-lg shadow-md shadow-black p-1 outline-none border placeholder:text-black/75 dark:placeholder:text-white/80 border-white/20"
                     />
@@ -78,13 +47,13 @@ export function CreatePost({ setShowCreatePost }) {
 
                 <input
                     ref={uploadVideo}
-                    required
                     name="video"
                     type="file"
                     accept="video/mp4"
                     onChange={(e) => setUpload(e.target.files[0])}
                     className="w-full py-2 outline-none upload__btn border hidden
-                    dark:border-white bg-transparent border-gray-600" />
+                    dark:border-white bg-transparent border-gray-600"
+                />
 
                 <div className="">
                     <button

@@ -12,7 +12,6 @@ export function Header({ setShowManu, setLogin, setRegister }) {
     showProfile,
     profileDetails,
     showSearch,
-    userId,
     setDarkMode,
     Loading,
     setShowSearch,
@@ -55,15 +54,15 @@ export function Header({ setShowManu, setLogin, setRegister }) {
               onClick={() => setDarkMode((prev) => !prev)}
               disabled={currentScrollY === 0 ? "" : "disabled"}
               className={`${currentScrollY === 0
-                ? "md:scale-[170%] scale-[155%] bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"
-                : "md:scale-[170%] opacity-40 cursor-not-allowed scale-[155%] bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"}`}
+                ? "md:scale-[170%] scale-[155%] border dark:border-white/20 shadow-inner shadow-black/40 border-black/30 bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"
+                : "md:scale-[170%] opacity-40 border dark:border-white/20 border-black/30 shadow-inner shadow-black/40 cursor-not-allowed scale-[155%] bg-gray-500/30 p-1 rounded-full hover:bg-gray-500/50 mx-2"}`}
             >
               {darkMode ? <BiMoon color="white" /> : <BiSun color="white" />}
             </button>
           </section>
 
           <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
-            <img src={user ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
+            <img src={!Loading && user ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
               alt="" className="object-cover object-center h-full w-full rounded-full" />
           </button>
         </section>

@@ -31,6 +31,7 @@ export function GlobalState({ children }) {
         sessionStorage.setItem("videoIndex", JSON.stringify(index))
     }, [index, getVideos])
 
+
     const userId = user && user.id
     const userID = user && user.id
 
@@ -39,7 +40,7 @@ export function GlobalState({ children }) {
             await AxiosInstance.get("/uplay/checkAuth")
                 .then(res => {
                     const data = res.data
-                    setUser(data ? data : null)
+                    setUser(data)
                 });
         } catch (error) {
             console.log(error);

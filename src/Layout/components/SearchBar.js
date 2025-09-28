@@ -7,18 +7,62 @@ import { useEffect, useState } from "react";
 export function SearchBar() {
     const { setValue, value } = GlobalContext();
     const [videos, setVideos] = useState([])
+    const [currentIndex, setCurrentIndex] = useState("")
+    const [text, setText] = useState("");
+    let index
+    let data__length
 
     const getVideos = async () => {
         await axios.get("http://localhost:9000/uplay/getVideos")
             .then(res => {
                 const data = res.data;
+                setInterval(() => {
+                    placeholderFunction(data)
+                }, 1000 * 15);
                 setVideos(data);
             })
+    };
+
+    function videoIndex() {
+        index = Math.floor(Math.random() * data__length)
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            videoIndex()
+        }, 1);
+
+        return () => clearInterval(interval);
+    }, [index]) 
+
+    const placeholderFunction = (data) => {
+        setCurrentIndex(data[index]);
+        data__length = data.length
     };
 
     useEffect(() => {
         getVideos();
     }, []);
+
+
+    useEffect(() => {
+        let textIndex = 0;
+        const waitForPlaceholderText = "Waiting for the most searched videos...";
+
+        const interval = setInterval(() => {
+            setText(
+                currentIndex ? currentIndex.title.substring(0, textIndex)
+                    : waitForPlaceholderText.substring(0, textIndex)
+            );
+            textIndex++;
+
+            if (textIndex > currentIndex.title.length) {
+                clearInterval(interval);
+            }
+        }, 60);
+
+        return () => clearInterval(interval);
+    }, [currentIndex]);
 
     const filter = videos.length > 0 && videos.filter((item) => { return item.title.toLowerCase().match(value.toLowerCase()) });
 
@@ -28,9 +72,9 @@ export function SearchBar() {
                 type="text"
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
-                className="dark:bg-gray-600 bg-slate-200 border flex flex-grow dark:border-white/20 border-black/30 outline-none py-2 
-                pl-4 rounded-l-full"
-                placeholder="Search video here"
+                className="dark:bg-gray-600 placeholder:text-gray-600 dark:placeholder:text-gray-200 placeholder:tracking-wider shadow-inner shadow-black/40 bg-slate-200 border flex flex-grow dark:border-white/20 border-black/30 outline-none py-2 
+                pl-4 rounded-l-full transition-all duration-200"
+                placeholder={text}
             />
             {value !== "" &&
                 <button
@@ -52,6 +96,7 @@ export function SearchBar() {
                 >
                     <section className="w-[80%] flex flex-col p-2 rounded-lg dark:bg-gray-600 truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.slice(0, 8).map((name, i) => {
+                            i += 1
                             return (
                                 <Link key={i} to={`/videoPlayer/${name.id}`}
                                     className="border-gray-400 shadow-lg truncate rounded-lg border p-2 my-0.5">
@@ -61,6 +106,7 @@ export function SearchBar() {
                         })}
                     </section>
                 </div>}
+
         </section>
     )
 }

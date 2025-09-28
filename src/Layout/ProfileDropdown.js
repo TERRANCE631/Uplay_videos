@@ -19,7 +19,6 @@ export function ProfileDropdown({ setProfile }) {
                 getUserDetails()
                 if (user && data.message) {
                     setUser(null)
-                    setOfflineUser(true)
                     getUserDetails()
                 }
             });
@@ -28,16 +27,13 @@ export function ProfileDropdown({ setProfile }) {
             setUser(null)
             getUserDetails()
 
-            if (offlineUser) {
-                setUser(null)
-                getUserDetails()
-            };
         } catch (error) {
             console.log("Error in 👉👉logOut function", + " | " + error);
         } finally {
             getUserDetails()
         };
     };
+    console.log(user);
 
     return (
         <section onClick={() => setProfile(false)} className="w-full h-screen shadow-xl shadow-black bg-opacity-10 bg-black">

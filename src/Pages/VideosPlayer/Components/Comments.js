@@ -26,7 +26,7 @@ export function Comments({ videoDetails }) {
 
             <p className="mt-2 md:pl-0 pl-2">Comments: ({comments.length ? comments.length : 0})</p>
 
-            <div className="md:mt-5 mt-3 mb-10">
+            <div ref={scrollRef} className="md:mt-5 mt-3 md:mb-10">
                 {data.length > 0 ? data.map((comment, i) => {
                     return (
                         <div key={i} className="">
@@ -52,7 +52,6 @@ export function Comments({ videoDetails }) {
                     )
                 }) : <div className="text-center">No comments</div>}
             </div>
-            <br ref={scrollRef} />
         </section>
     )
 }

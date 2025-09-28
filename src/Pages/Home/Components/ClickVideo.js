@@ -2,7 +2,7 @@ import { HomeCard } from './HomeCard'
 import { VideoFilter } from './VideoFilter';
 import { ClickVideoFn } from './Functions/ClickVideoFn';
 import { useState } from 'react';
-import { GlobalContext } from '../../../Hooks/Context/useContext';
+import { BiErrorCircle } from 'react-icons/bi';
 
 export function ClickVideo() {
     const { videos, user } = ClickVideoFn();
@@ -19,7 +19,7 @@ export function ClickVideo() {
         <section>
             <VideoFilter setSelectedValue={setSelectedValue} />
             <div className="w-full grid 2xl:grid-cols-7 xl:grid-cols-4 lg:grid-cols-3 
-            md:grid-cols-2 grid-cols-1 pb-2">
+            md:grid-cols-2 grid-cols-1 pb-2 md:px-0 px-2">
                 {filtingVideos.length > 0 && filtingVideos.map((video, i) => {
                     i += 1
                     return (
@@ -31,9 +31,9 @@ export function ClickVideo() {
             </div>
             {filtingVideos.length === 0 &&
                 <div className="w-full flex justify-center items-center">
-                    <div className="flex border w-[50%] rounded-lg bg-gray-500 bg-opacity-40 py-20 flex-col justify-center items-center dark:text-gray-300 gap-3 text-xl">
-                        <span>No videos found</span>
-                        <span className="text-2xl animate-pulse font-extrabold text-blue-700 border">＞﹏＜</span>
+                    <div className="flex border md:w-[50%] w-[90%] rounded-lg bg-gray-500 bg-opacity-40 py-20 flex-col justify-center items-center dark:text-gray-300 gap-3 text-xl">
+                        <span className="animate-pulse font-extrabold"><BiErrorCircle size={90} /></span>
+                        <span>No video found</span>
                     </div>
                 </div>}
         </section>

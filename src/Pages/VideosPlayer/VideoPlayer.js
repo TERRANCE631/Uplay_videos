@@ -26,7 +26,7 @@ export function VideoPlayer() {
     return (
         <section>
             <div className="flex flex-col justify-center w-full">
-                <section className="grid xl:pr-10 md:pl-2 md:pl-1 md:pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
+                <section className="grid xl:pr-10 md:pl-2 md:pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
                     <div className="w-full">
                         <div className="w-full xl:h-[28rem] 2xl:h-[45rem] lg:h-[22rem] md:h-[23rem] 
                         h-[16rem] flex grid-grow-0">
@@ -36,8 +36,7 @@ export function VideoPlayer() {
                                 muted
                                 controls
                                 loop
-                                className="object-cover scale-100 shrink-0 
-                                object-center w-full h-full"
+                                className="object-center object-fill w-full h-full"
                             />
                         </div>
                         <section className="lg:block hidden">

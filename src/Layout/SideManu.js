@@ -15,7 +15,7 @@ export function SideManu({ setShowCreatePost }) {
               key={i}
               onClick={() => i === 1 ? setShowCreatePost((prev) => !prev) : setShowCreatePost(false)}
               to={icon.link}
-              className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 
+              className="truncate my-2 border dark:border-white/20 border-black/30 hover:bg-gray-500 bg-gray-500/10 
                 rounded-lg py-2 flex flex-col justify-center items-center hover:text-white">
               {icon.icon}
             </Link>

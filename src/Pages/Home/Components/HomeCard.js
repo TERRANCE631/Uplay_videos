@@ -12,9 +12,7 @@ export function HomeCard({ video, user, i }) {
     const onHover = (onHover) => {
         setHover(onHover)
     };
-    const videoIndex = JSON.parse(sessionStorage.getItem("videoIndex"))
 
-    console.log(videoIndex);
     const onMouseLeave = () => {
         setHover(null)
     };
@@ -23,7 +21,7 @@ export function HomeCard({ video, user, i }) {
     return (
         <section className="h-full">
             <div className="h-full w-full flex flex-col pb-2 bg-white 
-            dark:bg-gray-600 shadow-md shadow-black md:rounded-lg dark:border-white/20">
+            dark:bg-gray-600 shadow-md shadow-black rounded-lg dark:border-white/20">
                 {!hover &&
                     <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
                         <video
@@ -33,7 +31,7 @@ export function HomeCard({ video, user, i }) {
                             }}
                             alt=""
                             onClick={() => getHomeVideoIndex(i)}
-                            className="h-[10rem] mask md:rounded-lg bg-white w-full object-cover object-center"
+                            className="h-[10rem] mask rounded-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
                 {hover &&
