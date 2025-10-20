@@ -13,7 +13,7 @@ export function Comments({ videoDetails }) {
                     type="text"
                     className="w-full border py-2.5 pl-4 border-blue-700 shadow-inner shadow-gray-500 text-black 
                     bg-gray-200 outline-none rounded-l-full"
-                    placeholder="Comment here"
+                    placeholder={videoDetails.title}
                     name="comment"
                     onChange={(e) => setSendComment(e.target.value)}
                     id="comment"

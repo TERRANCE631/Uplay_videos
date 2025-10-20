@@ -11,6 +11,10 @@ export function GlobalState({ children }) {
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState({});
+    const [loadingVideos, setLoadingVideos] = useState(true)
+    const userId = user && user.id
+    const userID = user && user.id
+
     const [index, setIndex] = useState(JSON.parse(sessionStorage.getItem("videoIndex")) || 0)
 
     const getVideos = async () => {
@@ -19,21 +23,18 @@ export function GlobalState({ children }) {
                 .then(res => {
                     const data = res.data;
                     setVideos(data);
+                    setLoadingVideos(false)
                 })
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         sessionStorage.setItem("videoIndex", JSON.stringify(index))
-    }, [index, getVideos])
-
-
-    const userId = user && user.id
-    const userID = user && user.id
+    }, [index, Loading])
 
     const getUserDetails = async () => {
         try {
@@ -73,6 +74,8 @@ export function GlobalState({ children }) {
         setIndex(index)
     };
 
+    useEffect(() => { GetSubscribers() }, [user]);
+
     const values = {
         value,
         setValue,
@@ -96,7 +99,9 @@ export function GlobalState({ children }) {
         setProfile,
         getIndex,
         index,
-        getHomeVideoIndex
+        getHomeVideoIndex,
+        loadingVideos,
+        setLoadingVideos
     };
 
     return (

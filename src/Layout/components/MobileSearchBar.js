@@ -20,7 +20,7 @@ export function MobileSearchBar({ currentScrollY, showSearch, setShowSearch }) {
         getVideos();
     }, [value]);
 
-    const filter = videos && videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) });
+    const filter = videos.length > 0 && videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) });
 
     return (
         <section className={`${user && currentScrollY > 0 && showSearch ? "w-screen h-screen bg-black bg-opacity-10 backdrop-blur-lg"
@@ -51,7 +51,7 @@ export function MobileSearchBar({ currentScrollY, showSearch, setShowSearch }) {
                 </nav>}
             {value !== "" &&
                 <result className="flex my-[3.5rem] justify-center md:hidden items-center inset-x-0 top-[4.5rem] min-h-20 absolute">
-                    {filter.length !== 0 ? <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
+                    {filter.length > 0 ? <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.slice(0, 8).map((name, i) => {
                             return (
                                 <Link

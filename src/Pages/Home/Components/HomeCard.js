@@ -1,16 +1,24 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 import { LikesFn } from '../../VideosPlayer/Functions/LikesFn';
+import { toast } from 'react-toastify';
 
 export function HomeCard({ video, user, i }) {
-    // const [showDropDown, setShowDropDown] = useState(false);
-    // const [videoID, setVideoID] = useState(null);
-    const { likes, Likes, getHomeVideoIndex } = GlobalContext();
+    const { getHomeVideoIndex, setLoadingVideos } = GlobalContext();
     const { like } = LikesFn()
     const [hover, setHover] = useState(null);
+    const navigate = useNavigate();
+
     const onHover = (onHover) => {
         setHover(onHover)
+    };
+
+    const noUserFound = () => {
+        if (!user) {
+            toast.error("Sign in to your account");
+            navigate("/")
+        }
     };
 
     const onMouseLeave = () => {
@@ -23,37 +31,38 @@ export function HomeCard({ video, user, i }) {
             <div className="h-full w-full flex flex-col pb-2 bg-white 
             dark:bg-gray-600 shadow-md shadow-black rounded-lg dark:border-white/20">
                 {!hover &&
-                    <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
+                    <Link onMouseEnter={onHover} className="">
                         <video
+                            onLoad={() => setLoadingVideos(true)}
                             src={video.video}
                             onError={(e) => {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            onClick={() => getHomeVideoIndex(i)}
                             className="h-[10rem] mask rounded-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
                 {hover &&
-                    <Link to={`/videoPlayer/${video.id}`} onMouseLeave={onMouseLeave} onClick={() => Likes(likes)} className="">
+                    <Link to={user && `/videoPlayer/${video.id}`} onMouseLeave={onMouseLeave} className="">
                         <video
                             autoPlay
+                            onLoad={() => setLoadingVideos(true)}
                             muted
                             src={video.video}
                             onError={(e) => {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            onClick={() => getHomeVideoIndex(i)}
+                            onClick={() => { getHomeVideoIndex(i); noUserFound() }}
                             className="h-[10rem] bg-white w-full rounded-lg object-cover object-center md:rounded-t-lg"
                         />
                     </Link>}
 
                 <section className="flex p-1 h-full">
-                    <Link onClick={() => getHomeVideoIndex(i)} className="flex flex-wrap truncate">
+                    <Link to={user && `/videoPlayer/${video.id}`} onClick={() => { getHomeVideoIndex(i); noUserFound() }} className="flex flex-wrap truncate">
                         {video.title.split(" ").map((title, i) => {
                             return (
-                                <section onClick={() => Likes(likes)} key={i} className='flex items-center truncate'>
+                                <section key={i} className='flex items-center truncate'>
                                     <span className={`${i >= 6
                                         ? "hidden"
                                         : `${i === 5 ? "text-xl flex items-center font-bold truncate"

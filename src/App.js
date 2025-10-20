@@ -13,7 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers, user } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers } = GlobalContext();
   const { Loading } = ClickVideoFn();
 
   const [showRegister, setRegister] = useState(false);
@@ -37,7 +37,7 @@ function App() {
       {showRegister && <Register setRegister={setRegister} setLogin={setLogin} />}
       {showLogin && <LogIn setRegister={setRegister} setLogin={setLogin} />}
       {showManu && <SlideIn setShowManu={setShowManu} setShowCreatePost={setShowCreatePost} />}
-      <main className="min-h-screen md:pt-[5.2rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
+      <main className="min-h-screen md:pt-[4.5rem] pt-[5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] dark:text-white text-black">
         <AllRoutes />
       </main>
       <Footer />
