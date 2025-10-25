@@ -10,7 +10,7 @@ export default function ProfileDropdownLoggedOut({ setLogin, setProfile, setRegi
                             Sign In
                         </button>
                     </section>
-                    <p className="text-white">OR</p>
+                    <p className="dark:text-white">OR</p>
                     <section className="w-full flex justify-center">
                         <button onClick={() => { setRegister((prev) => !prev); setProfile((prev) => !prev); setLogin(false) }} className="bg-blue-500 shadow-inner shadow-blue-900 py-2 w-[90%] my-4 rounded-lg text-white">
                             Sign Up

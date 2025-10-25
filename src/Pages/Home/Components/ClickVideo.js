@@ -16,7 +16,7 @@ export function ClickVideo() {
     const skeletonOfLoadingVideos = Array(6).fill(null);
 
     useEffect(() => {
-        const timeout = setTimeout(() => { !loadingVideos && !user ? setTogglePopUp(true) : setTogglePopUp(false) }, 1000 * 20)
+        const timeout = setTimeout(() => { !user ? setTogglePopUp(true) : setTogglePopUp(false) }, 1000 * 20)
         setTimeout(() => { clearTimeout(timeout) }, 1500 * 20)
     }, [user]);
 
@@ -29,7 +29,7 @@ export function ClickVideo() {
 
     return (
         <section>
-            {togglePopUp && <div className="w-full h-10 text-gray-700 dark:text-white tracking-wide bg-orange-300/50 flex items-center justify-between p-2 shadow-sm">
+            {videos.length > 0 && togglePopUp && <div className="w-full h-10 text-gray-700 dark:text-white tracking-wide bg-orange-300/50 flex items-center justify-between p-2 shadow-sm">
                 <div className="flex items-center gap-1.5">
                     <BiUserCircle size={32} className="text-blue-500 dark:text-blue-400" />
                     <p className="">Sign in to watch videos and get full access to all features,</p>

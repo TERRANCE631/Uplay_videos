@@ -27,13 +27,12 @@ export function LogInFn(setLogin) {
     const UserInputs = async (e) => {
         e.preventDefault();
         const success = validation();
-        
+
         try {
             if (success === true) {
                 await AxiosInstance.post("/uplay/signIn", { username, password })
                     .then((res) => {
                         const data = res.data
-                        console.log(data);
 
                         if (data.user) {
                             navigate("/");
@@ -46,6 +45,7 @@ export function LogInFn(setLogin) {
                     });
             };
         } catch (error) {
+            toast.error(error.message);
             console.log("Error occured at 👉👉LogInFn function", + " | " + error)
             throw new Error(error);
         } finally {

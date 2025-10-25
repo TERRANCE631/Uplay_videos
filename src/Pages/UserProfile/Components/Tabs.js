@@ -6,7 +6,6 @@ export function Tabs({ NavBar }) {
     const getIndex = (index) => {
         setCurrentIndex(index);
     };
-    console.log(currentIndex);
 
     return (
         <div className="p-2">

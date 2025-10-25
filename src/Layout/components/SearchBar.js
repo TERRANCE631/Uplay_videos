@@ -78,8 +78,7 @@ export function SearchBar() {
             {value !== "" &&
                 <button
                     onClick={() => setValue("")}
-                    className="absolute 2xl:right-[8.3%] xl:right-[14.3%] lg:right-[20%] md:right-[26%] 
-                bg-gray-500/30 hover:bg-transparent text-gray-600 dark:text-white rounded-full scale-[185%] font-thin px-2"
+                    className="absolute 2xl:right-[8.3%] xl:right-[14.3%] lg:right-[20%] md:right-[26%]  hover:bg-transparent text-gray-600 dark:text-white rounded-full scale-[185%] font-thin mx-1"
                 >
                     &times;
                 </button>}
@@ -93,8 +92,8 @@ export function SearchBar() {
                     onClick={() => setValue("")}
                     className="flex justify-center items-center inset-x-0 top-[4.5rem] ite min-h-20 absolute"
                 >
-                    <section className="w-[80%] flex flex-col p-2 rounded-lg dark:bg-gray-600 truncate bg-slate-200 shadow-black shadow-lg" >
-                        {filter.slice(0, 8).map((name, i) => {
+                    {filter.length > 0 && <section className="w-[80%] flex flex-col p-2 rounded-lg dark:bg-gray-600 truncate bg-slate-200 shadow-black shadow-lg" >
+                        {filter.length > 0 && filter.slice(0, 8).map((name, i) => {
                             i += 1
                             return (
                                 <Link key={i} to={`/videoPlayer/${name.id}`}
@@ -103,9 +102,8 @@ export function SearchBar() {
                                 </Link>
                             )
                         })}
-                    </section>
+                    </section>}
                 </div>}
-
         </section>
     )
 }

@@ -24,7 +24,7 @@ export function HomeCard({ video, user, i }) {
     const onMouseLeave = () => {
         setHover(null)
     };
-    const videoLikes = like.filter((likes) => likes.videoID === video.id)
+    const videoLikes = like.length > 0 && like.filter((likes) => likes.videoID === video.id)
 
     return (
         <section className="h-full">
@@ -90,7 +90,7 @@ export function HomeCard({ video, user, i }) {
                             {video.username}
                             <p className="font-normal text-xs truncate">
                                 <span className="bg-blue-700 dark:bg-blue-700 px-2 text-white">Likes</span>
-                                <span className="truncate w-2 mx-1 border bg-blue-700 px-[3px] rounded-full text-white">{videoLikes.length}</span>
+                                <span className="truncate w-2 mx-1 border bg-blue-700 px-[3px] rounded-full text-white">{videoLikes.length || 0}</span>
                             </p>
                         </div>
                     </Link>

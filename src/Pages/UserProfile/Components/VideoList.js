@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { YesOrNo } from "./YesOrNo";
 import { VideoListFn } from "../Functions/VideoListFn";
 import { LikesFn } from "../../VideosPlayer/Functions/LikesFn";
@@ -6,9 +5,9 @@ import { UserVideos } from "./UserVideos";
 
 export function VideoList({ user, videos, getVideos }) {
     const { videoDetails, setVideoDetails, toggle, setToggle, userID, deleteVideo } = VideoListFn(videos, getVideos, user);
-    console.log(videos);
     const { like } = LikesFn();
     const filteredVideos = videos && videos.filter((prev) => prev.userID === user.id)
+
     return (
         <div className="grid h-full w-full 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:mx-2 py-2 px-2 gap-5">
             {filteredVideos.length > 0 ? filteredVideos.map((vid, i) => {
