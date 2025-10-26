@@ -1,4 +1,4 @@
-import { BiMoon, BiSearch, BiSun } from "react-icons/bi";
+import { BiDownArrowCircle, BiMoon, BiSearch, BiSun, BiUpArrowCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
@@ -61,9 +61,12 @@ export function Header({ setShowManu, setLogin, setRegister }) {
             </button>
           </section>
 
-          <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
+          <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border">
             <img src={!Loading && user ? user.profile_image : "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
-              alt="" className="object-cover object-center h-full w-full rounded-full" />
+              alt="" className="object-cover object-center h-full w-full rounded-full hover:opacity-60" />
+            {showProfile ?
+              <div className="space-y-0 w-fit rounded-full relative -top-4 right-0.5 backdrop-blur-2xl bg-black bg-opacity-50 font-extrabold text-white"><BiDownArrowCircle size={18} /></div> :
+              <div className="space-y-0 w-fit rounded-full relative -top-4 right-0.5 backdrop-blur-2xl bg-black bg-opacity-50 font-extrabold text-white"><BiUpArrowCircle size={18}/></div>}
           </button>
         </section>
       </nav>

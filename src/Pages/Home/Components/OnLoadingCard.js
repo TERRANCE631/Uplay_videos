@@ -1,6 +1,6 @@
 export const OnLoadingCard = () => {
     return (
-        <section className="h-full">
+        <section className="h-full">        
             <div className="h-full w-full flex flex-col pb-4 bg-white dark:bg-gray-600 shadow-md shadow-black rounded-lg dark:border-white/20">
                 <div className="animate-pulse">
                     <div className="h-[10rem] bg-gray-400 dark:bg-white/40 w-full rounded-lg object-cover object-center md:rounded-t-lg" />

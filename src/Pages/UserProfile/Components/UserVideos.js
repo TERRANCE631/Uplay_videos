@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { YesOrNo } from './YesOrNo';
 
 export const UserVideos = ({ i, setVideoDetails, vid, toggle, like, videoDetails, getVideos, deleteVideo, userID, setToggle }) => {
-    const videoLikes = like.filter((likes) => likes.videoID === vid.id);
+    const videoLikes = like.length > 0 && like.filter((likes) => likes.videoID === vid.id);
 
     return (
         <div>
@@ -53,7 +53,7 @@ export const UserVideos = ({ i, setVideoDetails, vid, toggle, like, videoDetails
                                 {vid.username}
                                 <p className="font-normal text-xs truncate">
                                     <span className="bg-blue-700 dark:bg-blue-700 px-2 text-white">Likes</span>
-                                    <span className="truncate w-2 mx-1 border bg-blue-700 px-[3px] rounded-full text-white">{videoLikes.length}</span>
+                                    <span className="truncate w-2 mx-1 border bg-blue-700 px-[3px] rounded-full text-white">{videoLikes.length || 0}</span>
                                 </p>
                             </div>
                         </Link>

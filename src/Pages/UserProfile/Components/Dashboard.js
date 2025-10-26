@@ -1,5 +1,4 @@
 import { BiSolidAddToQueue, BiSolidLike } from "react-icons/bi";
-import { VideoListFn } from "../Functions/VideoListFn";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 import { LikesFn } from "../../VideosPlayer/Functions";
 
@@ -23,8 +22,8 @@ export const dataForGraph = () => {
     const { profile, subs } = GlobalContext()
     const { like } = LikesFn()
 
-    const userLikes = like.filter((likes) => likes.videoUserID === profile.id)
-    const userSubs = subs.filter((subscribe) => subscribe.videoUserID === profile.id)
+    const userLikes = like.length > 0 && like.filter((likes) => likes.videoUserID === profile.id)
+    const userSubs = subs.length > 0 && subs.filter((subscribe) => subscribe.videoUserID === profile.id)
 
     const data = [
         {
@@ -37,6 +36,6 @@ export const dataForGraph = () => {
         }
     ];
 
-    return { data }
+    return { data, userLikes, userSubs }
 }
 

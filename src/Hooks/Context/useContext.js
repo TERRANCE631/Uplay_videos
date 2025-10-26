@@ -1,5 +1,4 @@
-import axios from "axios";
-import { createContext, useCallback, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 const ContextWrapper = createContext(null);
@@ -7,6 +6,7 @@ export function GlobalState({ children }) {
     const [value, setValue] = useState("");
     const [subs, setSubs] = useState([]);
     const [showLogin, setLogin] = useState(false);
+    const [showRegister, setRegister] = useState(false);
     const [Loading, setLoading] = useState(true);
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
@@ -44,7 +44,7 @@ export function GlobalState({ children }) {
                     setUser(data)
                 });
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         } finally {
             setLoading(false)
         };
@@ -101,7 +101,9 @@ export function GlobalState({ children }) {
         index,
         getHomeVideoIndex,
         loadingVideos,
-        setLoadingVideos
+        setLoadingVideos,
+        showRegister,
+        setRegister
     };
 
     return (

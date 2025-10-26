@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
+import { AxiosInstance } from "../../../Lib/AxiosInstance";
 
 export function VideoListFn(videos, getVideos) {
     const [videoDetails, setVideoDetails] = useState({
@@ -11,7 +11,7 @@ export function VideoListFn(videos, getVideos) {
     const { userID } = GlobalContext();
     const deleteVideo = (id) => {
         try {
-            axios.delete(`http://localhost:9000/uplay/deleteVideo/${id}`);
+            AxiosInstance.delete(`/uplay/deleteVideo/${id}`);
             videos.filter((item) => item.id !== id);
         } catch (error) {
             console.log("Error occured in 👉👉VideoListFn", + " | " + error);

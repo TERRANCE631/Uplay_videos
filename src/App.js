@@ -13,20 +13,31 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers } = GlobalContext();
+  const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers, showRegister, setRegister } = GlobalContext();
   const { Loading } = ClickVideoFn();
 
-  const [showRegister, setRegister] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
-
+  // eslint-disable-next-line
   useEffect(() => { getUserDetails(); getVideos(); GetSubscribers() }, []);
 
   if (Loading) return (
-    <div className="flex dark:bg-gray-700 dark:text-white justify-center gap-1 items-center absolute inset-0">
-      <BiLoaderCircle className="animate-spin h-8 w-8" />
-      <span className="">Loading...</span>
-    </div>
+    <section className="dark:bg-gray-700 dark:text-white min-h-screen flex flex-col">
+      <section className="fixed backdrop-blur-2xl z-20 transition-all inset-x-0 duration-300 h-[4.5rem] flex 
+       items-center px-4">
+        <div to="/">
+          <span className="md:mx-5 mx-2 flex items-center md:scale-125 tracking-wider">
+            <span className="text-4xl text-red-500 font-extrabold">U</span>
+            <span className="text-xl">play</span>
+          </span>
+        </div>
+      </section>
+
+      <div className="flex dark:bg-gray-700 dark:text-white justify-center gap-1 items-center absolute inset-0">
+        <BiLoaderCircle className="animate-spin h-8 w-8" />
+        <span className="">Loading...</span>
+      </div>
+    </section>
   );
 
   return (

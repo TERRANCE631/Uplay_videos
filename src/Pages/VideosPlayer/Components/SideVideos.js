@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
-import { useEffect, useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 
 export function SideVideos({ videos, videoDetails }) {

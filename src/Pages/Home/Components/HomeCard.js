@@ -5,7 +5,7 @@ import { LikesFn } from '../../VideosPlayer/Functions/LikesFn';
 import { toast } from 'react-toastify';
 
 export function HomeCard({ video, user, i }) {
-    const { getHomeVideoIndex, setLoadingVideos } = GlobalContext();
+    const { getHomeVideoIndex, setLoadingVideos, setLogin } = GlobalContext();
     const { like } = LikesFn()
     const [hover, setHover] = useState(null);
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ export function HomeCard({ video, user, i }) {
         if (!user) {
             toast.error("Sign in to your account");
             navigate("/")
+            setLogin(true);
         }
     };
 

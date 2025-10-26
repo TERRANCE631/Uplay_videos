@@ -1,7 +1,6 @@
-import React from 'react'
 import { AnaliticGraph } from './AnaliticGraph'
 
-export function Graph({ dashboardList }) {
+export function Graph() {
     return (
         <section className="m-2">
             <section>

@@ -1,11 +1,11 @@
 import { BiSearch } from "react-icons/bi";
 import { GlobalContext } from "../../Hooks/Context/useContext";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { AxiosInstance } from "../../Lib/AxiosInstance";
 
 export function SearchBar() {
-    const { setValue, value, loadingVideos } = GlobalContext();
+    const { setValue, value } = GlobalContext();
     const [videos, setVideos] = useState([])
     const [currentIndex, setCurrentIndex] = useState("")
     const [text, setText] = useState("");
@@ -13,7 +13,7 @@ export function SearchBar() {
     let data__length = 10
 
     const getVideos = async () => {
-        await axios.get("http://localhost:9000/uplay/getVideos")
+        await AxiosInstance.get("/uplay/getVideos")
             .then(res => {
                 const data = res.data;
                 setInterval(() => {
@@ -34,6 +34,7 @@ export function SearchBar() {
 
     useEffect(() => {
         getVideos();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -42,6 +43,7 @@ export function SearchBar() {
         }, 1000 * 15);
 
         return () => clearInterval(interval);
+        // eslint-disable-next-line
     }, [index])
 
     useEffect(() => {
@@ -61,12 +63,13 @@ export function SearchBar() {
         }, 60);
 
         return () => clearInterval(interval);
+        // eslint-disable-next-line
     }, [currentIndex]);
 
     const filter = videos.length > 0 && videos.filter((item) => { return item.title.toLowerCase().match(value.toLowerCase()) });
 
     return (
-        <section className="md:flex items-center hidden w-full mx-4">
+        <section className="md:flex items-center hidden w-full mx-4 backdrop-blur-2xl bg-black bg-opacity-30 rounded-full relative">
             <input
                 type="text"
                 onChange={(e) => setValue(e.target.value)}
@@ -78,7 +81,7 @@ export function SearchBar() {
             {value !== "" &&
                 <button
                     onClick={() => setValue("")}
-                    className="absolute 2xl:right-[8.3%] xl:right-[14.3%] lg:right-[20%] md:right-[26%]  hover:bg-transparent text-gray-600 dark:text-white rounded-full scale-[185%] font-thin mx-1"
+                    className="absolute 2xl:right-[3.3%] xl:right-[7.3%] lg:right-[10%] md:right-[15%] hover:bg-transparent text-gray-500 dark:text-white/80 rounded-full scale-[185%] font-thin mx-1"
                 >
                     &times;
                 </button>}

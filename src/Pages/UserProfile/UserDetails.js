@@ -1,7 +1,6 @@
-import axios from "axios"
 import { dashboardList } from "./Components/Dashboard"
 import { UserInfor } from "./Components/UserInfor"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { TabList } from "./Components/TabList"
 import { useParams } from "react-router-dom"
 import { GlobalContext } from "../../Hooks/Context/useContext"

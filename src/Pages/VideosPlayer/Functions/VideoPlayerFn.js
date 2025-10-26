@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 import { AxiosInstance } from "../../../Lib/AxiosInstance";

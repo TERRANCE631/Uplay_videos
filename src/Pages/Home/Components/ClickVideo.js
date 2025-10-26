@@ -18,6 +18,7 @@ export function ClickVideo() {
     useEffect(() => {
         const timeout = setTimeout(() => { !user ? setTogglePopUp(true) : setTogglePopUp(false) }, 1000 * 20)
         setTimeout(() => { clearTimeout(timeout) }, 1500 * 20)
+        if (user) return setTogglePopUp(false)
     }, [user]);
 
     switch (selectedValue) {

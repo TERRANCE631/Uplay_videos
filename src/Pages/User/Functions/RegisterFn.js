@@ -54,7 +54,7 @@ export function RegisterFn(setRegister, setLogin) {
         users.append("email", userDetails.email);
         users.append("password", userDetails.password);
         users.append("image", profile_image);
-
+        
         try {
             setbuttonLoader(true)
             if (success === true) {

@@ -24,10 +24,10 @@ export function ProfileDropdown({ setProfile }) {
             setProfile(false);
         };
     };
-
+    // eslint-disable-next-line
     useEffect(() => {
         backEndRes && setUser(null)
-    }, [backEndRes, user]);
+    }, [backEndRes, user, setUser]);
 
     return (
         <section onClick={() => setProfile(false)} className="w-full h-screen shadow-xl shadow-black bg-opacity-10 bg-black">

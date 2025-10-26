@@ -18,7 +18,7 @@ export default function ProfileDropdownLoggedOut({ setLogin, setProfile, setRegi
                     </section>
                 </div>
                 <section className="flex flex-col gap-5 justify-center items-center">
-                    <div className="text-4xl dark:text-white">
+                    <div className="text-4xl dark:text-white animate-pulse">
                         {".·´¯`(>▂<)´¯`·."}
                     </div>
                     <p className="dark:text-white font-mono">Sign in to see stats</p>
