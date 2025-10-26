@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { showLogin, setLogin, getUserDetails, getVideos, GetSubscribers, showRegister, setRegister } = GlobalContext();
-  const { Loading } = ClickVideoFn();
+  const { Loading } = ClickVideoFn()
 
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
