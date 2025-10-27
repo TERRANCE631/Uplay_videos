@@ -34,57 +34,74 @@ export function RegisterFn(setRegister, setLogin) {
 
     const validation = () => {
         if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
-            return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers.")
+            return toast.error("Username / Email can only have A-Z a-z 0-9 . @ / letters and numbers.");
 
         if (!profile_image)
-            return toast.error("Profile picture must be provided")
+            return toast.error("Profile picture must be provided");
 
-        if (foundUser) return toast.error("Username already exist, try another username")
+        if (foundUser)
+            return toast.error("Username already exists, try another username");
 
-        return true
+        return true;
     };
 
-    const UserInputs = (e) => {
+    const UserInputs = async (e) => {
         e.preventDefault();
-        const success = validation()
-        const users = new FormData();
-        if (!profile_image) { setTriggerAnimation(true) }
+        const success = validation();
+        if (!success) return;
 
+        if (!profile_image) setTriggerAnimation(true);
+
+        const users = new FormData();
         users.append("username", userDetails.username);
         users.append("email", userDetails.email);
         users.append("password", userDetails.password);
         users.append("image", profile_image);
-        
+
         try {
-            setbuttonLoader(true)
-            if (success === true) {
-                AxiosInstance.post("/uplay/register", users)
-                    .then(res => {
-                        const data = res.data
-                        toast.success(data.registered);
-                        getUserDetails();
-                        setTimeout(() => {
-                            // setLogin(true);
-                            setRegister(false);
-                        }, 2000);
-                        setUserDetails({ ...userDetails, username: "", email: "", password: "" });
-                    })
-                navigate("/");
-                e.target.reset();
-                getUserDetails();
-            }
+            setbuttonLoader(true); // ✅ start loader BEFORE request
+
+            const res = await AxiosInstance.post("/uplay/register", users);
+            const data = res.data;
+
+            toast.success(data.registered);
             getUserDetails();
+            setUserDetails({ username: "", email: "", password: "" });
+            e.target.reset();
+
+            setTimeout(() => {
+                setRegister(false);
+                // Optionally open login
+                // setLogin(true);
+            }, 2000);
+
+            navigate("/");
+
         } catch (error) {
-            console.log("Error occured in register funtion", + " | " + error);
+            toast.error(error.response?.data?.message || "Registration failed");
+            console.error("Error occurred in RegisterFn:", error);
+
         } finally {
-            setbuttonLoader(false);
+            setbuttonLoader(false); // ✅ stop loader AFTER request completes
             getUserDetails();
-        };
+        }
     };
 
     const stopAnimation = () => {
-        setTriggerAnimation(false)
-    }
+        setTriggerAnimation(false);
+    };
 
-    return { profile_image, stopAnimation, buttonLoader, triggerAnimation, imageRef, showPassword, setShowPassword, setProfile_image, UserInputs, userDetails, setUserDetails }
-};
+    return {
+        profile_image,
+        stopAnimation,
+        buttonLoader,
+        triggerAnimation,
+        imageRef,
+        showPassword,
+        setShowPassword,
+        setProfile_image,
+        UserInputs,
+        userDetails,
+        setUserDetails
+    };
+}

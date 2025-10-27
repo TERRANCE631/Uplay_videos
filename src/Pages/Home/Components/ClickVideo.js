@@ -2,7 +2,8 @@ import { HomeCard } from './HomeCard'
 import { VideoFilter } from './VideoFilter';
 import { ClickVideoFn } from './Functions/ClickVideoFn';
 import { useEffect, useState } from 'react';
-import { BiErrorCircle, BiUserCircle, BiX } from 'react-icons/bi';
+import { BiErrorCircle, BiX } from 'react-icons/bi';
+import { FiAlertTriangle } from "react-icons/fi";
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 import { OnLoadingCard } from './OnLoadingCard';
 
@@ -30,11 +31,12 @@ export function ClickVideo() {
 
     return (
         <section>
-            {videos.length > 0 && togglePopUp && <div className="w-full h-10 text-gray-700 dark:text-white tracking-wide bg-orange-300/50 flex items-center justify-between p-2 shadow-sm">
+            {videos.length > 0 && togglePopUp && 
+            <div className="w-full h-10 text-gray-700 rounded-md dark:text-white tracking-wide bg-orange-300/50 flex items-center justify-between p-2 shadow-sm">
                 <div className="flex items-center gap-1.5">
-                    <BiUserCircle size={32} className="text-blue-500 dark:text-blue-400" />
-                    <p className="">Sign in to watch videos and get full access to all features,</p>
-                    <button onClick={() => setLogin(true)} className="underline active:text-red-500 dark:text-blue-500 text-blue-600">Sign in</button>
+                    <FiAlertTriangle size={26} className="text-yellow-500 dark:text-yellow-500" />
+                    <p className="font-semibold">Sign in to watch videos and get full access to all features,</p>
+                    <button onClick={() => setLogin(true)} className="underline active:text-red-500 dark:text-blue-500 text-blue-600 animate-pulse hover:animate-none">Sign in</button>
                 </div>
                 <button onClick={() => setTogglePopUp(false)} className="text-gray-900 dark:text-white">
                     <BiX size={25} />

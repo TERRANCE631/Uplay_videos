@@ -3,41 +3,14 @@ import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
     const { UserInputs, setUserInputs, userInputs, showPassword, setShowPassword, buttonLoader } = LogInFn(setLogin);
-
+    
     return (
         <div className="flex flex-col fixed inset-0 z-20 mt-[4.5rem] dark:text-white bg-black bg-opacity-10 h-screen w-full">
-            <div className="fixed p-2 z-20 right-0 md:w-[50%] lg:w-[40%] w-full h-screen backdrop-blur-3xl dark:bg-gray-700 bg-opacity-60 dark:bg-opacity-60 bg-white">
+            <div className="fixed p-2 z-20 right-0 md:w-[50%] lg:w-[40%] w-full h-screen dark:bg-gray-700 bg-white">
                 <button onClick={() => setLogin(false)} className="absolute flex gap-2 items-center right-2 dark:text-white">
                     <span>Close</span>
                     <span className=""><BiX className="border dark:border-white/20 hover:bg-gray-500  rounded-full dark:bg-white/10 bg-black/50 text-white scale-150" /></span>
                 </button>
-                {/* 
-                <div className={`${err.error !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${err.error !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] p-2 text-sm flex absolute justify-center py-2 items-center rounded-lg border border-gray-600 dark:text-white"
-                        : "hidden"
-                        }`}>
-                        <p className="text-red-600 scale-150"><BiErrorCircle /></p>
-                        <p className="text-black tracking-wide">{err.error}</p>
-                    </div>
-                </div>
-
-                <div className={`${err.loggedIn !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${err.loggedIn !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] p-2 text-sm flex absolute justify-center py-2 items-center rounded-lg border border-gray-600 dark:text-white"
-                        : "hidden"
-                        }`}>
-                        <p className="text-blue-600 scale-150"><BiNotification /></p>
-                        <p className="text-black tracking-wide">{err.loggedIn}</p>
-                    </div>
-                </div> */}
-
                 <form onSubmit={UserInputs} className="mt-4 flex flex-col justify-center h-[460px] gap-2">
                     <p className="text-center text-xl 
                 font-thin dark:bg-white bg-black text-transparent bg-clip-text tracking-wider dark:text-white text-gray-800">Sign In</p>
@@ -87,7 +60,7 @@ export function LogIn({ setRegister, setLogin }) {
                             Sign Up
                         </button>
                     </p>
-                    <button type="submit" disabled={buttonLoader ? "disabled" : ""} className="">
+                    <button type="submit" disabled={buttonLoader} className="">
                         <div className="uppercase flex justify-center items-center gap-1.5 w-full py-2 bg-blue-600 shadow-inner shadow-blue-900 dark:text-white 
                         text-white rounded-lg">
                             {buttonLoader ?

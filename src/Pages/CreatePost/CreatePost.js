@@ -2,12 +2,12 @@ import { BiLoader, BiUpload, BiX } from "react-icons/bi";
 import { CreatePostFn } from "./Functions/CreatePostFn";
 
 export function CreatePost({ setShowCreatePost }) {
-    const { post, uploadVideo, user, upload, setUpload, postVideo } = CreatePostFn(setShowCreatePost);
+    const { post, uploadVideo, user, upload, setUpload, postVideo, progress, uploadedMB, totalMB } = CreatePostFn(setShowCreatePost);
 
     return (
-        <div className="flex flex-col fixed z-20 mt-[4.5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] bg-black bg-opacity-10 h-screen w-full">
-            <form onSubmit={postVideo} className="lg:w-[40%] md:w-[50%] w-[100%] flex flex-col gap-6 bg-slate-100 h-full  p-2 
-            dark:bg-gray-700 dark:text-white backdrop-blur-3xl bg-opacity-60">
+        <div className="flex flex-col fixed z-20 mt-[4.5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] h-screen w-full">
+            <form onSubmit={postVideo} className="lg:w-[40%] md:w-[50%] w-[100%] flex flex-col gap-6 bg-white h-full  p-2 
+            dark:bg-gray-700 dark:text-white">
                 <div className="justify-end flex">
                     <button onClick={() => setShowCreatePost(false)} type="button" className="flex gap-2 items-center right-2 dark:text-white">
                         <span>Close</span>
@@ -29,7 +29,21 @@ export function CreatePost({ setShowCreatePost }) {
                 <p className="text-center truncate dark:text-white tracking-wider">
                     UPLOAD: {upload ? upload.name : "Video title..."}
                 </p>
+                {progress > 0 && (
+                    <div className="w-full">
+                        <div className="flex justify-between mb-1 text-sm">
+                            <span>{uploadedMB} MB / {totalMB} MB</span>
+                            <span>{progress}%</span>
+                        </div>
 
+                        <div className="w-full bg-gray-200 rounded-full h-3">
+                            <div
+                                className="bg-blue-700 h-3 rounded-full transition-all duration-300"
+                                style={{ width: `${progress}%` }}
+                            ></div>
+                        </div>
+                    </div>
+                )}
                 <div className="flex w-full justify-between items-center gap-2">
                     <div className="w-full">
                         {/* <label htmlFor="category" className="text-[19px]">Category</label> */}
@@ -57,9 +71,9 @@ export function CreatePost({ setShowCreatePost }) {
 
                 <div className="">
                     <button
-                        disabled={user && user.id ? "" : "disabeled"}
+                        disabled={user && user.id && !progress > 0 ? "" : "disabeled"}
                         type="submit"
-                        className={user && user.id ? "bg-blue-700 hover:bg-blue-600 py-2 rounded-lg w-full text-white"
+                        className={user && user.id && !progress > 0 ? "bg-blue-700 hover:bg-blue-600 py-2 rounded-lg w-full text-white"
                             : "bg-blue-700 hover:bg-blue-600 opacity-50 cursor-not-allowed rounded-lg py-2 w-full text-white uppercase"}
                     >
                         {user && user.id ?
@@ -67,7 +81,7 @@ export function CreatePost({ setShowCreatePost }) {
                                 {post ?
                                     <div className="flex items-center justify-center gap-2">
                                         <span><BiLoader className="animate-spin h-6 w-6 text-white" /></span>
-                                        <span className="">Posting...</span>
+                                        <span className="">{`Posting${progress}%...`}</span>
                                     </div>
                                     : <span className="">Upload</span>}
                             </div> :

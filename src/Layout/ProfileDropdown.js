@@ -9,14 +9,16 @@ export function ProfileDropdown({ setProfile }) {
     const { setSubs, user, setUser } = GlobalContext()
     const [backEndRes, setBackEndRes] = useState(null)
 
-    const logOut = () => {
+    const logOut = async () => {
         try {
-            AxiosInstance.get("/uplay/logout").then((res) => {
-                const data = res.data
+            await AxiosInstance.get("/uplay/logout").then(res => {
+                const data = res.data;
                 setUser(null);
                 toast.success(data.message)
                 setBackEndRes(data.message)
             });
+
+            setUser(null);
         } catch (error) {
             console.log("Error in 👉👉logOut function", + " | " + error);
         } finally {
