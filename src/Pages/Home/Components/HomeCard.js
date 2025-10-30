@@ -84,7 +84,7 @@ export function HomeCard({ video, user, i }) {
                         className="flex items-center mt-2 md:-mb-2 gap-1"
                     >
                         <div className="w-9 h-9 shrink-0 rounded-full border">
-                            <img src={video.photo || "/Assets/profile.png"} alt="" className="shrink-0 object-cover bg-white rounded-full object-center 
+                            <img src={video && video.photo ? video.photo : "/Assets/profile.png"} alt="" className="shrink-0 object-cover bg-white rounded-full object-center 
                             w-full h-full" />
                         </div>
                         <div className="font-semibold tracking-wider truncate dark:text-gray-100">

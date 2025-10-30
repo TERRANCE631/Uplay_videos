@@ -38,7 +38,7 @@ export function ProfileDropdown({ setProfile }) {
                 <section className="">
                     <div className=" flex flex-col items-center justify-center p-4 backdrop-blur-xl bg-blue-500/30 rounded-t-lg" >
                         <div className="md:h-[6rem] md:w-[6rem] w-[6rem] h-[6rem] rounded-full border-4 border-blue-600 hover:opacity-70">
-                            <img src={user.profile_image} alt="" className="object-cover object-center h-full w-full rounded-full" />
+                            <img src={user ? user.profile_image : "/Assets/profile.png"} alt="" className="object-cover object-center h-full w-full rounded-full" />
                         </div>
 
                         <section className="truncate flex flex-col items-center justify-center">

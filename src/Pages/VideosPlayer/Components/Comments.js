@@ -1,9 +1,9 @@
-import { BiSolidSend } from 'react-icons/bi'
+import { BiLoader, BiSolidSend } from 'react-icons/bi'
 import { CommentsFn } from '../Functions/CommentsFn';
 import { Link } from 'react-router-dom';
 
 export function Comments({ videoDetails }) {
-    const { scrollFunction, sendFeedback, comments, data, scrollRef, setSendComment } = CommentsFn(videoDetails);
+    const { scrollFunction, sendFeedback, comments, data, scrollRef, setSendComment, sendingComment } = CommentsFn(videoDetails);
 
     return (
         <section className="">
@@ -20,7 +20,7 @@ export function Comments({ videoDetails }) {
                 />
                 <button onClick={() => scrollFunction(scrollRef)} className="py-2.5 border border-blue-700 md:px-8 px-4 shadow-inner shadow-gray-500 
                 bg-blue-500 hover:bg-blue-400 text-2xl text-white rounded-r-full">
-                    <BiSolidSend />
+                    {!sendingComment ? <BiSolidSend /> : <BiLoader className="animate-spin" />}
                 </button>
             </form>
 

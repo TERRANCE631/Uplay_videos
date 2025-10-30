@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 import { AxiosInstance } from '../../../Lib/AxiosInstance';
+import { toast } from 'react-toastify';
 
 export function LikesFn(id, videoDetails) {
     // const userId = JSON.parse(sessionStorage.getItem("userID"));
     const [showDropDown, setShowDropDown] = useState(false);
     const [existOrNot, setExistOrNot] = useState(false);
-    const { user, getUserDetails, userId } = GlobalContext();
+    const { user, getUserDetails, userId, loadingLikes, setLoadingLikes } = GlobalContext();
     const [like, setLike] = useState([]);
 
     // filter likes from the database to get its length and render it as likes.
@@ -28,11 +29,18 @@ export function LikesFn(id, videoDetails) {
     };
 
     const getLikes = async () => {
-        await AxiosInstance.get(`/uplay/getLikes`)
-            .then(res => {
-                const data = res.data;
-                setLike(data);
-            })
+        setLoadingLikes(true)
+        try {
+            const res = await AxiosInstance.get(`/uplay/getLikes`)
+            const data = res.data;
+            setLike(data);
+
+        } catch (error) {
+            console.log("Error fetching likes", + " | " + error.message);
+            toast.error("Error fetching likes");
+        } finally {
+            setLoadingLikes(false)
+        }
     };
 
     useEffect(() => {
@@ -40,7 +48,7 @@ export function LikesFn(id, videoDetails) {
         getUserDetails()
 
         // eslint-disable-next-line
-    }, [id]);
+    }, [user && user.username, id]);
 
     useEffect(() => {
         // chicking if the current username exist in the database. If false like button is displayed
@@ -55,5 +63,5 @@ export function LikesFn(id, videoDetails) {
         // eslint-disable-next-line
     }, [like, user && user.username, id, getLikes]);
 
-    return { showDropDown, setShowDropDown, existOrNot, setExistOrNot, user, like, likes, handleDelete, Likes, getLikes, userId }
+    return { showDropDown, loadingLikes, setShowDropDown, existOrNot, setExistOrNot, user, like, likes, handleDelete, Likes, getLikes, userId }
 }

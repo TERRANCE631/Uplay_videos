@@ -11,7 +11,10 @@ export function GlobalState({ children }) {
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState({});
-    const [loadingVideos, setLoadingVideos] = useState(true)
+    const [loadingVideos, setLoadingVideos] = useState(true);
+    const [loadingLikes, setLoadingLikes] = useState(false);
+    const [loadingSubs, setLoadingSubs] = useState(false);
+
     const userId = user && user.id
     const userID = user && user.id
 
@@ -50,15 +53,17 @@ export function GlobalState({ children }) {
         };
     };
 
-    const GetSubscribers = () => {
+    const GetSubscribers = async () => {
+        setLoadingSubs(true);
         try {
-            AxiosInstance.get("/uplay/getSubs")
-                .then(res => {
-                    const data = res.data;
-                    setSubs(data);
-                })
+            const res = await AxiosInstance.get("/uplay/getSubs")
+            const data = res.data;
+            setSubs(data);
+
         } catch (error) {
-            console.log(error);
+            console.log("Can't fetch subscribers at 👉👉GetSubscribers function", + " | " + error.message);
+        } finally {
+            setLoadingSubs(false);
         }
     };
 
@@ -103,7 +108,10 @@ export function GlobalState({ children }) {
         loadingVideos,
         setLoadingVideos,
         showRegister,
-        setRegister
+        setRegister,
+        loadingLikes,
+        setLoadingLikes,
+        loadingSubs,
     };
 
     return (

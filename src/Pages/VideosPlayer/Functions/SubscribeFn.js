@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { AxiosInstance } from '../../../Lib/AxiosInstance';
+import { GlobalContext } from '../../../Hooks/Context/useContext';
 
 export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, username, user, photo) {
     const [exist, setExist] = useState(false);
+    const { loadingSubs } = GlobalContext();
 
     const Subscribers = () => {
         const formData = new FormData();
@@ -21,6 +23,11 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         await AxiosInstance.delete(`/uplay/deleteSub/${userID}`);
     };
 
+    useEffect(() => {
+        GetSubscribers()
+        // eslint-disable-next-line
+    }, [user, id]);
+
     const amountOfSubs = subs.length > 0 && subs.filter(item => item.videoUserID === videoDetails.userID);
 
     useEffect(() => {
@@ -34,5 +41,5 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         }
     }, [id, subs, GetSubscribers, videoDetails.userID, userID]);
 
-    return { exist, setExist, Subscribers, DeleteSub, amountOfSubs }
+    return { exist, loadingSubs, setExist, Subscribers, DeleteSub, amountOfSubs }
 };

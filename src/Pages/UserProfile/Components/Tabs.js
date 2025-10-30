@@ -10,7 +10,7 @@ export function Tabs({ NavBar }) {
     return (
         <div className="p-2">
             <div className="flex">
-                {NavBar.map((tab, i) => {
+                {NavBar && NavBar.map((tab, i) => {
                     return (
                         <button
                             key={tab.title}

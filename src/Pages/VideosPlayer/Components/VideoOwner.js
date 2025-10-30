@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { BiAddToQueue, BiLike, BiSolidAddToQueue, BiSolidLike } from 'react-icons/bi';
+import { BiAddToQueue, BiLike, BiLoader, BiLoaderCircle, BiSolidAddToQueue, BiSolidLike } from 'react-icons/bi';
 import { LikesFn } from '../Functions/LikesFn';
 import { GlobalContext } from "../../../Hooks/Context/useContext";
 import { SubscribeFn } from "../Functions";
@@ -15,14 +15,16 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
     Likes,
     user,
     getLikes,
-    userId
+    userId,
+    loadingLikes
   } = LikesFn(id, videoDetails);
 
   const {
     exist,
     Subscribers,
     DeleteSub,
-    amountOfSubs
+    amountOfSubs,
+    loadingSubs
   } = SubscribeFn(id, userId, subs, GetSubscribers, videoDetails, username, user, photo);
 
   return (
@@ -52,16 +54,18 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
               />
             </Link>
             <p className="truncate md:block hidden">{username}</p>
+
             {!exist &&
               <button
+                disabled={loadingSubs}
                 onClick={() => { Subscribers(); GetSubscribers() }}
-                className="truncate flex items-center gap-2 bg-gray-300 ml-4 shadow-gray-600 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
-                shadow-inner hover:bg-gr  ay-200 px-4 py-1 
+                className="truncate flex items-center gap-2 bg-gray-300 ml-4 shadow-gray-600 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 shadow-inner hover:bg-gray-200 px-4 py-1 
                 border border-black/30 rounded-full"
               >
-                <span className="text-blue-600 scale-150"><BiAddToQueue /></span>
-                <span>Subscribe</span>
+                <span className="text-blue-600">{!loadingSubs ? <BiAddToQueue size={22} /> : <BiLoader size={22} className="animate-spin" />}</span>
+                <span>{!loadingSubs && "Subscribe"}</span>
               </button>}
+
             {exist &&
               <section>
                 {/* eslint-disable-next-line  */}
@@ -86,13 +90,14 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {!existOrNot &&
               <section className="w-full">
                 <button
+                  disabled={loadingLikes}
                   onClick={() => { Likes(); getLikes() }}
                   className="truncate flex md:hidden items-center gap-2 shadow-gray-600 shadow-inner hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
                       bg-gray-300 hover:bg-gray-200 px-4 py-1 
                       rounded-full border border-black/30 w-full"
                 >
-                  <span className="text-blue-600 scale-150"><BiLike /></span>
-                  <button className="">Like</button>
+                  <span className="text-blue-600 scale-150">{!loadingLikes ? <BiLike size={22} /> : <BiLoader size={22} className="animate-spin" />}</span>
+                  <button className="">{!loadingLikes && "Like"}</button>
                 </button>
               </section>
             }
@@ -120,13 +125,14 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
             {!existOrNot &&
               <section>
                 <button
+                  disabled={loadingLikes}
                   onClick={() => { Likes(); getLikes() }}
                   className="truncate md:flex items-center gap-2 hidden shadow-gray-600 shadow-inner hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
                       bg-gray-300 hover:bg-gray-200 px-4 py-1 
                       rounded-full border border-black/30"
                 >
-                  <span className="text-blue-600 scale-150"><BiLike /></span>
-                  <button>Like</button>
+                  <span className="text-blue-600">{!loadingLikes ? <BiLike size={22} /> : <BiLoader size={22} className="animate-spin" />}</span>
+                  <button>{!loadingLikes && "Like"}</button>
                 </button>
               </section>
             }

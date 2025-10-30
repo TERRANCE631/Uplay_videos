@@ -11,6 +11,7 @@ export function CommentsFn(videoDetails) {
     const [forUseEffect, setForUseEffect] = useState("");
     const comments = data.length > 0 && data.filter(item => item.videoID === videoDetails.id);
     const scrollRef = useRef(null);
+    const [sendingComment, setSendingComment] = useState(false);
 
     const sendFeedback = (e) => {
         e.preventDefault();
@@ -34,16 +35,23 @@ export function CommentsFn(videoDetails) {
     };
 
     const getComments = () => {
-        AxiosInstance.get("/uplay/getComments")
-            .then(res => {
-                const data = res.data;
-                setData(data);
-            });
+        setSendingComment(true);
+        try {
+            AxiosInstance.get("/uplay/getComments")
+                .then(res => {
+                    const data = res.data;
+                    setData(data);
+                });
+        } catch (error) {
+            console.log("Error fetching comments", + " | " + error.message);
+        } finally {
+            setSendingComment(false);
+        }
     };
 
     useEffect(() => {
         getComments();
     }, [forUseEffect]);
 
-    return { scrollFunction, sendFeedback, comments, data, scrollRef, sendComment, setSendComment }
+    return { scrollFunction, sendingComment, sendFeedback, comments, data, scrollRef, sendComment, setSendComment }
 };
