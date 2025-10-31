@@ -57,7 +57,7 @@ export const CreatePostFn = (setShowCreatePost) => {
             getVideos();
             toast.success("Video uploaded successfully");
         } catch (error) {
-            console.error("Error occurred in postVideo function:", error);
+            console.error("Error occurred in postVideo function:", error.message);
             toast.error("Upload failed. Please try again.");
         } finally {
             // ✅ 6. Cleanup
